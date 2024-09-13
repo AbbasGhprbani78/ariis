@@ -1,0 +1,261 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 300;
+    src: url('/fonts/poppins/light/Poppins-light.eot') format('eot'),
+        url('/fonts/poppins/light/Poppins-light.woff') format('woff'),
+        url('/fonts/poppins/light/Poppins-light.woff2') format('woff2'),
+        url('/fonts/poppins/light/Poppins-Light') format('ttf');
+}
+
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 400;
+    src: url('/fonts/poppins/regular/Poppins-Regular.eot') format('eot'),
+        url('/fonts/poppins/regular/Poppins-Regular.woff') format('woff'),
+        url('/fonts/poppins/regular/Poppins-Regular.woff2') format('woff2'),
+        url('/fonts/poppins/regular/Poppins-Regular.ttf') format('ttf');
+}
+
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 700;
+    src: url('/fonts/poppins/bold/Poppins-Bold.eot') format('eot'),
+        url('/fonts/poppins/bold/Poppins-Bold.woff') format('woff'),
+        url('/fonts/poppins/bold/Poppins-Bold.woff2') format('woff2'),
+        url('/fonts/poppins/bold/Poppins-Bold.ttf') format('ttf');
+}
+
+
+
+@font-face {
+    font-family: 'Vazir';
+    font-weight: 300;
+    src: url('/fonts/vazir/light/Vazir-Light.eot') format('eot'),
+        url('/fonts/vazir/light/Vazir-Light.woff') format('woff'),
+        url('/fonts/vazir/light/Vazir-Light.woff2') format('woff2'),
+        url('/fonts/vazir/light/Vazir-Light.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'Vazir';
+    font-weight: 400;
+    src: url('/fonts/vazir/regular/Vazir-Regular.eot') format('eot'),
+        url('/fonts/vazir/regular/Vazir-Regular.woff') format('woff'),
+        url('/fonts/vazir/regular/Vazir-Regular.woff2') format('woff2'),
+        url('/fonts/vazir/regular/Vazir-Regular.ttf') format('ttf');
+}
+
+
+@font-face {
+    font-family: 'Vazir';
+    font-weight: 700;
+    src: url('/fonts/vazir/blod/Vazir-Bold.eot') format('eot'),
+        url('/fonts/vazir/blod/Vazir-Bold.woff') format('woff'),
+        url('/fonts/vazir/blod/Vazir-Bold.woff2') format('woff2'),
+        url('/fonts/vazir/blod/Vazir-Bold.ttf') format('ttf');
+}
+
+
+
+.fa_language {
+    font-family: "vazir", sans-serif !important;
+    direction: rtl !important;
+    font-weight: 300;
+}
+
+
+html,
+body {
+    background-color: #F9F9F9;
+    font-family: 'poppins', sans-serif !important;
+    font-weight: 300;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+}
+
+:root {
+    --color-1: #1F211F;
+    --color-2: #F9F9F9;
+    --color-3: #AFC8C0;
+    --color-4: #CCFFEE;
+    --color-5: #F1A07E;
+    --color-6: #FF4F4F;
+    --color-7: #3071FF;
+    --color-8: #FD9B56;
+    --color-9: #70A151;
+    --color-10: #979797;
+    --border-redi: 500px;
+    --visual-height: 100%
+}
+
+
+body {
+    --sb-track-color: #232E33;
+    --sb-thumb-color: #afc8c0;
+    --sb-size: 9px;
+}
+
+body::-webkit-scrollbar {
+    width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 8px;
+
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}

@@ -1,0 +1,49 @@
+.header_wrap_btn_switch {
+    display: flex;
+    align-items: center;
+    margin: 0 2rem;
+}
+
+.btn_switch {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin: 0 7px;
+    color: var(--color-10);
+}
+
+.active {
+    color: #fff;
+    background-color: var(--color-3);
+}
+
+.link_offcanvas {
+    all: unset;
+    cursor: pointer;
+    margin-top: 1.6rem;
+}
+
+
+
+@media (min-width:1025px) {
+    .offcanvas_container {
+        display: none;
+    }
+}
+
+@media (max-width:1025px) {
+    .header_wrap_btn_switch {
+        margin: 0;
+        margin-top: 2rem;
+        padding: 0 8px;
+    }
+
+    .btn_wrappper {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+}

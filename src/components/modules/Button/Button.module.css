@@ -1,0 +1,19 @@
+.btn {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-1);
+    color: #fff;
+    border-radius: var(--border-redi);
+    padding: 10px 20px;
+}
+
+.icon {
+    margin-left: 5px;
+    font-size: 1.2rem
+}
+
+.rotate {
+    transform: rotate(180deg);
+    margin-left: 0;
+    margin-right: 5px;
+}
