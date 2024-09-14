@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 7;
 }
 
 .header_logo {}
@@ -62,12 +63,13 @@
     top: 130%;
     opacity: 0;
     visibility: hidden;
-    background-color: blue;
+    background-color: #fff;
     transition: all .5s;
     display: flex;
     flex-direction: column;
     min-width: 200px;
     max-height: 0;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .header_items_wrapper:hover .drop {
@@ -103,12 +105,12 @@
 }
 
 .product_link:hover {
-    background-color: olive;
-    padding-left: 20px
+    background-color: #f3efef;
+    padding-left: 10px
 }
 
 .right_product_link:hover {
-    padding-right: 20px;
+    padding-right: 10px;
     padding-left: 0
 }
 
@@ -141,15 +143,16 @@
 }
 
 
+
+
+
 @media (max-width:1068px) {
     .header_container {
         padding: 15px 20px;
     }
 }
 
-@media (max-width:1025px) {
-
-}
+@media (max-width:1025px) {}
 
 
 @media (max-width:600px) {}

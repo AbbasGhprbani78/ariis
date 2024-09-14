@@ -27,11 +27,11 @@ export default function Header() {
                 width < 1025 ?
                     <>
                         <Offcanvas />
-                        <Image src={'/images/logo.svg'} width={70} height={33} />
+                        <Image src={'/images/logo.svg'} width={70} height={33} alt='logo' />
                     </> :
                     <>
                         <div className={styles.header_logo}>
-                            <Image src={'/images/logo.svg'} width={70} height={33} />
+                            <Image src={'/images/logo.svg'} width={70} height={33} alt='logo' />
                         </div>
                         <nav className={styles.header_menu}>
                             <Link className={styles.header_link} href={""}>{t("Home")}</Link>
@@ -42,24 +42,21 @@ export default function Header() {
                                 </div>
                                 <ul className={styles.drop}>
                                     <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
-                                        <img className={styles.image_logo} src={"/images/snapreportlogo.png"} />
-                                        Snap Report
+                                        Edupia
                                     </Link>
                                     <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
-                                        <img className={styles.image_logo} src={"/images/topetlogo.png"} />
-                                        ToPet
-                                    </Link>
-                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
-                                        <img className={styles.image_logo} src={"/images/opermatelogo.png"} />
-                                        Opermate
-                                    </Link>
-                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
-                                        <img className={styles.image_logo} src={"/images/farmflowlogo.png"} />
                                         Farm Flow
                                     </Link>
                                     <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
-                                        <img className={styles.image_logo} src={"/images/edupialogo.png"} />
-                                        Edupia
+
+                                        Opermate
+                                    </Link>
+                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
+
+                                        Snap Report
+                                    </Link>
+                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
+                                        ToPet
                                     </Link>
                                 </ul>
                             </li>

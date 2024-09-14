@@ -1,0 +1,130 @@
+.products_container {
+    background-color: #f7f7f7;
+}
+
+.product_title {
+    background: linear-gradient(90deg, #AFC8C0 0%, #F1A07E 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
+    font-weight: 400;
+    font-size: calc(5rem + .1vw);
+    padding-top: 5rem;
+    margin-bottom: 3rem;
+}
+
+.products_items {
+    width: 98%;
+    margin: 0 auto;
+}
+
+.wrapper_text_image1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: end;
+    text-align: center;
+    justify-content: center;
+}
+
+.text_image1 {
+    color: #fff;
+    margin-bottom: 15%;
+    line-height: 24px;
+    font-weight: 100;
+    width: 70%;
+    font-size: 1.1rem;
+}
+
+.wrapper_text_image2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.title_image2 {
+    font-weight: 400;
+    letter-spacing: 10px;
+    color: #fff;
+    font-size: calc(2.5rem + .1vw);
+}
+
+.text_image2 {
+    position: absolute;
+    color: #fff;
+    line-height: 24px;
+    width: 80%;
+    bottom: 25%;
+    font-size: 1.1rem;
+}
+
+
+.wrapper_text_image3 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.title_image3 {
+    position: absolute;
+    top: 24%;
+    right: 3%;
+    color: var(--color-1);
+    letter-spacing: 17px;
+    font-size: calc(2.5rem + .1vw);
+    font-weight: 400;
+}
+
+.text_image3 {
+    position: absolute;
+    color: var(--color-1);
+    line-height: 24px;
+    top: 43%;
+    width: 60%;
+    right: 3%;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+
+.wrapper_text_image4 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title_image4 {
+    color: #fff;
+    letter-spacing: 10px;
+    font-size: calc(2.5rem + .1vw);
+    font-weight: 400;
+}
+
+.text_image4 {
+    margin-top: 4rem;
+    color: #fff;
+    width: 60%;
+    line-height: 24px;
+    font-size: 1.1rem;
+    text-align: center;
+}

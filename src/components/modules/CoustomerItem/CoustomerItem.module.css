@@ -1,0 +1,7 @@
+.coustomer_text {
+    font-size: 2rem;
+    font-weight: 400;
+    background: linear-gradient(90deg, #AFC8C0 0%, #F1A07E 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}

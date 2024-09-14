@@ -1,0 +1,60 @@
+.contactus_container {
+    margin-top: 5rem;
+}
+
+.contactus_title {
+    color: var(--color-1);
+    font-size: calc(2rem + .1vw);
+    margin-bottom: 4rem;
+}
+
+.contactus_form {
+    padding: 0 0 0 4rem;
+}
+
+.btn_wrapper {
+    margin-top: 3rem;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-1);
+    color: #fff;
+    border-radius: var(--border-redi);
+    padding: 10px 20px;
+    min-width: 90px;
+    font-weight: 100;
+}
+
+.icon {
+    margin-left: 5px;
+    font-size: 1.2rem
+}
+
+.rotate {
+    transform: rotate(180deg);
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+.contactus_socialmedia {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.media_item {
+    display: flex;
+    align-items: start;
+    margin-bottom: 3.5rem;
+}
+
+
+.text_media {
+    line-height: 20px;
+    color: var(--color-1);
+    width: 80%;
+}
+

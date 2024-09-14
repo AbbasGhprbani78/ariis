@@ -5,9 +5,52 @@
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    text-align: center;
 }
 
+.texts_header_home {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 50%;
+    margin-right: 3%;
+}
 
+.explore {
+    font-size: calc(5.5rem + .1vw);
+    font-weight: 100;
+    width: 100%;
+    text-align: center;
+    color: var(--color-11);
+}
+
+.future {
+    margin-top: 2rem;
+    font-weight: 700;
+    font-size: calc(6.5rem + .1vw);
+    letter-spacing: 35px;
+    width: 100%;
+    text-align: center;
+    color: var(--color-3);
+}
+
+.text {
+    width: 90%;
+    margin-top: 3rem;
+    line-height: 24.2px;
+    text-align: center;
+    color: var(--color-11);
+}
+
+.btn_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin: 2rem 0 0 0;
+}
 
 @media (max-width:1025px) {
     .header_home {

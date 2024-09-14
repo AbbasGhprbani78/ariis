@@ -136,6 +136,14 @@ table {
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 100;
+    src: url('/fonts/poppins/thin/Poppins-Thin.eot') format('eot'),
+        url('/fonts/poppins/thin/Poppins-Thin.woff') format('woff'),
+        url('/fonts/poppins/thin/Poppins-Thin.woff2') format('woff2'),
+        url('/fonts/poppins/thin/Poppins-Thin') format('ttf');
+}
 
 @font-face {
     font-family: 'Poppins';
@@ -228,6 +236,7 @@ button {
     --color-8: #FD9B56;
     --color-9: #70A151;
     --color-10: #979797;
+    --color-11:#9f9f9f;
     --border-redi: 500px;
     --visual-height: 100%
 }
