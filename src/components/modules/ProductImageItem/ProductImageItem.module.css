@@ -1,6 +1,6 @@
 .img_wrapper {
     width: 100%;
-    height: auto;
+    height: 100%;
     position: relative;
 }
 
@@ -14,4 +14,17 @@
     position: absolute;
     bottom: 2rem;
     right: 30px;
+}
+
+@media (max-width:1011px) {
+    .btn1_wrapper {
+        bottom: 1rem;
+    }
+}
+
+@media (max-width:600px) {
+    .btn1_wrapper {
+        left: 50%;
+        transform: translate(-50%);
+    }
 }

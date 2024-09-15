@@ -6,7 +6,7 @@ export default function Button({ text, icon: Icon, style }) {
     const { language } = useLanguage();
 
     return (
-        <button className={`${styles.btn} ${styles[style]}`}>
+        <button className={`${styles.btn} ${styles[style]} ${language === "fa" && styles.rightdir}`}>
             {text}
             {Icon && <Icon className={`${styles.icon} ${language === "fa" && styles.rotate}`} />}
         </button>

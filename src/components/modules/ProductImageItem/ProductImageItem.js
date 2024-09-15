@@ -13,7 +13,7 @@ export default function ProductImageItem({ img, style, children }) {
             {children}
             <div className={styles.btn1_wrapper}>
                 <Button
-                    text={t("View More")}
+                    text={t("ViewMore")}
                     icon={EastIcon}
                     style={style}
                 />

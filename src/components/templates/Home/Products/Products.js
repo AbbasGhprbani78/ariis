@@ -21,7 +21,7 @@ export default function Products() {
                             <ProductImageItem img={"/images/product1.png"} style="bgcolor" >
                                 <div className={styles.wrapper_text_image1}>
                                     <p className={styles.text_image1}>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus fugiat ipsam consectetur magni quasi repudiandae facilis nemo cupiditate reiciendis repellendus.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                     </p>
                                 </div>
                             </ProductImageItem>
@@ -44,7 +44,6 @@ export default function Products() {
                                     <p className={styles.title_image3}>
                                         Data  Mining
                                     </p>
-
                                     <p className={styles.text_image3}>
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                     </p>
@@ -57,7 +56,6 @@ export default function Products() {
                                     <p className={styles.title_image4}>
                                         Data  Mining
                                     </p>
-
                                     <p className={styles.text_image4}>
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                     </p>

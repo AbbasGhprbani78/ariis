@@ -14,9 +14,11 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MediaItem from '@/components/modules/MediaItem/MediaItem';
+import { useLanguage } from '@/context/LangContext';
 export default function ContactUs() {
 
   const { t } = useTranslation()
+  const { language } = useLanguage()
   return (
     <div className={styles.contactus_container}>
       <Box sx={{ flexGrow: 1 }}>
@@ -34,7 +36,7 @@ export default function ContactUs() {
                         name={"Name"}
                         value={""}
                         onChnage={""}
-                        placeholder={"Name"}
+                        placeholder={t("Name")}
                       />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
@@ -42,7 +44,7 @@ export default function ContactUs() {
                         name={"Email_Address"}
                         value={""}
                         onChnage={""}
-                        placeholder={"Email Address"}
+                        placeholder={t("EmailAddress")}
                       />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }} >
@@ -50,15 +52,15 @@ export default function ContactUs() {
                         name={"Message"}
                         value={""}
                         onChnage={""}
-                        placeholder={"Message"}
+                        placeholder={t("Message")}
                       />
                     </Grid>
                   </Grid>
                 </Box>
                 <div className={styles.btn_wrapper}>
-                  <button className={styles.btn} type='submit'>
+                  <button className={`${styles.btn} ${language === "fa" && styles.btn_rtl}`} type='submit'>
                     {t("Submit")}
-                    <EastIcon className={styles.icon} />
+                    <EastIcon className={`${styles.icon} ${language === "fa" && styles.icon_rotate}`} />
                   </button>
                 </div>
               </form>

@@ -7,7 +7,11 @@ const en = {
     ContactUs: "Contact Us",
     HeaderHome: "HeaderHome",
     Submit: "Submit",
-    TryNow:"Try Now",
+    TryNow: "Try Now",
+    ViewMore: "ViewMore",
+    Name: "Name",
+    EmailAddress: "Email Address",
+    Message: "Message",
     des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 }
 

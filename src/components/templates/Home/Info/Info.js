@@ -7,7 +7,6 @@ import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/context/LangContext';
 
-
 export default function Info() {
 
   const { t } = useTranslation()
@@ -20,7 +19,7 @@ export default function Info() {
             <div className={`${styles.text_info_wrapper} ${language === "fa" && styles.text_info_right}`}>
               {
                 language === "en" ?
-                  <Image src={"/images/logo.svg"} width={100} height={63} alt='logo' />
+                  <div className={styles.info_logo}> <Image src={"/images/logo.svg"} width={100} height={63} alt='logo' /></div>
                   :
                   <p className={styles.ariis_text}>آریس</p>
               }

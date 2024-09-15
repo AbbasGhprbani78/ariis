@@ -58,3 +58,21 @@
     width: 80%;
 }
 
+.btn_rtl {
+    direction: rtl;
+}
+
+.icon_rotate {
+    transform: rotate(180deg);
+}
+
+@media (max-width:900px) {
+    .contactus_container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .contactus_form {
+        padding: 0;
+    }
+}

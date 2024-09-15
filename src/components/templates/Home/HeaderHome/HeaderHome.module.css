@@ -11,12 +11,30 @@
     text-align: center;
 }
 
+.header_home_right {
+    justify-content: start;
+}
+
+.texts_header_home_wrappper {
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    margin-top: 65px;
+}
+
+.texts_header_home_wrappper_right {
+    justify-content: start;
+}
+
 .texts_header_home {
     display: flex;
     flex-direction: column;
-    align-items: end;
-    width: 50%;
     margin-right: 3%;
+}
+
+.texts_header_home_right {
+    align-items: end;
+
 }
 
 .explore {
@@ -52,26 +70,116 @@
     margin: 2rem 0 0 0;
 }
 
+.btn_wrapper_right {
+    justify-content: start;
+}
+
 @media (max-width:1025px) {
     .header_home {
         background: url("/images/hederback.png");
         background-size: 100% 100%;
         background-position: center;
         background-repeat: no-repeat;
-        height: 50vh;
+        height: max-content;
+    }
+
+    .texts_header_home_wrappper {
+        margin-bottom: 65px;
     }
 
     .menu_icon {
         cursor: pointer;
     }
+
+    .texts_header_home {
+        justify-content: center;
+    }
+
+    .btn_wrapper {
+        justify-content: center;
+    }
 }
 
-@media (max-width:600px) {
+
+@media (max-width:905px) {
+    .explore {
+        font-size: calc(4.5rem + .1vw);
+    }
+
+    .future {
+        font-size: calc(5.5rem + .1vw);
+        letter-spacing: 30px;
+    }
+}
+
+@media (max-width:760px) {
     .header_home {
         background: url("/images/logotablet.png");
         background-size: 100% 100%;
         background-position: center;
         background-repeat: no-repeat;
         height: 50vh;
+    }
+
+    .texts_header_home_wrappper {
+        margin-bottom: 0;
+    }
+
+    .header_text_wrraper_m {
+        margin-top: 3rem;
+        padding: 0 20px;
+    }
+
+    .explore {
+        font-size: calc(5.5rem + .1vw);
+    }
+
+    .future {
+        font-size: calc(6.5rem + .1vw);
+        letter-spacing: 35px;
+        background: rgba(168, 193, 190, 1);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+
+    .text {
+        width: 100%;
+    }
+
+    .btn_wrapper {
+        margin-top: 3rem;
+    }
+}
+
+
+@media (max-width:688px) {
+    .explore {
+        font-size: calc(3.5rem + .1vw);
+    }
+
+    .future {
+        font-size: calc(4.5rem + .1vw);
+        letter-spacing: 25px;
+    }
+
+    .header_home {
+        height: 45vh;
+    }
+}
+
+@media (max-width:500px) {
+    .future {
+        letter-spacing: 10px;
+    }
+}
+
+@media (max-width:400px) {
+    .explore {
+        font-size: calc(2.5rem + .1vw);
+    }
+
+    .future {
+        font-size: calc(3.5rem + .1vw);
+        letter-spacing: 10px;
     }
 }
