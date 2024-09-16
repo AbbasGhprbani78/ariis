@@ -1,0 +1,39 @@
+.section4_wrapper {
+    background-color: #fff;
+    padding: 3rem;
+}
+
+.title {
+    font-size: calc(1.4rem + .2vw);
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.how_work_text {
+    text-align: start;
+    color: var(--color-1);
+    line-height: 28px;
+    font-weight: 400;
+    margin-bottom: 4rem;
+}
+
+.img_screen {
+    margin-bottom: 5rem;
+    width: 500px;
+    height: 600px;
+}
+
+.img_screen_last {
+    width: 500px;
+    height: 600px;
+}
+
+.img_screen>img {
+    width: 100%;
+    height: 100%;
+}
+
+.img_screen_last>img {
+    width: 100%;
+    height: 100%;
+}

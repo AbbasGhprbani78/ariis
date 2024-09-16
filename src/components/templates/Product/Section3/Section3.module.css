@@ -1,0 +1,25 @@
+.section3_wrapper {
+    background-color: #fff;
+    padding: 3rem;
+}
+
+.title {
+    font-size: calc(1.4rem + .2vw);
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.about_des {
+    line-height: 28px;
+    color: var(--color-1);
+}
+
+.stack_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    width: 85%;
+    gap: 20px;
+}

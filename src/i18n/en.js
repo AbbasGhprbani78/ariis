@@ -12,6 +12,9 @@ const en = {
     Name: "Name",
     EmailAddress: "Email Address",
     Message: "Message",
+    TechStack: "TechStack",
+    HowItWorks:"How It Works",
+    AboutProduct:"About Product",
     des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 }
 

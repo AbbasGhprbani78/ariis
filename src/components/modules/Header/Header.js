@@ -34,28 +34,41 @@ export default function Header() {
                             <Image src={'/images/logo.svg'} width={70} height={33} alt='logo' />
                         </div>
                         <nav className={styles.header_menu}>
-                            <Link className={styles.header_link} href={""}>{t("Home")}</Link>
+                            <Link className={styles.header_link} href={"/"}>{t("Home")}</Link>
                             <li className={styles.header_items_wrapper}>
                                 <div className={styles.header_dropdown}>
                                     <span className={styles.products_text}>{t("Products")}</span>
                                     <ExpandMoreIcon className={styles.icon_drop} />
                                 </div>
                                 <ul className={styles.drop}>
-                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
+                                    <Link
+                                        className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`}
+                                        href={"/product/edupia"}
+                                    >
                                         Edupia
                                     </Link>
-                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
+                                    <Link
+                                        className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`}
+                                        href={"/product/farmflow"}
+                                    >
                                         Farm Flow
                                     </Link>
-                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
-
+                                    <Link
+                                        className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`}
+                                        href={"/product/opermate"}
+                                    >
                                         Opermate
                                     </Link>
-                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
-
+                                    <Link
+                                        className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`}
+                                        href={"/product/snapreport"}
+                                    >
                                         Snap Report
                                     </Link>
-                                    <Link className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`} href={""}>
+                                    <Link
+                                        className={`${styles.product_link} ${language === "fa" && styles.right_product_link}`}
+                                        href={"/product/topet"}
+                                    >
                                         ToPet
                                     </Link>
                                 </ul>

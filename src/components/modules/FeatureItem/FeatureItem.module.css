@@ -1,0 +1,23 @@
+.featureitem {
+    display: flex;
+    align-items: center;
+    width: 48%;
+    margin-bottom: 23px;
+}
+
+.icon_wrapper {
+    background-color: #ff4f4f;
+    color: #fff;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {}
+
+.feature_text {
+    margin: 0 10px;
+    color: var(--color-1);
+}

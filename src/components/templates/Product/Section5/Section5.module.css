@@ -1,0 +1,19 @@
+.section5_wrapper {
+    height: auto;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.section5_wrapper>img {
+    width: 100%;
+    height: 100%;
+}
+
+.features_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}

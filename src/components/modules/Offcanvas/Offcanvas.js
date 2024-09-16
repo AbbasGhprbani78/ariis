@@ -58,19 +58,19 @@ export default function Offcanvas() {
                     <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             <ListItemButton sx={{ pl: 4 }}>
-                                <Link className={styles.link_offcanvas} href={""}>Edupia</Link>
+                                <Link className={styles.link_offcanvas} href={"/product/edupia"}>Edupia</Link>
                             </ListItemButton>
                             <ListItemButton sx={{ pl: 4 }}>
-                                <Link className={styles.link_offcanvas} href={""}>Farm Flow</Link>
+                                <Link className={styles.link_offcanvas} href={"/product/farmflow"}>Farm Flow</Link>
                             </ListItemButton>
                             <ListItemButton sx={{ pl: 4 }}>
-                                <Link className={styles.link_offcanvas} href={""} >Opermate</Link>
+                                <Link className={styles.link_offcanvas} href={"/product/opermate"} >Opermate</Link>
                             </ListItemButton>
                             <ListItemButton sx={{ pl: 4 }}>
-                                <Link className={styles.link_offcanvas} href={""}>Snap Report</Link>
+                                <Link className={styles.link_offcanvas} href={"/product/snapreport"}>Snap Report</Link>
                             </ListItemButton>
                             <ListItemButton sx={{ pl: 4 }}>
-                                <Link className={styles.link_offcanvas} href={""}>ToPet</Link>
+                                <Link className={styles.link_offcanvas} href={"/product/topet"}>ToPet</Link>
                             </ListItemButton>
                         </List>
                     </Collapse>
