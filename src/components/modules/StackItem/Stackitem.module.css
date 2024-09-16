@@ -1,6 +1,7 @@
 .item_wrapper {
     background-color: #000;
     color: #fff;
+    direction: ltr;
 }
 
 .item_wrapper {
@@ -19,10 +20,36 @@
 }
 
 .img_wrapper>img {
-    width: 100%;
+    width: 20px;
     height: 100%;
 }
 
 .text_tech {
     margin: 0 0 0 7px;
+}
+
+
+@media (max-width:1306px) {
+    .item_wrapper {
+        width: 47%;
+    }
+}
+
+@media (max-width:1164px) {
+    .item_wrapper {
+        width: 47%;
+    }
+}
+
+@media (max-width:908px) {
+    .item_wrapper {
+        width: 45%;
+        padding: 10px 30px;
+    }
+}
+
+@media (max-width:397px) {
+    .item_wrapper {
+        width: 46%;
+    }
 }

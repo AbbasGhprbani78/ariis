@@ -13,9 +13,9 @@ export default function Section4() {
                 {t("HowItWorks")}
             </p>
             <div>
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid size={{ xs: 12, md: 6 }}>
+                <Box sx={{ flexGrow: 1 }} >
+                    <Grid container spacing={2} className={styles.catalog_wrapper}>
+                        <Grid size={{ xs: 12, sm: 5.5 }}>
                             <p className={styles.how_work_text}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             </p>
@@ -34,7 +34,7 @@ export default function Section4() {
                                 />
                             </div>
                         </Grid>
-                        <Grid size={{ xs: 12, md: 6 }}
+                        <Grid size={{ xs: 12, sm: 5.5 }}
                             sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <div className={styles.img_screen}>
                                 <img

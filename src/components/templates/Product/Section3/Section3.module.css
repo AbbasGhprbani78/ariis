@@ -23,3 +23,35 @@
     width: 85%;
     gap: 20px;
 }
+
+
+@media (max-width:1509px) {
+    .stack_wrapper {
+        width: 90%;
+    }
+}
+
+
+@media (max-width:1433px) {
+    .stack_wrapper {
+        width: 95%;
+    }
+}
+
+@media (max-width:1366px) {
+    .stack_wrapper {
+        width: 100%;
+    }
+}
+
+@media (max-width:1164px) {
+    .stack_wrapper {
+        width: 100%;
+    }
+}
+
+@media (max-width:940px) {
+    .section3_wrapper {
+        padding: 2rem;
+    }
+}

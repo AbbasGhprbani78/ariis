@@ -22,13 +22,13 @@ export default function Section3() {
             </p>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={4}>
-                    <Grid size={{ xs: 12, md: 8 }} >
+                    <Grid size={{ xs: 12, sm: 12, md: 7, lg: 8 }} >
                         <p className={styles.about_des}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.
                         </p>
                     </Grid>
-                    <Grid size={{ xs: 12, md: 4 }} >
+                    <Grid size={{ xs: 12, sm: 12, md: 5, lg: 4 }} >
                         <span className={styles.techstack}>
                             {t("TechStack")} :
                         </span>

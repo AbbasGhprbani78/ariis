@@ -15,7 +15,9 @@ export default function Section1() {
       <h1 className={styles.product_title}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </h1>
-      <Button text={t("ViewMore")} icon={EastIcon} />
+      <div className={styles.btn_wrapper}>
+        <Button text={t("ViewMore")} icon={EastIcon} />
+      </div>
     </div>
   )
 }

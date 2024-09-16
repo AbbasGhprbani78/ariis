@@ -1,8 +1,9 @@
 .featureitem {
     display: flex;
     align-items: center;
-    width: 48%;
+    width: 45%;
     margin-bottom: 23px;
+    justify-content: center;
 }
 
 .icon_wrapper {
@@ -20,4 +21,24 @@
 .feature_text {
     margin: 0 10px;
     color: var(--color-1);
+    line-height: 24px;
+}
+
+@media (max-width:1200px) {
+    .featureitem {
+        width: 50%;
+    }
+}
+
+@media (max-width:900px) {
+    .featureitem {
+        width: 48%;
+    }
+}
+
+@media (max-width:700px) {
+    .featureitem {
+        width: 100%;
+        justify-content: start;
+    }
 }

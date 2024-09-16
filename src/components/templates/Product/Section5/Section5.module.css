@@ -1,7 +1,6 @@
 .section5_wrapper {
     height: auto;
-    width: 90%;
-    margin: 0 auto;
+    padding: 0 3rem 3rem 3rem;
     margin-top: 2rem;
 }
 
@@ -13,7 +12,13 @@
 .features_wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     margin-top: 40px;
+}
+
+@media (max-width:940px) {
+    .section5_wrapper {
+        padding: 0 2rem 3rem 2rem;
+    }
 }
