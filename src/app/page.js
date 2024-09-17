@@ -17,7 +17,7 @@ export default function Home() {
       <Coustomers />
       <Slider />
       <ContactUs />
-      <Footer/>
+      <Footer />
     </>
   );
 }

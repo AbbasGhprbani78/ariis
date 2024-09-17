@@ -1,0 +1,41 @@
+.card {
+    padding: 20px 30px 50px 30px;
+    color: #fff;
+    background-color: #1f211f;
+    border-radius: 20px;
+    height: 100%;
+    min-height: 301px;
+}
+
+.card_header {
+    display: flex;
+    align-items: center;
+}
+
+.card_image {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
+.card_title {
+    margin-left: 1.2rem;
+    font-size: 18px;
+}
+
+.card_content {
+    margin-top: 2rem;
+    max-height: 157px;
+    overflow-y: scroll;
+}
+
+.card_content::-webkit-scrollbar {
+    display: none;
+}
+
+.card_text {
+    text-align: justify;
+    font-weight: 400;
+    font-size: .9rem;
+    line-height: 24px;
+}

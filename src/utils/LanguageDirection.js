@@ -1,11 +1,8 @@
 'use client';
-
 import { useEffect } from 'react';
 import i18n from '@/i18n';
 
 export default function LanguageDirection() {
-
-    
 
     useEffect(() => {
         const handleLanguageChange = (lang) => {
@@ -16,9 +13,7 @@ export default function LanguageDirection() {
             }
         };
 
-
         handleLanguageChange(i18n.language);
-
 
         i18n.on('languageChanged', handleLanguageChange);
 

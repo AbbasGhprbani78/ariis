@@ -1,0 +1,43 @@
+.section1_wrapper {
+    width: 100%;
+    background: url("/images/aboutusback.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: var(--visual-height);
+}
+
+.aboutus_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    padding: 0 3rem;
+}
+
+.aboutus_top {
+    /* margin-bottom: 5rem; */
+}
+
+.aboutus_title {
+    font-size: calc(1.5rem + 1vw);
+    font-weight: 500;
+    background: linear-gradient(90deg, #AFC8C0 0%, #F1A07E 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    width: max-content;
+    margin-bottom: 2rem;
+}
+
+.aboutus_text {
+    width: 70%;
+    text-align: start;
+    line-height: 30px;
+    color: #fff;
+}
+
+.aboutus_bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

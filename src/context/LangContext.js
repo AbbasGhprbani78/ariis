@@ -25,7 +25,6 @@ export const LanguageProvider = ({ children }) => {
 
     useEffect(() => {
         document.body.className = language === 'fa' ? 'fa_language' : '';
-        
     }, [language]);
     return (
         <LanguageContext.Provider value={{ language, changeLanguage }}>

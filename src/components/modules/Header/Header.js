@@ -8,8 +8,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '@/context/LangContext'
-import useWindowWidth from '@/hook/WindowWidth'
 import Offcanvas from '../Offcanvas/Offcanvas'
+import useWindowWidth from '@/hook/WindowWidth'
 
 export default function Header() {
 
@@ -73,9 +73,9 @@ export default function Header() {
                                     </Link>
                                 </ul>
                             </li>
-                            <Link className={styles.header_link} href={""}>{t("Articles")}</Link>
-                            <Link className={styles.header_link} href={""}>{t("AboutUs")}</Link>
-                            <Link className={styles.header_link} href={""}>{t("ContactUs")}</Link>
+                            <Link className={styles.header_link} href={"/articles"}>{t("Articles")}</Link>
+                            <Link className={styles.header_link} href={"/aboutus"}>{t("AboutUs")}</Link>
+                            <Link className={styles.header_link} href={"contactus"}>{t("ContactUs")}</Link>
                         </nav>
                         <div className={styles.header_actions}>
                             <div className={styles.header_wrap_btn_switch}>
@@ -88,6 +88,10 @@ export default function Header() {
             }
 
 
+
         </header>
     )
 }
+
+
+
