@@ -67,6 +67,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    direction: ltr;
 }
 
 .year_founded {
@@ -86,6 +87,7 @@
     color: #fff;
     display: flex;
     align-items: center;
+    direction: ltr;
 }
 
 .number {
@@ -148,6 +150,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 15px 0;
 }
 
 .text_chart {
@@ -167,14 +170,19 @@
 
 .item6_top {
     display: flex;
-    align-items: center;
+    align-items: start;
     color: #fff;
 }
 
 .item6_text {
     font-size: .9rem;
-    margin: 0 10px;
+    margin-left: 15px;
     line-height: 24px;
+}
+
+.item6_text_fa {
+    margin-left: 0;
+    margin-right: 15px;
 }
 
 .item6_flag {
@@ -188,4 +196,45 @@
 .flag_img {
     width: 35px;
     height: auto;
+}
+
+@media (max-width:1222px) {
+    .text_chart {
+        font-size: .9rem;
+    }
+
+    .item6 {
+        padding: 0 10px;
+    }
+}
+
+
+@media (max-width:1025px) {
+    .ourteam_wrapper {
+        padding: 3rem 2rem 2rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .item_about {
+        height: 300px;
+    }
+
+    .about_feature {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "sec_1"
+            "sec_2"
+            "sec_3"
+            "sec_4"
+            "sec_5"
+            "sec_6";
+    }
+}
+
+@media (max-width:600px) {
+    .ourteam_wrapper {
+        padding: 3rem 1.5rem 2rem 1.5rem;
+    }
 }

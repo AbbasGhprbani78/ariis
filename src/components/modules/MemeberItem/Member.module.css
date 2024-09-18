@@ -38,6 +38,16 @@
     top: 10px;
 }
 
+.name_right {
+    left: 0;
+    right: 3rem;
+    font-weight: 400;
+    color: var(--color-1);
+    font-size: calc(1.1rem + .3vw);
+    position: absolute;
+    top: 10px;
+}
+
 .memeber_content {
     padding: 0 3rem;
     margin: 2rem 0;
@@ -76,8 +86,70 @@
 .email {
     margin: 0 5px;
 }
-
+.phone{
+    direction: ltr;
+}
 .memeber_media {
     display: flex;
     align-items: center;
+}
+
+
+.name_m {
+    display: none;
+}
+
+@media (max-width:1025px) {
+    .memeber_content {
+        padding: 0 2rem;
+    }
+
+    .name {
+        left: 2rem;
+    }
+
+    .name_right {
+        right: 2rem;
+    }
+}
+
+@media (max-width:768px) {
+    .name {
+        display: none;
+    }
+
+    .memeber_content {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .memeber_text {
+        width: 100%;
+    }
+
+    .memeber_contact_wrapper {
+        width: 100%;
+        margin-top: 2rem;
+        justify-content: start;
+    }
+
+    .memeber_phone {
+        margin-bottom: 2rem;
+    }
+
+    .name_m {
+        text-align: center;
+        width: 100%;
+        margin: 1.5rem 0;
+        font-weight: 400;
+        color: var(--color-1);
+        font-size: calc(1.1rem + .3vw);
+    }
+}
+
+
+@media (max-width:600px) {
+    .memeber_content {
+        padding: 0 1.5rem;
+    }
 }

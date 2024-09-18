@@ -24,3 +24,29 @@
     font-size: .85rem;
 }
 
+
+@media (max-width:890px) {
+    .item_wrapper {
+        width: 45%;
+        margin-top: 2.5rem;
+    }
+
+    .textfeature {
+        width: 60%;
+    }
+}
+
+@media (max-width:600px) {
+    .item_wrapper {
+        width: 80%;
+        margin-top: 2.5rem;
+    }
+
+    .img_wrapper {
+        width: 90px;
+    }
+
+    .textfeature {
+        font-size: .95rem;
+    }
+}

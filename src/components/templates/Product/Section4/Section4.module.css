@@ -5,6 +5,7 @@
 
 .catalog_wrapper {
     padding: 0 50px;
+    justify-content: space-evenly;
 }
 
 .title {

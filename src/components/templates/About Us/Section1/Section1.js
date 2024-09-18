@@ -39,20 +39,20 @@ export default function Section1() {
                         img={imgUrl4}
 
                     />
-                    <div style={{ height: "100%", width: "1px", background: "#fff" }}></div>
+                    <div className={styles.line}></div>
                     <AboutFeatureItem
                         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                         img={imgUrl3}
 
                     />
-                    <div style={{ height: "100%", width: "1px", background: "#fff" }}></div>
+                    <div className={styles.line}></div>
 
                     <AboutFeatureItem
                         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                         img={imgUrl2}
 
                     />
-                    <div style={{ height: "100%", width: "1px", background: "#fff" }}></div>
+                    <div className={styles.line}></div>
                     <AboutFeatureItem
                         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                         img={imgUrl1}

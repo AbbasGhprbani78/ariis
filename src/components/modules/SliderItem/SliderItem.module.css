@@ -7,6 +7,10 @@
     min-height: 301px;
 }
 
+.card_right {
+    direction: rtl;
+}
+
 .card_header {
     display: flex;
     align-items: center;
@@ -23,15 +27,18 @@
     font-size: 18px;
 }
 
-.card_content {
-    margin-top: 2rem;
-    max-height: 157px;
-    overflow-y: scroll;
+.card_title_right {
+    margin-left: 0;
+    margin-right: 1.2rem;
 }
 
-.card_content::-webkit-scrollbar {
-    display: none;
+.card_content {
+    margin-top: 2rem;
 }
+
+/* .card_content::-webkit-scrollbar {
+    display: none;
+} */
 
 .card_text {
     text-align: justify;

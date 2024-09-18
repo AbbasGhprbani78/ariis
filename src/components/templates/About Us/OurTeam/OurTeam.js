@@ -7,6 +7,9 @@ import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import PercentIcon from '@mui/icons-material/Percent';
 import { Cell, Pie, PieChart } from 'recharts';
+import { useLanguage } from '@/context/LangContext';
+
+
 const data = [
     { name: '1', value: 40, color: '#CCFFEE' },
     { name: '2', value: 10, color: '#f2f3f5' },
@@ -15,15 +18,23 @@ const data = [
     { name: '5', value: 15, color: '#f1a07e' },
 ];
 
+
 export default function OurTeam() {
 
     const { t } = useTranslation()
     const [mainScore, totalScore] = "8.7/10".split('/');
+    const { language } = useLanguage()
+
+    const convertToFarsiDigits = (number) => {
+        const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        return number.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
+    };
+
     return (
         <div className={styles.ourteam_wrapper}>
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={7}>
-                    <Grid size={{ xs: 12, md: 6 }} >
+                <Grid container spacing={3} >
+                    <Grid size={{ xs: 12, md: 12, lg: 5, xl: 6 }} >
                         <p className={styles.title_our}>
                             {t("OurTeam")}
                         </p>
@@ -31,10 +42,12 @@ export default function OurTeam() {
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         </p>
                     </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{ xs: 12, md: 12, lg: 7, xl: 6 }}>
                         <div className={styles.about_feature}>
                             <div className={`${styles.item_about} ${styles.item1}`}>
-                                <p className={styles.number_year}>2010</p>
+                                <p className={styles.number_year}>
+                                    {language === "fa" ? convertToFarsiDigits(2010) : 2010}
+                                </p>
                                 <span className={styles.text_year}>
                                     Year Founded
                                 </span>
@@ -44,27 +57,35 @@ export default function OurTeam() {
                                     <span className={styles.year_founded_item}>Year Founded</span>
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
-                                        <span className={styles.number}>10</span>
+                                        <span className={styles.number}>
+                                            {language === "fa" ? convertToFarsiDigits(10) : 10}
+                                        </span>
                                     </div>
                                 </div>
                                 <div className={styles.year_founded}>
                                     <span className={styles.year_founded_item}>Year Founded</span>
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
-                                        <span className={styles.number}>5 <span className={styles.letter}>M</span></span>
+                                        <span className={styles.number}>
+                                            {language === "fa" ? `${convertToFarsiDigits(5)}` : '5'}<span className={styles.letter}>M</span>
+                                        </span>
                                     </div>
                                 </div>
                                 <div className={styles.year_founded}>
                                     <span className={styles.year_founded_item}>Year Founded</span>
                                     <div className={styles.wrap_number}>
-                                        <span className={styles.number}>80</span>
+                                        <span className={styles.number}>
+                                            {language === "fa" ? convertToFarsiDigits(80) : 80}
+                                        </span>
                                         <PercentIcon className={styles.icon_number} />
                                     </div>
                                 </div>
                             </div>
                             <div className={`${styles.item_about} ${styles.item3}`}>
                                 <div className={styles.number2_wrapper}>
-                                    <span className={styles.main_score}>{mainScore}</span>
+                                    <span className={styles.main_score}>
+                                        {language === "fa" ? convertToFarsiDigits(mainScore) : mainScore}
+                                    </span>
                                     <span className={styles.total_score}>/{totalScore}</span>
                                 </div>
                                 <span className={styles.text_item2}>
@@ -82,7 +103,7 @@ export default function OurTeam() {
                                             dataKey="value"
                                             cx="50%"
                                             cy="50%"
-                                            innerRadius={60}
+                                            innerRadius={68}
                                             outerRadius={80}
                                             startAngle={90}
                                             endAngle={-270}
@@ -101,7 +122,7 @@ export default function OurTeam() {
                                             fontWeight="bold"
                                             fill="#fff"
                                         >
-                                            84%
+                                            {language === "fa" ? convertToFarsiDigits(84) : 84}%
                                         </text>
                                         <text
                                             x="50%"
@@ -121,9 +142,11 @@ export default function OurTeam() {
                                 <div className={styles.item6_top}>
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
-                                        <span className={styles.number}>10</span>
+                                        <span className={styles.number}>
+                                            {language === "fa" ? convertToFarsiDigits(10) : 10}
+                                        </span>
                                     </div>
-                                    <p className={styles.item6_text}>
+                                    <p className={`${styles.item6_text} ${language === "fa" && styles.item6_text_fa}`}>
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,
                                     </p>
                                 </div>

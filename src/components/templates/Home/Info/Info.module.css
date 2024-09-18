@@ -38,21 +38,12 @@
 
 @media (max-width:900px) {
     .text_info_wrapper {
-        padding-left: 0;
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    .text_info_right {
-        padding-right: 0;
+        padding: 0 20px;
     }
 }
 
 
 @media (max-width:600px) {
-    .text_info_wrapper {
-        width: 93%;
-    }
 
     .info_logo {
         display: flex;
@@ -60,10 +51,6 @@
     }
 
     .ariis_text {
-        text-align: center;
-    }
-
-    .text_info {
         text-align: center;
     }
 }

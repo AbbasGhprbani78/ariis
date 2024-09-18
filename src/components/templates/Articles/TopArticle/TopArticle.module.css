@@ -1,0 +1,151 @@
+.container {
+    padding-top: 90px;
+    padding-bottom: 30px;
+}
+
+.toparticles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 1.2rem;
+    grid-template-areas: "sec_1 sec_1 sec_2" "sec_1 sec_1 sec_2" "sec_1 sec_1 sec_2" "sec_1 sec_1 sec_2" "sec_1 sec_1 sec_3" "sec_1 sec_1 sec_3" "sec_1 sec_1 sec_3" " sec_4 sec_4 sec_3";
+
+}
+
+.item {
+    height: 80px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+.item_1 {
+    grid-area: sec_1;
+    height: 100%;
+    position: relative;
+}
+
+.item_1>img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.firstarticle_content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 100%;
+    padding: 20px;
+}
+
+.texts_first_article {
+    color: #fff;
+    margin-top: 1rem;
+}
+
+.first_article_title {
+    font-weight: 700;
+    font-size: calc(1.5rem);
+    line-height: 30px;
+    letter-spacing: 2px;
+    width: 83%;
+    margin-bottom: 1rem;
+}
+
+.first_article_text {
+    font-weight: 100;
+    line-height: 24px;
+}
+
+.item_2 {
+    background-color: var(--color-5);
+    grid-area: sec_2;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.user_info {
+    display: flex;
+    align-items: start;
+    width: max-content;
+}
+
+.user_info>img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user_texts {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: var(--color-1);
+    justify-content: space-around;
+    font-weight: 400;
+    height: 60px;
+    margin: 0 6px;
+}
+
+.user_name {}
+
+.date {}
+
+.texts_wrapper {
+    line-height: 24px;
+}
+
+.user_title {
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.user_text {}
+
+
+.item_3 {
+    background-color: var(--color-4);
+    grid-area: sec_3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item_3>img {
+    padding-top: 2rem;
+}
+
+.texts_wrapper2 {
+    padding: 20px;
+    line-height: 24px;
+}
+
+.item_4 {
+    grid-area: sec_4;
+    display: flex;
+    align-items: end;
+}
+
+.top_text {
+    font-weight: 700;
+    font-size: calc(2rem + .8rem);
+    color: #fff;
+}
+
+.f_article {
+    color: #fff;
+}
+
+.texts_first_article {}
+
+.first_article_title {}

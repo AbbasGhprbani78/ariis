@@ -19,12 +19,18 @@ export default function ContactUs() {
 
   const { t } = useTranslation()
   const { language } = useLanguage()
+
+  const convertToFarsiDigits = (number) => {
+    const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    return number.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
+  };
+
   return (
     <div className={styles.contactus_container}>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={10}>
           <Grid size={{ xs: 12, md: 7 }} >
-            <div className={styles.contactus_form}>
+            <div className={`${styles.contactus_form} ${language === "fa" && styles.contactus_form_right}`}>
               <p className={styles.contactus_title}>
                 {t("ContactUs")}
               </p>
@@ -76,7 +82,7 @@ export default function ContactUs() {
               </div>
               <div className={styles.media_item}>
                 <LocalPhoneOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_phone}`} />
-                <p className={styles.text_media}>0916 295 7253</p>
+                <p className={styles.text_media} style={{ direction: "ltr", width: "max-content" }}>0916 295 7253</p>
               </div>
               <div className={styles.media_item}>
                 <MailOutlineOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_email}`} />

@@ -11,7 +11,7 @@ export default function page() {
         <>
             <Header />
             <Section1 />
-             <OurTeam /> 
+            <OurTeam />
             <Memebers />
             <Slider />
             <Footer />
