@@ -2,7 +2,7 @@
     padding: 20px 30px 50px 30px;
     color: #fff;
     background-color: #1f211f;
-    border-radius: 20px;
+    border-radius: var(--border-redi);
     height: 100%;
     min-height: 301px;
 }

@@ -1,0 +1,42 @@
+.trending_item {
+    border-left: 1px solid #fff;
+    padding-left: 10px;
+    margin-bottom: 2.7rem;
+}
+
+.trending_item_right {
+    border-left: none;
+    padding-left: 0;
+    border-right: 1px solid #fff;
+    padding-right: 10px;
+}
+
+.title_trending {
+    margin-bottom: 1.5rem;
+    line-height: 24px;
+}
+
+.user_info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .9rem;
+}
+
+.user_left {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    margin: 0 10px;
+}
+
+.user_left>img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.date {}

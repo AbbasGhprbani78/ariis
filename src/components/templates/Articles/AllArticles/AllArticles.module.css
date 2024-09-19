@@ -1,0 +1,132 @@
+.allarticle {
+    margin-top: 5rem;
+}
+
+.left_article {
+    max-height: 1182px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.left_article_right {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+.left_article::-webkit-scrollbar {
+    width: 5px
+}
+
+.left_article::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 8px;
+}
+
+.left_article::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 8px;
+
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    .left_article {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}
+
+.filtering {
+    padding-bottom: 7rem;
+}
+
+.trendig_text,
+.filter_title {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+
+.right_article {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+
+.filter_btns {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.3rem;
+}
+
+.btn_filter {
+    background-color: #cfdcd6;
+    border-radius: var(--border-redi);
+    color: var(--color-1);
+    width: 130px;
+    padding: 12px 0;
+    text-align: center;
+    font-weight: 400;
+}
+
+@media (max-width:986px) {
+    .filter_btns {
+        justify-content: center;
+    }
+}
+
+@media (max-width:900px) {
+    .filter_btns {
+        justify-content: start;
+    }
+
+    .right_article {
+        flex-direction: row;
+        align-items: start;
+        justify-content: space-between;
+    }
+
+    .trending {
+        width: 48%;
+    }
+
+    .filtering {
+        width: 45%;
+    }
+
+}
+
+@media (max-width:704px) {
+    .filter_btns {
+        justify-content: center;
+    }
+
+    .filter_title {
+        text-align: center;
+    }
+}
+
+@media (max-width:600px) {
+    .right_article {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .filter_btns {
+        justify-content: start;
+    }
+
+    .filter_title {
+        text-align: start;
+    }
+
+    .trending,
+    .filtering {
+        width: 100%;
+    }
+
+}
