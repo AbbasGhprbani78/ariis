@@ -8,10 +8,11 @@ import { useLanguage } from '@/context/LangContext'
 import { useTranslation } from 'react-i18next';
 import EastIcon from '@mui/icons-material/East';
 import Button from '../Button/Button';
-
+import { usePathname } from 'next/navigation';
 
 export default function Offcanvas() {
 
+    const pathname = usePathname();
     const { t } = useTranslation()
     const { changeLanguage, language } = useLanguage()
 
@@ -26,6 +27,8 @@ export default function Offcanvas() {
         setDropdownOpen(!dropdownOpen);
     };
 
+    const isActive = (href) => pathname === href;
+
     return (
         <div className={styles.offcanvas_container}>
             <IconButton onClick={handleDrawerToggle} sx={{
@@ -34,7 +37,7 @@ export default function Offcanvas() {
                 <MenuIcon />
             </IconButton>
             <Drawer
-                anchor="left"
+                anchor={language === "fa" ? "right" : "left"}
                 open={open}
                 onClose={handleDrawerToggle}
                 sx={{
@@ -43,11 +46,10 @@ export default function Offcanvas() {
                 }}
             >
                 <List sx={{ padding: "10px" }}>
-                    <ListItemButton>
-                        <Link className={styles.link_offcanvas} href={""}>{t("Home")}</Link>
+                    <ListItemButton className={`${styles.link_item} ${isActive("/") && styles.active_route}`}>
+                        <Link className={styles.link_offcanvas} href={"/"}>{t("Home")}</Link>
                     </ListItemButton>
-                    <ListItemButton onClick={handleDropdownToggle} sx={{
-                        marginTop: "1.6rem",
+                    <ListItemButton className={`${styles.link_item}`} onClick={handleDropdownToggle} sx={{
                         display: "flex",
                         justifyContent: "space-between"
 
@@ -57,31 +59,31 @@ export default function Offcanvas() {
                     </ListItemButton>
                     <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/edupia") && styles.active_route}`}>
                                 <Link className={styles.link_offcanvas} href={"/product/edupia"}>Edupia</Link>
                             </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/farmflow") && styles.active_route}`}>
                                 <Link className={styles.link_offcanvas} href={"/product/farmflow"}>Farm Flow</Link>
                             </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/opermate") && styles.active_route}`}>
                                 <Link className={styles.link_offcanvas} href={"/product/opermate"} >Opermate</Link>
                             </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/snapreport") && styles.active_route}`}>
                                 <Link className={styles.link_offcanvas} href={"/product/snapreport"}>Snap Report</Link>
                             </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/topet") && styles.active_route}`}>
                                 <Link className={styles.link_offcanvas} href={"/product/topet"}>ToPet</Link>
                             </ListItemButton>
                         </List>
                     </Collapse>
-                    <ListItemButton>
-                        <Link className={styles.link_offcanvas} href={""}>{t("Articles")}</Link>
+                    <ListItemButton className={`${styles.link_item} ${isActive("/articles") && styles.active_route}`}>
+                        <Link className={styles.link_offcanvas} href={"/articles"}>{t("Articles")}</Link>
                     </ListItemButton>
-                    <ListItemButton>
-                        <Link className={styles.link_offcanvas} href={""}>{t("AboutUs")}</Link>
+                    <ListItemButton className={`${styles.link_item} ${isActive("/aboutus") && styles.active_route}`}>
+                        <Link className={styles.link_offcanvas} href={"/aboutus"}>{t("AboutUs")}</Link>
                     </ListItemButton>
-                    <ListItemButton>
-                        <Link className={styles.link_offcanvas} href={""}>{t("ContactUs")}</Link>
+                    <ListItemButton className={`${styles.link_item} ${isActive("/contactus") && styles.active_route}`}>
+                        <Link className={styles.link_offcanvas} href={"/contactus"}>{t("ContactUs")}</Link>
                     </ListItemButton>
                     <div className={styles.header_wrap_btn_switch}>
                         <button className={`${styles.btn_switch} ${language === "en" && styles.active}`} onClick={() => changeLanguage('en')}>En</button>

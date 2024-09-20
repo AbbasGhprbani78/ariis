@@ -21,11 +21,18 @@
 
 .link_offcanvas {
     all: unset;
-    cursor: pointer;
-    margin-top: 1.6rem;
+    cursor: pointer
 }
 
+.link_item {
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+    margin-top: 1rem;
+}
 
+.active_route {
+    background-color: rgb(219, 217, 217);
+}
 
 @media (min-width:1025px) {
     .offcanvas_container {

@@ -57,7 +57,10 @@ export default function HeaderHome() {
                                 <p className={styles.text}>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                     <div className={`${styles.btn_wrapper} ${language === "fa" && styles.btn_wrapper_right}`}>
-                                        <Button text={t("TryNow")} icon={EastIcon} />
+                                        <button className={`${styles.btn_sec1} ${language === "fa" && styles.btn_right}`}>
+                                            {t("TryNow")}
+                                            <EastIcon className={`${styles.icon_east} ${language == "fa" && styles.east_right}`} />
+                                        </button>
                                     </div>
                                 </p>
                             </div>

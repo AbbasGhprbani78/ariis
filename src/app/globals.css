@@ -238,7 +238,7 @@ button {
     --color-10: #979797;
     --color-11: #9f9f9f;
     --border-redi: 500px;
-    --border-redi: 20px;
+    --border-redi2: 20px;
     --visual-height: 100%
 }
 
@@ -262,6 +262,30 @@ body::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 8px;
 
+}
+
+
+/* globals.css */
+.page-transition-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.page-transition-leave {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-transition-leave-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
 }
 
 @supports not selector(::-webkit-scrollbar) {

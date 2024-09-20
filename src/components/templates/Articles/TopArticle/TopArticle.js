@@ -58,15 +58,15 @@ export default function TopArticle() {
                 <div className={`${styles.item} ${styles.item_4}`}>
                     <p className={styles.top_text}>Top 5 Ariis Articles</p>
                     <div className={styles.image_container}>
-                        <img src="images/article/7.jpg"
+                        <img src="/images/article/7.jpg"
                             className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
-                        <img src="images/article/6.jpg"
+                        <img src="/images/article/3.png"
                             className={`${styles.circle2} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 2" />
-                        <img src="images/article/5.png"
+                        <img src="/images/article/5.png"
                             className={`${styles.circle3} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 3" />
-                        <img src="images/article/4.jpg"
+                        <img src="/images/article/4.jpg"
                             className={`${styles.circle4} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 4" />
-                        <img src="images/article/9.png"
+                        <img src="/images/article/9.png"
                             className={`${styles.circle5} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 5" />
                     </div>
                 </div>

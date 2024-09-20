@@ -12,7 +12,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <I18nProvider>
-          <LanguageProvider>{children}</LanguageProvider>
+          <LanguageProvider>
+            <main>
+              {children}
+            </main>
+          </LanguageProvider>
         </I18nProvider>
       </body>
     </html>

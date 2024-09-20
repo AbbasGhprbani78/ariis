@@ -3,9 +3,12 @@
 }
 
 .contactus_title {
-    color: var(--color-1);
     font-size: calc(2rem + .1vw);
     margin-bottom: 4rem;
+    background: linear-gradient(90deg, #AFC8C0 0%, #F1A07E 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    width: max-content;
 }
 
 .contactus_form {

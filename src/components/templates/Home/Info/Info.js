@@ -1,16 +1,22 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Info.module.css'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/context/LangContext';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Info() {
 
   const { t } = useTranslation()
   const { language } = useLanguage()
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <div className={styles.Info_container}>
       <Box sx={{ flexGrow: 1 }}>
@@ -33,7 +39,7 @@ export default function Info() {
             display: 'flex',
             justifyContent: "center"
           }}>
-            <div className={styles.img_wrapper}>
+            <div data-aos="fade-up" className={styles.img_wrapper}>
               <img src='/images/handmobile.png' alt='mobile in hand' />
             </div>
           </Grid>

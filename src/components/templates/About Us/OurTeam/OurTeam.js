@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './OurTean.module.css'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
@@ -24,11 +24,21 @@ export default function OurTeam() {
     const { t } = useTranslation()
     const [mainScore, totalScore] = "8.7/10".split('/');
     const { language } = useLanguage()
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true)
+    }, []);
+
 
     const convertToFarsiDigits = (number) => {
         const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         return number.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
     };
+
+    if (!isClient) {
+        return null;
+    }
 
     return (
         <div className={styles.ourteam_wrapper}>
@@ -167,4 +177,3 @@ export default function OurTeam() {
 }
 
 
-//import { PieChart, Pie, Cell } from 'recharts';

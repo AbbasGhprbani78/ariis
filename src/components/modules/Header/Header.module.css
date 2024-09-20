@@ -13,8 +13,6 @@
     z-index: 7;
 }
 
-
-
 .header_logo {}
 
 .header_menu {
@@ -144,6 +142,9 @@
     background-color: var(--color-3);
 }
 
+.active_route{
+    border-bottom: 2px solid;
+}
 
 
 

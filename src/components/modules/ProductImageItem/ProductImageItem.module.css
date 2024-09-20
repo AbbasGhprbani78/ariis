@@ -16,6 +16,12 @@
     right: 30px;
 }
 
+.btn1_wrapper_right {
+    position: absolute;
+    bottom: 2rem;
+    right: 30px;
+}
+
 @media (max-width:1011px) {
     .btn1_wrapper {
         bottom: 1rem;
@@ -26,5 +32,12 @@
     .btn1_wrapper {
         left: 50%;
         transform: translate(-50%);
+        width: max-content;
+    }
+
+    .btn1_wrapper_right {
+        right: 50%;
+        transform: translate(50%);
+        width: max-content;
     }
 }

@@ -11,6 +11,7 @@ export default function Input({ name, value, onChnage, placeholder }) {
                     onChange={onChnage}
                     placeholder={placeholder}
                     className={styles.input}
+                    autoComplete='off'
                 />
             </div>
         </>
