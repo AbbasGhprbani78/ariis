@@ -1,6 +1,7 @@
 import "./globals.css";
 import I18nProvider from "@/utils/I18NextProvaider";
 import { LanguageProvider } from "@/context/LangContext";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 export const metadata = {
   title: "",
@@ -13,9 +14,11 @@ export default function RootLayout({ children }) {
       <body>
         <I18nProvider>
           <LanguageProvider>
-            <main>
-              {children}
-            </main>
+            <ReduxProvider>
+              <main>
+                {children}
+              </main>
+            </ReduxProvider>
           </LanguageProvider>
         </I18nProvider>
       </body>

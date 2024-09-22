@@ -6,6 +6,7 @@ import i18n from '@/i18n';
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
+
     const [language, setLanguage] = useState('en'); 
 
     useEffect(() => {
@@ -26,6 +27,8 @@ export const LanguageProvider = ({ children }) => {
     useEffect(() => {
         document.body.className = language === 'fa' ? 'fa_language' : '';
     }, [language]);
+
+    
     return (
         <LanguageContext.Provider value={{ language, changeLanguage }}>
             {children}

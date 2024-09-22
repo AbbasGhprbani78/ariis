@@ -6,13 +6,12 @@ import Button from '@/components/modules/Button/Button';
 import EastIcon from '@mui/icons-material/East';
 import { useLanguage } from '@/context/LangContext';
 import useWindowWidth from '@/hook/WindowWidth';
+
 export default function HeaderHome() {
 
     const { t } = useTranslation()
     const { language } = useLanguage()
-
     const width = useWindowWidth();
-
     if (width === undefined) {
         return null;
     }

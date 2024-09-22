@@ -8,14 +8,30 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/context/LangContext';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDataHome } from '@/redux/home';
+import Loading from '@/components/modules/Loading/Loading';
 
 export default function Info() {
 
   const { t } = useTranslation()
   const { language } = useLanguage()
+  const dispatch = useDispatch()
+  const { data, loading, error } = useSelector((state) => state.home);
+
   useEffect(() => {
     AOS.init();
   }, []);
+
+  useEffect(() => {
+    dispatch(getDataHome(language))
+  }, [language])
+
+
+  if (loading) {
+    return <Loading />;
+  }
+
 
   return (
     <div className={styles.Info_container}>
@@ -48,3 +64,6 @@ export default function Info() {
     </div>
   )
 }
+
+
+

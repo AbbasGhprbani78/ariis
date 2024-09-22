@@ -220,6 +220,12 @@ body {
     font-weight: 300;
 }
 
+
+body {
+    max-width: 1676px;
+    margin: 0 auto;
+}
+
 button {
     all: unset;
     cursor: pointer;
