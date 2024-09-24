@@ -1,18 +1,32 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import { useTranslation } from 'react-i18next';
 import StackItem from '@/components/modules/StackItem/StackItem';
 import styles from './Section3.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { getProjectData } from '@/redux/product';
+import { useLanguage } from '@/context/LangContext';
+import Loading from '@/components/modules/Loading/Loading';
 
-export default function Section3({ about, technology }) {
+export default function Section3({ id }) {
+    console.log(id)
     const { t } = useTranslation()
-    const imgUrl = '/images/logo/js.png'
-    const imgUrl2 = '/images/logo/python.png'
-    const imgUrl3 = '/images/logo/ai.png'
-    const imgUrl4 = '/images/logo/bootstrap.png'
+    const dispatch = useDispatch()
+    const { language } = useLanguage()
+    const { data, loading, error } = useSelector((state) => state.product);
 
+
+
+    useEffect(() => {
+        dispatch(getProjectData({ language, id }))
+    }, [language, id])
+
+
+    if (loading) {
+        return <Loading />;
+    }
 
 
     return (
@@ -24,7 +38,7 @@ export default function Section3({ about, technology }) {
                 <Grid container spacing={4}>
                     <Grid size={{ xs: 12, sm: 12, md: 7, lg: 8 }} >
                         <p className={styles.about_des}>
-                            {about}
+                            {data?.about}
                         </p>
                     </Grid>
                     <Grid size={{ xs: 12, sm: 12, md: 5, lg: 4 }} >
@@ -33,15 +47,11 @@ export default function Section3({ about, technology }) {
                         </span>
                         <div className={styles.stack_wrapper}>
                             {
-                                technology &&
-                                technology.map((item,i)=>(
-                                    <StackItem key={i} item={item} text={"Python"}  />
+                                data?.technology &&
+                                data.technology.map((item, i) => (
+                                    <StackItem key={i} item={item} text={"Python"} />
                                 ))
                             }
-                           
-                            {/* <StackItem text={"Js"} img={imgUrl} />
-                            <StackItem text={"Ai"} img={imgUrl3} />
-                            <StackItem text={"bootstrap"} img={imgUrl4} /> */}
                         </div>
                     </Grid>
                 </Grid>

@@ -29,15 +29,13 @@ export default function Info() {
   }, [language])
 
 
-
-
   if (loading) {
     return <Loading />;
   }
 
-  if (error) {
-    return <Error />;
-  }
+  // if (error) {
+  //   return <Error />;
+  // }
 
 
   return (

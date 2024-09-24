@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Offcanvas.module.css'
 import { Drawer, List, ListItemButton, Collapse, IconButton } from '@mui/material';
 import { Menu as MenuIcon, ExpandLess, ExpandMore, Close as CloseIcon } from '@mui/icons-material';
@@ -9,10 +9,15 @@ import { useTranslation } from 'react-i18next';
 import EastIcon from '@mui/icons-material/East';
 import Button from '../Button/Button';
 import { usePathname } from 'next/navigation';
+import { useSelector, useDispatch } from "react-redux";
+import { getProjectsTitle } from "@/redux/header";
+
 
 export default function Offcanvas() {
 
     const pathname = usePathname();
+    const dispatch = useDispatch()
+    const { data, loading, error } = useSelector((state) => state.header);
     const { t } = useTranslation()
     const { changeLanguage, language } = useLanguage()
 
@@ -28,6 +33,11 @@ export default function Offcanvas() {
     };
 
     const isActive = (href) => pathname === href;
+
+    useEffect(() => {
+        dispatch(getProjectsTitle(language))
+    }, [])
+
 
     return (
         <div className={styles.offcanvas_container}>
@@ -59,21 +69,15 @@ export default function Offcanvas() {
                     </ListItemButton>
                     <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/edupia") && styles.active_route}`}>
-                                <Link className={styles.link_offcanvas} href={"/product/edupia"}>Edupia</Link>
-                            </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/farmflow") && styles.active_route}`}>
-                                <Link className={styles.link_offcanvas} href={"/product/farmflow"}>Farm Flow</Link>
-                            </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/opermate") && styles.active_route}`}>
-                                <Link className={styles.link_offcanvas} href={"/product/opermate"} >Opermate</Link>
-                            </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/snapreport") && styles.active_route}`}>
-                                <Link className={styles.link_offcanvas} href={"/product/snapreport"}>Snap Report</Link>
-                            </ListItemButton>
-                            <ListItemButton sx={{ pl: 4 }} className={`${styles.link_item} ${isActive("/product/topet") && styles.active_route}`}>
-                                <Link className={styles.link_offcanvas} href={"/product/topet"}>ToPet</Link>
-                            </ListItemButton>
+                            {
+                                data &&
+                                data.length > 0 &&
+                                data.map(item=>(
+                                    <ListItemButton key={item.id} sx={{ pl: 4 }} className={`${styles.link_item} `}>
+                                        <Link className={styles.link_offcanvas} href={`/product/${item.id}`}>{item?.name}</Link>
+                                    </ListItemButton>
+                                ))
+                            }
                         </List>
                     </Collapse>
                     <ListItemButton className={`${styles.link_item} ${isActive("/articles") && styles.active_route}`}>

@@ -6,9 +6,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-export default function Section4({ data }) {
+import { useSelector } from 'react-redux'
+
+export default function Section4() {
 
     const { t } = useTranslation()
+    const { data, loading, error } = useSelector((state) => state.product);
     useEffect(() => {
         AOS.init();
     }, []);
