@@ -7,7 +7,7 @@ export const getDataHome = createAsyncThunk(
         const headers = {
             'Accept-Language': language
         }
-        const response = await axios.get("https://fakestoreapi.com/products", {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/home-page/`, {
             headers
         });
         return response.data;
@@ -21,7 +21,7 @@ const slice = createSlice({
         loading: false,
         error: null,
     },
-    
+
     reducers: {},
     extraReducers: (builder) => {
         builder
@@ -38,7 +38,6 @@ const slice = createSlice({
             });
     },
 });
-
 
 export default slice.reducer;
 

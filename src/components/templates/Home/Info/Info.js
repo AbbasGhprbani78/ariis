@@ -11,6 +11,7 @@ import 'aos/dist/aos.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDataHome } from '@/redux/home';
 import Loading from '@/components/modules/Loading/Loading';
+import Error from '@/components/modules/Error/Error';
 
 export default function Info() {
 
@@ -28,8 +29,14 @@ export default function Info() {
   }, [language])
 
 
+
+
   if (loading) {
     return <Loading />;
+  }
+
+  if (error) {
+    return <Error />;
   }
 
 
@@ -47,7 +54,7 @@ export default function Info() {
               }
 
               <p className={styles.text_info}>
-                {t("des")}
+                {data?.name}
               </p>
             </div>
           </Grid>
@@ -56,7 +63,7 @@ export default function Info() {
             justifyContent: "center"
           }}>
             <div data-aos="fade-up" className={styles.img_wrapper}>
-              <img src='/images/handmobile.png' alt='mobile in hand' />
+              <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.image_one}`} alt='mobile in hand' />
             </div>
           </Grid>
         </Grid>

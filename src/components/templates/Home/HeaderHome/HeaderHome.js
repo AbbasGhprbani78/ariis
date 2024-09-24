@@ -6,6 +6,7 @@ import Button from '@/components/modules/Button/Button';
 import EastIcon from '@mui/icons-material/East';
 import { useLanguage } from '@/context/LangContext';
 import useWindowWidth from '@/hook/WindowWidth';
+import {useSelector } from 'react-redux';
 
 export default function HeaderHome() {
 
@@ -15,6 +16,8 @@ export default function HeaderHome() {
     if (width === undefined) {
         return null;
     }
+
+    const { data, loading, error } = useSelector((state) => state.home);
 
     useEffect(() => {
         if (typeof window !== 'undefined' && window.visualViewport) {
@@ -28,6 +31,7 @@ export default function HeaderHome() {
         }
     }, []);
 
+   
 
     return (
         <>
@@ -39,7 +43,7 @@ export default function HeaderHome() {
                             <h1 className={styles.explore}>Explore</h1>
                             <p className={styles.future}>FUTURE</p>
                             <p className={styles.text}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                {data?.header_text}
                             </p>
                             <div className={`${styles.btn_wrapper} ${language === "fa" && styles.btn_wrapper_right}`}>
                                 <Button text={t("TryNow")} icon={EastIcon} />
@@ -54,7 +58,7 @@ export default function HeaderHome() {
                                 <h1 className={styles.explore}>Explore</h1>
                                 <p className={styles.future}>FUTURE</p>
                                 <p className={styles.text}>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    {data?.header_text}
                                     <div className={`${styles.btn_wrapper} ${language === "fa" && styles.btn_wrapper_right}`}>
                                         <button className={`${styles.btn_sec1} ${language === "fa" && styles.btn_right}`}>
                                             {t("TryNow")}

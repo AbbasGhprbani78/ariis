@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import styles from './ContactUs.module.css'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2'
@@ -17,17 +17,20 @@ import MediaItem from '@/components/modules/MediaItem/MediaItem';
 import { useLanguage } from '@/context/LangContext';
 import axios from 'axios';
 import Toast from '@/components/modules/Toast/Toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContactusData } from '@/redux/contactus';
+import Loading from '@/components/modules/Loading/Loading';
 export default function ContactUs() {
 
   const { t } = useTranslation()
   const { language } = useLanguage()
+  const dispatch = useDispatch()
   const [showToast, setShowToast] = useState(false);
   const [formdata, setFormData] = useState({
     name: "",
     email: "",
     message: ""
   })
-
 
   const [toastMessage, setToastMessage] = useState({
     type: "",
@@ -48,17 +51,17 @@ export default function ContactUs() {
     if (formdata.email.trim() && formdata.email.trim() && formdata.message.trim()) {
       e.preventDefault()
       try {
-        const response = await axios.post(`${process.env}`, formdata, {})
-        if (response.status === 200) {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/home/contact-us/`, formdata, {})
+        if (response.status === 201) {
           console.log(response.data)
           formdata.email = ""
           formdata.message = ""
-          formdata.email = ""
+          formdata.name = ""
           setShowToast(true)
           setToastMessage({
             type: "success",
             title: "success",
-            message: "login success",
+            message: "success",
           })
         }
       } catch (error) {
@@ -72,11 +75,23 @@ export default function ContactUs() {
     }
   }
 
+
   const convertToFarsiDigits = (number) => {
     const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
     return number.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
   };
 
+
+  const { data, loading, error } = useSelector((state) => state.contactus);
+
+
+  useEffect(() => {
+    dispatch(getContactusData(language))
+  }, [language])
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className={styles.contactus_container}>
       <Box sx={{ flexGrow: 1 }}>
@@ -129,24 +144,35 @@ export default function ContactUs() {
               <div className={styles.media_item}>
                 <LocationOnOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_loc}`} />
                 <p className={styles.text_media}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  {
+                    language === "en" ?
+                      data && data[0]?.address :
+                      data && data[0].address_farsi
+                  }
+
                 </p>
               </div>
               <div className={styles.media_item}>
                 <LocalPhoneOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_phone}`} />
-                <p className={styles.text_media} style={{ direction: "ltr", width: "max-content" }}> {language === "fa" ? convertToFarsiDigits("0916 295 7253") : "0916 295 7253"}</p>
+                <p className={styles.text_media} style={{ direction: "ltr", width: "max-content" }}> {language === "fa" ? convertToFarsiDigits(data && data[0]?.phone_number) : data && data[0]?.phone_number}</p>
               </div>
               <div className={styles.media_item}>
                 <MailOutlineOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_email}`} />
                 <p className={styles.text_media}>
-                  AbbasGhorbani779@gmail.com
+                  {data && data[0]?.email}
                 </p>
               </div>
               <div className={styles.media_item}>
-                <MediaItem icon={InstagramIcon} />
-                <MediaItem icon={TelegramIcon} />
-                <MediaItem icon={WhatsAppIcon} />
-                <MediaItem icon={LinkedInIcon} />
+                {
+                  data && data[0] &&
+                  <>
+                    <MediaItem icon={InstagramIcon} url_link={`https://www.instagram.com/${data[0].instagram}`}  />
+                    <MediaItem icon={TelegramIcon} url_link={`https://t.me/${data[0].telegram}`}/>
+                    <MediaItem icon={WhatsAppIcon} url_link={`https://wa.me/${data[0].whatsapp}`}/>
+                    <MediaItem icon={LinkedInIcon} url_link={`https://www.linkedin.com/in/${data[0].linkedin}`}  />
+                  </>
+                }
+
               </div>
             </div>
           </Grid>
@@ -161,3 +187,19 @@ export default function ContactUs() {
     </div>
   )
 }
+
+
+// const handleGoToInstagram = () => {
+//   const instagramUrl = `https://www.instagram.com/${socaial.instagram}`;
+//   window.open(instagramUrl, '_blank');
+// }
+
+// const handleGoToWhatsUp = () => {
+//   const whatsappUrl = `https://wa.me/${socaial.whatsapp}`;
+//   window.open(whatsappUrl, '_blank');
+// };
+
+// const handleGoToTelegram = () => {
+//   const telegramUrl = `https://t.me/${socaial.telegram}`;
+//   window.open(telegramUrl, '_blank');
+// };

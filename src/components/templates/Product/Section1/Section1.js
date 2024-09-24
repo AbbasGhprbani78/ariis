@@ -1,19 +1,19 @@
-
+"use client"
 import React from 'react'
 import styles from './section1.module.css'
 import Button from '@/components/modules/Button/Button'
 import { useTranslation } from 'react-i18next'
 import EastIcon from '@mui/icons-material/East';
-export default function Section1() {
+export default function Section1({ title, img }) {
 
   const { t } = useTranslation()
   return (
     <div className={styles.section1_wrapper}>
       <div className={styles.logo_wrapper}>
-        <img src="/images/logo/opermate.png" alt="logo" />
+        <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${img}`} alt="logo" />
       </div>
       <h1 className={styles.product_title}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        {title && title}
       </h1>
       <div className={styles.btn_wrapper}>
         <Button text={t("ViewMore")} icon={EastIcon} />

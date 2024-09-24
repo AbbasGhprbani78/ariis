@@ -54,7 +54,6 @@
     align-items: start;
     padding: 0 6%;
     z-index: 5;
-    color: #fff;
     top: 0;
     left: 0;
     font-weight: 400;
@@ -68,13 +67,22 @@
     width: 50%;
     line-height: 24px;
     margin-bottom: 2.5rem;
+    color: #fff;
+    text-align: start;
 }
+
 
 .slide_text_right,
 .slide_text_m_right {
     text-align: end;
+    color: #fff;
+    text-align: start;
+    direction: rtl;
 }
 
+.black_color {
+    color: var(--color-1)
+}
 
 @media (max-width:1216px) {
     .slide_text_content {
@@ -105,6 +113,7 @@
         line-height: 24px;
         width: 80%;
         margin: 0 auto;
+        text-align: start;
     }
 }
 

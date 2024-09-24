@@ -16,7 +16,7 @@ export default function ProductImageItem({ img, style, children }) {
     }, []);
     return (
         <div className={styles.img_wrapper} data-aos="flip-left">
-            <img src={img} alt="product" />
+            <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${img}`} alt="product" />
             {children}
             <div className={`${language === "fa" ? styles.btn1_wrapper_right : styles.btn1_wrapper}`}>
                 <Button

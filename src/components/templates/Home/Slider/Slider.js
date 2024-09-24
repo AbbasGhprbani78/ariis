@@ -13,6 +13,7 @@ import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import useWindowWidth from '@/hook/WindowWidth';
 import { useLanguage } from '@/context/LangContext';
+import {useSelector } from 'react-redux';
 
 export default function Slider() {
 
@@ -38,7 +39,8 @@ export default function Slider() {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
   };
 
-  const longText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, inventore laudantium recusandae ab libero hic quo, odit doloremque voluptas earum eos sunt nihil possimus culpa facere vero, dolores nobis error!';
+  const { data, loading, error } = useSelector((state) => state.home);
+
 
 
   return (
@@ -48,7 +50,7 @@ export default function Slider() {
         ref={swiperRef}
         modules={[Autoplay]}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
-        loop={true}
+        loop={data?.projects.length > 1}
         slidesPerView={1}
         className={styles.swiper_slider}
         dir='ltr'
@@ -56,129 +58,56 @@ export default function Slider() {
         {
           width < 1024 ?
             <>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src="/images/enslider/mobile/p1m.png" alt="pic slider" />
-                  <div className={styles.slide_text_content}>
-                    <p className={`${styles.slide_text_m} ${styles.slide_text_m_right}`}>
-                      {width < 642 ? truncateText(longText, 100) : longText}
-                    </p>
-                  </div>
-                  <div className={styles.btn_wrapper}>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src="/images/enslider/mobile/p2m.png" alt="pic slider" />
-                  <div className={styles.slide_text_content}>
-                    <p className={`${styles.slide_text_m} ${styles.slide_text_m_right}`}>
-                      {width < 642 ? truncateText(longText, 100) : longText}
-                    </p>
-                  </div>
-                  <div className={styles.btn_wrapper}>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src="/images/enslider/mobile/p3m.png" alt="pic slider" />
-                  <div className={styles.slide_text_content}>
-                    <p className={`${styles.slide_text_m} ${styles.slide_text_m_right}`}>
-                      {width < 642 ? truncateText(longText, 100) : longText}
-                    </p>
-                  </div>
-                  <div className={styles.btn_wrapper}>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src="/images/enslider/mobile/p4m.png" alt="pic slider" />
-                  <div className={styles.slide_text_content}>
-                    <p className={`${styles.slide_text_m} ${styles.slide_text_m_right}`}>
-                      {width < 642 ? truncateText(longText, 100) : longText}
-                    </p>
-                  </div>
-                  <div className={styles.btn_wrapper}>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src="/images/enslider/mobile/p5m.png" alt="pic slider" />
-                  <div className={styles.slide_text_content}>
-                    <p className={`${styles.slide_text_m} ${styles.slide_text_m_right}`}>
-                      {width < 642 ? truncateText(longText, 100) : longText}
-                    </p>
-                  </div>
-                  <div className={styles.btn_wrapper}>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
+              {
+                data?.projects.length > 0 &&
+                data?.projects?.map((project, i) => (
+                  <SwiperSlide>
+                    <div className={styles.slide_content}>
+                      <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${project?.image_mobile}`} alt="pic slider" />
+                      <div className={styles.slide_text_content}>
+                        <p className={`
+                          ${styles.slide_text_m} 
+                          ${styles.slide_text_m_right}
+                          ${project?.background_color === "white" ? styles.black_color : ""}`
+                        }
+                        >
+                          {width < 642 ? truncateText(project?.text_home, 100) : project?.text_home}
+                        </p>
+                      </div>
+                      <div className={styles.btn_wrapper}>
+                        <Button icon={EastIcon} text={t('TryNow')} />
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))
+              }
+
             </>
             :
             <>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src={language === "en" ? "/images/enslider/img1.png" : "/images/faslider/img1.png"} alt="pic slider" />
-                  <div className={`${styles.slide_text_content} ${language === "fa" && styles.slide_text_content_right}`}>
-                    <p className={`${styles.slide_text} ${language === "fa" && styles.slide_text_right}`}>
-                      {t("des")}
-                    </p>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src={language === "en" ? "/images/enslider/img2.png" : "/images/faslider/img2.png"} alt="pic slider" />
-                  <div className={`${styles.slide_text_content} ${language === "fa" && styles.slide_text_content_right}`}>
-                    <p className={`${styles.slide_text} ${language === "fa" && styles.slide_text_right}`}>
-                      {t("des")}
-                    </p>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src={language === "en" ? "/images/enslider/img3.png" : "/images/faslider/img3.png"} alt="pic slider" />
-                  <div className={`${styles.slide_text_content} ${language === "fa" && styles.slide_text_content_right}`}>
-                    <p className={`${styles.slide_text} ${language === "fa" && styles.slide_text_right}`}>
-                      {t("des")}
-                    </p>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src={language === "en" ? "/images/enslider/img4.png" : "/images/faslider/img4.png"} alt="pic slider" />
-                  <div className={`${styles.slide_text_content} ${language === "fa" && styles.slide_text_content_right}`}>
-                    <p className={`${styles.slide_text} ${language === "fa" && styles.slide_text_right}`}>
-                      {t("des")}
-                    </p>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.slide_content}>
-                  <img src={language === "en" ? "/images/enslider/img5.png" : "/images/faslider/img5.png"} alt="pic slider" />
-                  <div className={`${styles.slide_text_content} ${language === "fa" && styles.slide_text_content_right}`}>
-                    <p className={`${styles.slide_text} ${language === "fa" && styles.slide_text_right}`}>
-                      {t("des")}
-                    </p>
-                    <Button icon={EastIcon} text={t('TryNow')} />
-                  </div>
-                </div>
-              </SwiperSlide>
+              {
+                data?.projects.length > 0 &&
+                data?.projects?.map((project, i) => (
+                  <SwiperSlide key={i}>
+                    <div className={styles.slide_content}>
+                      <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${project?.image_desktop}`} alt="pic slider" />
+                      <div className={`${styles.slide_text_content} ${language === "fa" && styles.slide_text_content_right}`}>
+                        <p
+                          className={`
+                              ${styles.slide_text} 
+                              ${project?.background_color === "white" ? styles.black_color : ""} 
+                              ${language === "fa" ? styles.slide_text_right : ""}
+                            `}
+                        >
+                          {truncateText(project?.text_home, 200)}
+
+                        </p>
+                        <Button icon={EastIcon} text={t('TryNow')} />
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))
+              }
             </>
         }
 
@@ -206,6 +135,3 @@ export default function Slider() {
     </div>
   );
 }
-
-
-

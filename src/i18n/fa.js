@@ -5,7 +5,7 @@ const fa = {
     AboutUs: "درباره ما",
     ContactUs: "ارتباط با ما",
     HeaderHome: " هدر خانه",
-    Submit: "ثبت نام",
+    Submit: "ثبت",
     TryNow: "امتحان کنید",
     ViewMore: "دیدن بیشتر",
     Name: "نام",

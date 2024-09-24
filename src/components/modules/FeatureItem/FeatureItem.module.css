@@ -24,6 +24,25 @@
     line-height: 24px;
 }
 
+
+.red_icon {
+    background-color: var(--color-6);
+}
+
+.blue_icon {
+    background-color: var(--color-7);
+}
+
+.green_icon {
+    background-color: var(--color-9);
+}
+
+.orange_icon {
+    background-color: #fd9b56;
+}
+
+
+
 @media (max-width:1200px) {
     .featureitem {
         width: 50%;

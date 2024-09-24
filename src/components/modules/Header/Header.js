@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Header.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,18 +11,34 @@ import { useLanguage } from "@/context/LangContext";
 import Offcanvas from "../Offcanvas/Offcanvas";
 import useWindowWidth from "@/hook/WindowWidth";
 import { usePathname } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { getProjectsTitle } from "@/redux/header";
+import { useRouter } from 'next/navigation';
+
 
 export default function Header() {
     const pathname = usePathname();
+    const dispatch = useDispatch()
     const { t } = useTranslation();
     const { changeLanguage, language } = useLanguage();
+    const { data, loading, error } = useSelector((state) => state.header);
     const width = useWindowWidth();
+    const router = useRouter()
 
     if (width === undefined) {
         return null;
     }
 
     const isActive = (href) => pathname === href;
+
+    useEffect(() => {
+        dispatch(getProjectsTitle(language))
+    }, [])
+
+
+    const handleGotoProject = (id) => {
+        router.push(`/product/${id}`)
+    }
 
     return (
         <>
@@ -50,41 +66,19 @@ export default function Header() {
                                     <ExpandMoreIcon className={styles.icon_drop} />
                                 </div>
                                 <ul className={styles.drop}>
-                                    <Link
-                                        className={`${styles.product_link} ${isActive("/product/edupia") && styles.active_route} ${language === "fa" && styles.right_product_link
-                                            }`}
-                                        href="/product/edupia"
-                                    >
-                                        Edupia
-                                    </Link>
-                                    <Link
-                                        className={`${styles.product_link} ${isActive("/product/farmflow") && styles.active_route} ${language === "fa" && styles.right_product_link
-                                            }`}
-                                        href="/product/farmflow"
-                                    >
-                                        Farm Flow
-                                    </Link>
-                                    <Link
-                                        className={`${styles.product_link} ${isActive("/product/opermate") && styles.active_route} ${language === "fa" && styles.right_product_link
-                                            }`}
-                                        href="/product/opermate"
-                                    >
-                                        Opermate
-                                    </Link>
-                                    <Link
-                                        className={`${styles.product_link} ${isActive("/product/snapreport") && styles.active_route} ${language === "fa" && styles.right_product_link
-                                            }`}
-                                        href="/product/snapreport"
-                                    >
-                                        Snap Report
-                                    </Link>
-                                    <Link
-                                        className={`${styles.product_link} ${isActive("/product/topet") && styles.active_route} ${language === "fa" && styles.right_product_link
-                                            }`}
-                                        href="/product/topet"
-                                    >
-                                        ToPet
-                                    </Link>
+                                    {
+                                        data &&
+                                        data.length > 0 &&
+                                        data.map(item => (
+                                            <div
+                                                key={item.id}
+                                                className={`${styles.product_link}  ${language === "fa" && styles.right_product_link}`}
+                                                onClick={() => handleGotoProject(item.id)}
+                                            >
+                                                {item.name}
+                                            </div>
+                                        ))
+                                    }
                                 </ul>
                             </li>
                             <Link

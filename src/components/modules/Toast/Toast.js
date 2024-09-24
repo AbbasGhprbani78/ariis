@@ -14,6 +14,15 @@ export default function Toast({ type, title, message, showToast, setShowToast })
     }[type];
 
 
+    useEffect(() => {
+        if (showToast) {
+            const timer = setTimeout(() => {
+                setShowToast(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showToast, setShowToast])
 
     return (
         <div className={`

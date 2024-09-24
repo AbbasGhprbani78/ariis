@@ -1,13 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getContactusData = createAsyncThunk(
-    "contactus/getContactusData",
-    async (language) => {
+export const getProjectsTitle = createAsyncThunk(
+    "header/getProjectsTitle",
+    async (language, { getState }) => {
+        const { header } = getState();
+        if (header.data) {
+            return header.data;
+        }
         const headers = {
             'Accept-Language': language
-        }
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/get-about/`, {
+        };
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/get-all-project/`, {
             headers
         });
         return response.data;
@@ -15,24 +19,23 @@ export const getContactusData = createAsyncThunk(
 );
 
 const slice = createSlice({
-    name: "contactus",
+    name: "header",
     initialState: {
         data: null,
         loading: false,
         error: null,
     },
-
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getContactusData.pending, (state) => {
+            .addCase(getProjectsTitle.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(getContactusData.fulfilled, (state, action) => {
+            .addCase(getProjectsTitle.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload;
             })
-            .addCase(getContactusData.rejected, (state, action) => {
+            .addCase(getProjectsTitle.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             });
@@ -40,4 +43,3 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-
