@@ -75,6 +75,7 @@ export default function Comments({ id }) {
                     autoComplete='off'
                 >
 
+
                 </textarea>
                 <button type='submit' className={styles.btn}>{t("Send")}</button>
             </form>
