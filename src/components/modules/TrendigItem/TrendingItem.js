@@ -2,22 +2,24 @@
 import React from 'react'
 import styles from './TrendingItem.module.css'
 import { useLanguage } from '@/context/LangContext'
+import Link from 'next/link'
 export default function TrendingItem({ trend }) {
-
     const { language } = useLanguage()
     return (
         <div className={`${styles.trending_item} ${language == 'fa' && styles.trending_item_right}`}>
-            <p className={styles.title_trending}>
-                {
-                    language === "fa" ?
-                        trend?.title_farsi :
-                        trend?.title
-                }
-            </p>
+            <Link href={`/articles/${trend?.id}`} className={styles.link_article}>
+                <p className={styles.title_trending}>
+                    {
+                        language === "fa" ?
+                            trend?.title_farsi :
+                            trend?.title
+                    }
+                </p>
+            </Link>
             <div className={styles.user_info}>
                 <div className={styles.user_left}>
-                    <img src="/images/article/1.png" alt="image" />
-                    <span className={styles.text}>{trend.username}</span>
+                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${trend?.user?.avatar}`} alt="image" />
+                    <span className={styles.text}>{trend?.user?.username}</span>
                 </div>
                 <span className={styles.date}>
                     {

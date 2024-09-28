@@ -11,7 +11,7 @@ export default function mainArticle({ params }) {
             <Header />
             <div className={styles.container}>
                 <Article id={idArticle}/>
-                <Comments />
+                <Comments id={idArticle} />
                 <Footer />
             </div>
 

@@ -17,14 +17,26 @@ export default function AllArticles() {
     const dispatch = useDispatch()
     const { data, loading, error } = useSelector((state) => state.articles);
     const { datac, loadingc, errorc } = useSelector((state) => state.category);
+    const [fliterArticlesLanguage, setFliterArticlesLanguage] = useState([])
     const [filterArticles, setFilterArticles] = useState([])
 
     const fliterArticlesByLanguage = (lang) => {
         if (lang === "fa") {
             const articles = data?.all_articles?.filter((article) => article.is_farsi === true)
             setFilterArticles(articles)
+            setFliterArticlesLanguage(articles)
         } else {
             const articles = data?.all_articles?.filter((article) => article.is_farsi === false)
+            setFilterArticles(articles)
+            setFliterArticlesLanguage(articles)
+        }
+    }
+
+    const filterArticlesByCategory = (category) => {
+        if (category === "all") {
+            setFilterArticles(fliterArticlesLanguage)
+        } else {
+            const articles = filterArticles.filter(item => item.category === category)
             setFilterArticles(articles)
         }
     }
@@ -40,7 +52,6 @@ export default function AllArticles() {
     }, [language])
 
 
-    console.log(datac?.category_english)
 
     if (loading || loadingc) {
         return <Loading />;
@@ -68,24 +79,26 @@ export default function AllArticles() {
                     </Grid>
                     <Grid size={{ xs: 12, md: 4 }}>
                         <div className={styles.right_article}>
-                            {
-                                data?.most_liked_articles_farsi?.length > 0 ||
-                                data?.most_liked_articles_english?.length > 0 &&
-                                <div div className={styles.trending}>
-                                    <p className={styles.trendig_text}>Trending This Week</p>
-                                    {
-                                        language === "fa" ?
-                                            data?.most_liked_articles_farsi?.length > 0 &&
-                                            data?.most_liked_articles_farsi?.map((trend) => (
-                                                <TrendingItem key={item.id} trend={trend} />
-                                            )) :
 
-                                            data?.most_liked_articles_english?.length > 0 &&
-                                            data?.most_liked_articles_english?.map((trend) => (
-                                                <TrendingItem key={item.id} trend={trend} />
-                                            ))
-                                    }
-                                </div>
+                            {
+                                data?.most_liked_articles_english?.length > 0 ||
+                                    data?.most_liked_articles_farsi?.length > 0 ?
+                                    <div div className={styles.trending}>
+                                        <p className={styles.trendig_text}>Trending This Week</p>
+                                        {
+                                            language === "fa" ?
+                                                data?.most_liked_articles_farsi?.length > 0 &&
+                                                data?.most_liked_articles_farsi?.map((trend) => (
+                                                    <TrendingItem key={trend.id} trend={trend} />
+                                                )) :
+
+                                                data?.most_liked_articles_english?.length > 0 &&
+                                                data?.most_liked_articles_english?.map((trend) => (
+                                                    <TrendingItem key={trend.id} trend={trend} />
+                                                ))
+                                        }
+                                    </div> :
+                                    null
                             }
 
                             {
@@ -93,17 +106,17 @@ export default function AllArticles() {
                                 <div className={styles.filtering}>
                                     <p className={styles.filter_title}>You Might Like</p>
                                     <div className={styles.filter_btns}>
-                                        <button className={styles.btn_filter}>ALL</button>
+                                        <button className={styles.btn_filter} onClick={""}>aLL</button>
                                         {
                                             language === "fa" ?
                                                 datac?.category_farsi.length > 0 &&
                                                 datac?.category_farsi.map((item) => (
-                                                    <button key={item.id} className={styles.btn_filter}>{item.name}</button>
+                                                    <button key={item.id} className={styles.btn_filter} onClick={""}>{item.name}</button>
                                                 )) :
 
                                                 datac?.category_english.length > 0 &&
                                                 datac?.category_english.map((item) => (
-                                                    <button key={item.id} className={styles.btn_filter}>{item.name}</button>
+                                                    <button key={item.id} className={styles.btn_filter} onClick={""}>{item.name}</button>
                                                 ))
                                         }
                                     </div>

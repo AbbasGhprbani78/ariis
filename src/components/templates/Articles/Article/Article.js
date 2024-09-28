@@ -1,10 +1,35 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import styles from './Article.module.css'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLanguage } from '@/context/LangContext';
+import { getDataArticle } from '@/redux/article';
+import Loading from '@/components/modules/Loading/Loading';
+import Error from '@/components/modules/Error/Error';
+
 export default function Article({ id }) {
 
-    console.log(id)
+    const dispatch = useDispatch()
+    const { language } = useLanguage()
+    const { data, loading, error } = useSelector((state) => state.product);
+
+    useEffect(() => {
+        dispatch(getDataArticle(id))
+    }, [language])
+
+
+    console.log(data)
+
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <Error />;
+    }
 
     return (
         <div className={styles.article}>

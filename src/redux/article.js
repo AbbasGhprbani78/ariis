@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getDataArticle = createAsyncThunk(
     "articles/getDataArticle",
-    async (is) => {
+    async (id) => {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/${id}`, {});
         return response.data;
     }

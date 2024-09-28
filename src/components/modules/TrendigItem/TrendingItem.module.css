@@ -40,3 +40,9 @@
 }
 
 .date {}
+
+
+.link_article {
+    all: unset;
+    cursor: pointer;
+}

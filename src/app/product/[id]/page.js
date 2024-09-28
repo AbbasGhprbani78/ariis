@@ -26,10 +26,3 @@ export default function ProductPage({ params }) {
         </>
     );
 }
-// img = { data?.logo } title = { data?.title }
-
-// img = { data?.image_one }
-// technology = { data?.technology } about = { data?.about }
-// data = { data }
-// ability = { data?.ability } img = { data?.image_two } color = { data?.color_ability }
-// img = { data?.image_three }

@@ -4,12 +4,57 @@
     color: #fff;
 }
 
+.comment_container {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.comment_container::-webkit-scrollbar {
+    display: none;
+}
+
+
+.comment_container {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+
+.comment_container {
+    scrollbar-width: none;
+    /* Firefox */
+}
+
 .comment_title {
     font-size: calc(1.5rem + .1vw);
     font-weight: 700;
     margin-bottom: 2.5rem;
 }
 
+
+
+
+.send_comment_form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.input_name_comment {
+    margin: 20px 0;
+    border: none;
+    outline: none;
+}
+
+.comment_textarea {
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.btn {
+    margin: 20px 0;
+}
 
 @media (max-width:1025px) {
     .comment_wrapper {

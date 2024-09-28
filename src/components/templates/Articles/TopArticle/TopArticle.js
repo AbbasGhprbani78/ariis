@@ -25,7 +25,7 @@ export default function TopArticle() {
     }, [language, data])
 
 
-    console.log(data)
+
 
 
     const truncateText = (text, maxLength) => {
