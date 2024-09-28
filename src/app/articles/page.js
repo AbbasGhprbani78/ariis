@@ -4,16 +4,20 @@ import Footer from '@/components/modules/Footer/Footer'
 import TopArticle from '@/components/templates/Articles/TopArticle/TopArticle'
 import styles from './Articles.module.css'
 import AllArticles from '@/components/templates/Articles/AllArticles/AllArticles'
-export default function page() {
+
+export default function Page() {
+
+  
     return (
         <>
-            <Header />
-            <div className={styles.container}>
-                <TopArticle />
-                <AllArticles />
+            <div className={styles.pageContainer}>
+                <Header />
+                <div className={styles.content}>
+                    <TopArticle />
+                    <AllArticles />
+                </div>
                 <Footer />
             </div>
         </>
-
     )
 }

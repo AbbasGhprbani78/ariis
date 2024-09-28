@@ -9,14 +9,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProjectData } from '@/redux/product';
 import { useLanguage } from '@/context/LangContext';
 import Loading from '@/components/modules/Loading/Loading';
+import Error from '@/components/modules/Error/Error';
 
 export default function Section3({ id }) {
-    console.log(id)
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const { language } = useLanguage()
     const { data, loading, error } = useSelector((state) => state.product);
-
 
 
     useEffect(() => {
@@ -26,6 +25,10 @@ export default function Section3({ id }) {
 
     if (loading) {
         return <Loading />;
+    }
+
+    if (error) {
+        return <Error />;
     }
 
 

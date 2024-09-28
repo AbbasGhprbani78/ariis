@@ -11,6 +11,7 @@ export default function Section1() {
   const { t } = useTranslation()
   const { data, loading, error } = useSelector((state) => state.product);
 
+  console.log(data)
   return (
     <div className={styles.section1_wrapper}>
       <div className={styles.logo_wrapper}>
@@ -20,7 +21,7 @@ export default function Section1() {
         {data?.title && data?.title}
       </h1>
       <div className={styles.btn_wrapper}>
-        <Button text={t("ViewMore")} icon={EastIcon} />
+        <Button text={t("ViewMore")} icon={EastIcon} link={data?.link} />
       </div>
     </div>
   )

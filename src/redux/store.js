@@ -3,12 +3,20 @@ import home from "./home";
 import header from "./header";
 import contactus from "./contactus";
 import product from "./product";
+import aboutus from "./aboutus";
+import articles from "./articles";
+import article from "./article";
+import category from "./category";
 const store = configureStore({
     reducer: {
         home: home,
         header: header,
         contactus: contactus,
-        product: product
+        product: product,
+        aboutus: aboutus,
+        articles: articles,
+        article: article,
+        category: category
     }
 })
 

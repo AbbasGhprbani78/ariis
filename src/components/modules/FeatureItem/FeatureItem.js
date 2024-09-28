@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './FeatureItem.module.css'
 import DoneIcon from '@mui/icons-material/Done';
 export default function FeatureItem({ item, color }) {
-    console.log(color)
     return (
         <div className={styles.featureitem}>
             <div className={`${styles.icon_wrapper} ${color == "red" ? styles.red_icon :

@@ -1,23 +1,22 @@
+"use client"
 import React from 'react'
 import styles from './Members.module.css'
 import MemeberItem from '@/components/modules/MemeberItem/MemeberItem'
+import { useSelector } from 'react-redux'
 export default function Memebers() {
 
-    const imgUrl1 = "/images/member1.png"
-    const imgUrl2 = "/images/member2.png"
-    const imgUrl3 = "/images/member3.png"
+    const { data, loading, error } = useSelector((state) => state.aboutus);
     return (
         <div className={styles.member_wrapper}>
-            <div className={styles.member_wrapper}>
-                <MemeberItem img={imgUrl1} text={"Arash Karimi"} />
-            </div>
-            <div className={styles.member_wrapper}>
-                <MemeberItem img={imgUrl2} text={"Sepehr Enshaei"} />
-            </div>
-            <div className={styles.member_wrapper}>
-                <MemeberItem img={imgUrl3} text={"Saman Safarinasab"} />
-            </div>
+            {
+                data &&
+                data.employees.length > 0 &&
+                data.employees.map((member, i) => (
+                    <div className={styles.member_wrapper} key={i}>
+                        <MemeberItem member={member} />
+                    </div>
+                ))
+            }
         </div>
-
     )
 }

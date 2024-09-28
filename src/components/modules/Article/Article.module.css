@@ -7,6 +7,7 @@
     height: 100%;
     border-radius: var(--border-redi2);
     overflow: hidden;
+    max-height: 190.8px;
 }
 
 .image_article {
@@ -31,6 +32,8 @@
     line-height: 24px;
     font-weight: 100;
 }
+
+
 
 .user_info {
     display: flex;
@@ -62,5 +65,10 @@
 .date {}
 
 .user_like {
+    cursor: pointer;
+}
+
+.link_text {
+    all: unset;
     cursor: pointer;
 }

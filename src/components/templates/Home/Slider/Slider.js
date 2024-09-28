@@ -13,7 +13,7 @@ import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import useWindowWidth from '@/hook/WindowWidth';
 import { useLanguage } from '@/context/LangContext';
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function Slider() {
 
@@ -45,7 +45,6 @@ export default function Slider() {
 
   return (
     <div className={styles.slider_container}>
-
       <Swiper
         ref={swiperRef}
         modules={[Autoplay]}
@@ -75,7 +74,7 @@ export default function Slider() {
                         </p>
                       </div>
                       <div className={styles.btn_wrapper}>
-                        <Button icon={EastIcon} text={t('TryNow')} />
+                        <Button icon={EastIcon} text={t('TryNow')} link={`/product/${project?.project_id}`} />
                       </div>
                     </div>
                   </SwiperSlide>
@@ -102,7 +101,7 @@ export default function Slider() {
                           {truncateText(project?.text_home, 200)}
 
                         </p>
-                        <Button icon={EastIcon} text={t('TryNow')} />
+                        <Button icon={EastIcon} text={t('TryNow')} link={`/product/${project?.project_id}`} />
                       </div>
                     </div>
                   </SwiperSlide>

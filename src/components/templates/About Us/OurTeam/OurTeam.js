@@ -8,9 +8,13 @@ import AddIcon from '@mui/icons-material/Add';
 import PercentIcon from '@mui/icons-material/Percent';
 import { Cell, Pie, PieChart } from 'recharts';
 import { useLanguage } from '@/context/LangContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAboutusData } from '@/redux/aboutus';
+import Loading from '@/components/modules/Loading/Loading';
+import Error from '@/components/modules/Error/Error';
+import axios from 'axios';
 
-
-const data = [
+const dataChart = [
     { name: '1', value: 40, color: '#CCFFEE' },
     { name: '2', value: 10, color: '#f2f3f5' },
     { name: '3', value: 10, color: '#afc8c0' },
@@ -22,23 +26,39 @@ const data = [
 export default function OurTeam() {
 
     const { t } = useTranslation()
-    const [mainScore, totalScore] = "8.7/10".split('/');
     const { language } = useLanguage()
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true)
-    }, []);
-
+    const dispatch = useDispatch()
+    const { data, loading, error } = useSelector((state) => state.aboutus);
+    const [mainScore, totalScore] = data ? `${data?.point}/10`.split('/') : ['0', '10'];
+    // const [dataChart, setDataChart] = useState("")
 
     const convertToFarsiDigits = (number) => {
         const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         return number.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
     };
 
-    if (!isClient) {
-        return null;
+    // const getDataChart = async () => {
+    //     try {
+    //         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/data/`, {})
+    //         console.log(response.data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
+    useEffect(() => {
+        dispatch(getAboutusData(language))
+    }, [language])
+
+
+    if (loading) {
+        return <Loading />;
     }
+
+    if (error) {
+        return <Error />;
+    }
+
 
     return (
         <div className={styles.ourteam_wrapper}>
@@ -49,43 +69,43 @@ export default function OurTeam() {
                             {t("OurTeam")}
                         </p>
                         <p className={styles.text_Our}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            {data?.our_team_text}
                         </p>
                     </Grid>
                     <Grid size={{ xs: 12, md: 12, lg: 7, xl: 6 }}>
                         <div className={styles.about_feature}>
                             <div className={`${styles.item_about} ${styles.item1}`}>
                                 <p className={styles.number_year}>
-                                    {language === "fa" ? convertToFarsiDigits(2010) : 2010}
+                                    {language === "fa" ? convertToFarsiDigits(data?.year_founded) : data?.year_founded}
                                 </p>
                                 <span className={styles.text_year}>
-                                    Year Founded
+                                    {t("YearFounded")}
                                 </span>
                             </div>
                             <div className={`${styles.item_about} ${styles.item2}`}>
                                 <div className={styles.year_founded}>
-                                    <span className={styles.year_founded_item}>Year Founded</span>
+                                    <span className={styles.year_founded_item}>{t("Experience")}</span>
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
                                         <span className={styles.number}>
-                                            {language === "fa" ? convertToFarsiDigits(10) : 10}
+                                            {language === "fa" ? convertToFarsiDigits(data?.experience) : data?.experience}
                                         </span>
                                     </div>
                                 </div>
                                 <div className={styles.year_founded}>
-                                    <span className={styles.year_founded_item}>Year Founded</span>
+                                    <span className={styles.year_founded_item}>{t("Project")}</span>
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
                                         <span className={styles.number}>
-                                            {language === "fa" ? `${convertToFarsiDigits(5)}` : '5'}<span className={styles.letter}>M</span>
+                                            {language === "fa" ? `${convertToFarsiDigits(data?.number_of_projects)}` : data?.number_of_projects}<span className={styles.letter}>M</span>
                                         </span>
                                     </div>
                                 </div>
                                 <div className={styles.year_founded}>
-                                    <span className={styles.year_founded_item}>Year Founded</span>
+                                    <span className={styles.year_founded_item}>{t("Satisfaction")}</span>
                                     <div className={styles.wrap_number}>
                                         <span className={styles.number}>
-                                            {language === "fa" ? convertToFarsiDigits(80) : 80}
+                                            {language === "fa" ? convertToFarsiDigits(data?.satisfaction_level) : data?.satisfaction_level}
                                         </span>
                                         <PercentIcon className={styles.icon_number} />
                                     </div>
@@ -99,7 +119,7 @@ export default function OurTeam() {
                                     <span className={styles.total_score}>/{totalScore}</span>
                                 </div>
                                 <span className={styles.text_item2}>
-                                    Lorem ipsum dolor sit
+                                    {t("Point")}
                                 </span>
                             </div>
                             <div className={`${styles.item_about} ${styles.item4}`}>
@@ -109,7 +129,7 @@ export default function OurTeam() {
                                 <div className={styles.chart_wrapper}>
                                     <PieChart width={200} height={200}>
                                         <Pie
-                                            data={data}
+                                            data={dataChart}
                                             dataKey="value"
                                             cx="50%"
                                             cy="50%"
@@ -119,9 +139,10 @@ export default function OurTeam() {
                                             endAngle={-270}
                                             paddingAngle={5}
                                         >
-                                            {data.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={entry.color} />
-                                            ))}
+                                            {dataChart.length > 0 &&
+                                                dataChart.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={entry.color} />
+                                                ))}
                                         </Pie>
                                         <text
                                             x="50%"
@@ -153,7 +174,8 @@ export default function OurTeam() {
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
                                         <span className={styles.number}>
-                                            {language === "fa" ? convertToFarsiDigits(10) : 10}
+                                            {language === "fa" ? convertToFarsiDigits(data?.number_of_cooperation_with_other_countries) :
+                                                data?.number_of_cooperation_with_other_countries}
                                         </span>
                                     </div>
                                     <p className={`${styles.item6_text} ${language === "fa" && styles.item6_text_fa}`}>

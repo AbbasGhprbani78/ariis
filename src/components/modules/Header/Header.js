@@ -35,11 +35,6 @@ export default function Header() {
         dispatch(getProjectsTitle(language))
     }, [])
 
-
-    const handleGotoProject = (id) => {
-        router.push(`/product/${id}`)
-    }
-
     return (
         <>
             <header className={styles.header_container}>
@@ -70,13 +65,13 @@ export default function Header() {
                                         data &&
                                         data.length > 0 &&
                                         data.map(item => (
-                                            <div
+                                            <Link
                                                 key={item.id}
                                                 className={`${styles.product_link}  ${language === "fa" && styles.right_product_link}`}
-                                                onClick={() => handleGotoProject(item.id)}
+                                                href={`/product/${item.id}`}
                                             >
                                                 {item.name}
-                                            </div>
+                                            </Link>
                                         ))
                                     }
                                 </ul>

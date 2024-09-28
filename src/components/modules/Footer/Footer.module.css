@@ -5,6 +5,7 @@
     justify-content: center;
     text-align: center;
     padding: 1.2rem 0;
+    background-color: var(--color-2);
 }
 
 .color {

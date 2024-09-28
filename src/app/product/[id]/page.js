@@ -13,7 +13,6 @@ export default function ProductPage({ params }) {
 
     const idProduct = params.id
 
-
     return (
         <>
             <Header />

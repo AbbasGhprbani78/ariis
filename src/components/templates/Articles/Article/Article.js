@@ -2,7 +2,10 @@ import React from 'react'
 import styles from './Article.module.css'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
-export default function Article() {
+export default function Article({ id }) {
+
+    console.log(id)
+
     return (
         <div className={styles.article}>
             <div className={styles.topArticle}>

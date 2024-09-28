@@ -4,7 +4,7 @@ import styles from './Member.module.css'
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import { useLanguage } from '@/context/LangContext';
-import { useTranslation } from 'react-i18next';
+
 
 const convertToFarsiDigits = (number) => {
     const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
@@ -12,26 +12,25 @@ const convertToFarsiDigits = (number) => {
 };
 
 
-export default function MemeberItem({ img, text }) {
+export default function MemeberItem({ member }) {
 
     const { language } = useLanguage()
-    const { t } = useTranslation()
 
-    const phoneNumber = language === "fa" ? convertToFarsiDigits("0916 295 7253") : "0916 295 7253";
+    const phoneNumber = language === "fa" ? convertToFarsiDigits(member?.phone_number) : member?.phone_number;
     return (
         <div className={styles.member_item_wrapper}>
-            <span className={`${styles.name} ${language === "fa" && styles.name_right}`}>{text}</span>
+            <span className={`${styles.name} ${language === "fa" && styles.name_right}`}>{member?.name}</span>
             <div className={styles.profile_container}>
                 <div className={styles.line}></div>
                 <div className={styles.profile_pic}>
-                    <img src={img} alt="Profile Picture" />
+                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${member?.image}`} alt="Profile Picture" />
                 </div>
                 <div className={styles.line}></div>
             </div>
             <div className={styles.memeber_content}>
-                <p className={styles.name_m}>{text}</p>
+                <p className={styles.name_m}>{member?.name}</p>
                 <p className={styles.memeber_text}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    {member?.text}
                 </p>
                 <div className={styles.memeber_contact_wrapper}>
                     <div className={styles.memeber_contact}>
@@ -41,7 +40,7 @@ export default function MemeberItem({ img, text }) {
                         </p>
                         <p className={styles.memeber_media}>
                             <MailOutlineOutlinedIcon className={styles.icon} />
-                            <span className={styles.email}>arashkarimi11@gmail.com</span>
+                            <span className={styles.email}>{member?.email}</span>
                         </p>
                     </div>
                 </div>

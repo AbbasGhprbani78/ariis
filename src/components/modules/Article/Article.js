@@ -1,33 +1,91 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Article.module.css'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
-export default function Article() {
+import { useLanguage } from '@/context/LangContext';
+import axios from 'axios';
+import Link from 'next/link';
+export default function Article({ item }) {
+    const { language } = useLanguage()
+    const [like, setLike] = useState(item?.has_liked)
+
+
+    const truncateText = (text, maxLength) => {
+        return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    };
+
+    const likeDisLikeArticle = async () => {
+        try {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/${item.id}/like/`)
+            if (res.status === 201 || res.status === 200) {
+                setLike(prevLike => !prevLike)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className={styles.article}>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 12, xl: 4 }}>
                         <div className={styles.img_wrapper}>
-                            <img src="/images/article/4.jpg" alt="image" className={styles.image_article} />
+                            <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${item?.image}`} alt="image" className={styles.image_article} />
                         </div>
                     </Grid>
                     <Grid size={{ xs: 12, md: 12, xl: 8 }}>
                         <div className={styles.content}>
-                            <p className={styles.title}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.</p>
+                            <Link className={styles.link_text} href={`/articles/${item.id}`}>
+                                <p className={styles.title}>
+                                    {
+                                        language === "fa" ?
+
+                                            item?.title_farsi :
+                                            item?.title
+                                    }
+                                </p>
+
+                                <p className={styles.text}>
+                                    {
+                                        language === "fa" ?
+                                            truncateText(item?.text_farsi, 150) :
+                                            truncateText(item?.text, 150)
+                                    }
+                                </p>
+                            </Link>
                             <div className={styles.user_info}>
                                 <div className={styles.user_profile}>
-                                    <img src="/images/article/1.png" alt="image_profile" className={styles.img_profile} />
+                                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${item?.user?.avatar}`} alt="image_profile" className={styles.img_profile} />
                                     <div className={styles.user_texts}>
-                                        <span className={styles.name}>Zahra Rezai</span>
-                                        <span className={styles.date}>01/02/24</span>
+                                        <span className={styles.name}>{item?.user?.username}</span>
+                                        <span className={styles.date}>
+                                            {
+                                                language === "fa"
+                                                    ? new Date(item?.user?.date).toLocaleDateString('fa-IR', {
+                                                        day: '2-digit',
+                                                        month: '2-digit',
+                                                        year: '2-digit',
+                                                    })
+                                                    : new Date(item?.user?.date).toLocaleDateString('en-GB', {
+                                                        day: '2-digit',
+                                                        month: '2-digit',
+                                                        year: '2-digit',
+                                                    })
+                                            }
+                                        </span>
+
                                     </div>
                                 </div>
-                                <div className={styles.user_like}>
-                                    <FavoriteBorderOutlinedIcon />
+                                <div className={styles.user_like} onClick={likeDisLikeArticle}>
+                                    {
+                                        like ?
+                                            <FavoriteOutlinedIcon style={{ color: "red" }} /> :
+                                            <FavoriteBorderOutlinedIcon />
+                                    }
+
                                 </div>
                             </div>
                         </div>

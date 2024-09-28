@@ -4,7 +4,6 @@ import styles from './Info.module.css'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/context/LangContext';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -15,7 +14,6 @@ import Error from '@/components/modules/Error/Error';
 
 export default function Info() {
 
-  const { t } = useTranslation()
   const { language } = useLanguage()
   const dispatch = useDispatch()
   const { data, loading, error } = useSelector((state) => state.home);
@@ -33,9 +31,9 @@ export default function Info() {
     return <Loading />;
   }
 
-  // if (error) {
-  //   return <Error />;
-  // }
+  if (error) {
+    return <Error />;
+  }
 
 
   return (

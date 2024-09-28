@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getDataArticles = createAsyncThunk(
-    "articles/getDataArticles",
-    async () => {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/custom/`, {});
+export const getDataArticle = createAsyncThunk(
+    "articles/getDataArticle",
+    async (is) => {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/${id}`, {});
         return response.data;
     }
 );
 
 const slice = createSlice({
-    name: "articles",
+    name: "article",
     initialState: {
         data: null,
         loading: false,
@@ -20,14 +20,14 @@ const slice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getDataArticles.pending, (state) => {
+            .addCase(getDataArticle.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(getDataArticles.fulfilled, (state, action) => {
+            .addCase(getDataArticle.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload;
             })
-            .addCase(getDataArticles.rejected, (state, action) => {
+            .addCase(getDataArticle.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             });

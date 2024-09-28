@@ -14,13 +14,14 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useLanguage } from '@/context/LangContext';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 export default function Slider() {
     const { language } = useLanguage();
-    const { i18n } = useTranslation(); 
+    const { i18n } = useTranslation();
     const rtlSwitch = i18n?.dir();
     const swiperRef = useRef(null);
-    const swiperKey = `${rtlSwitch}-swiper`; 
+    const swiperKey = `${rtlSwitch}-swiper`;
 
     const handleNextSlide = () => {
         swiperRef.current?.swiper.slideNext();
@@ -29,6 +30,9 @@ export default function Slider() {
     const handlePrevSlide = () => {
         swiperRef.current?.swiper.slidePrev();
     };
+
+    const { data, loading, error } = useSelector((state) => state.aboutus);
+
 
     return (
         <div className={`${styles.slider_container} ${language === "fa" && styles.slider_right}`}>
@@ -73,10 +77,10 @@ export default function Slider() {
                         <Swiper
                             ref={swiperRef}
                             key={swiperKey}
-                            dir={rtlSwitch} 
+                            dir={rtlSwitch}
                             modules={[Autoplay]}
                             autoplay={{ delay: 3000, disableOnInteraction: false }}
-                            loop={true}
+                            loop={data?.customer_comment.length > 1}
                             className={styles.swiper_slider}
                             spaceBetween={30}
                             breakpoints={{
@@ -94,21 +98,15 @@ export default function Slider() {
                                 },
                             }}
                         >
-                            <SwiperSlide>
-                                <SliderItem />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <SliderItem />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <SliderItem />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <SliderItem />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <SliderItem />
-                            </SwiperSlide>
+                            {
+                                data &&
+                                data.customer_comment.length > 0 &&
+                                data.customer_comment.map((item, i) => (
+                                    <SwiperSlide key={i}>
+                                        <SliderItem item={item} />
+                                    </SwiperSlide>
+                                ))
+                            }
                         </Swiper>
                     </Grid>
                 </Grid>

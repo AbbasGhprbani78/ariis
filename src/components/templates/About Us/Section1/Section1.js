@@ -3,14 +3,12 @@ import React, { useEffect } from 'react'
 import styles from './Section1.module.css'
 import { useTranslation } from 'react-i18next'
 import AboutFeatureItem from '@/components/modules/AboutFeatureItem/AboutFeatureItem'
+import { useSelector } from 'react-redux'
 
 export default function Section1() {
 
     const { t } = useTranslation()
-    const imgUrl1 = "/images/cup.png"
-    const imgUrl2 = "/images/flash.png"
-    const imgUrl3 = "/images/graph.png"
-    const imgUrl4 = "/images/maximize.png"
+
 
     useEffect(() => {
         if (typeof window !== 'undefined' && window.visualViewport) {
@@ -24,38 +22,41 @@ export default function Section1() {
         }
     }, []);
 
+    const { data, loading, error } = useSelector((state) => state.aboutus);
+
+
     return (
         <div className={styles.section1_wrapper}>
             <div className={styles.aboutus_content}>
                 <div className={styles.aboutus_top}>
                     <h1 className={styles.aboutus_title}>{t("AboutUs")}</h1>
                     <p className={styles.aboutus_text}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        {data?.main_text}
                     </p>
                 </div>
                 <div className={styles.aboutus_bottom}>
                     <AboutFeatureItem
-                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                        img={imgUrl4}
+                        text={data?.text_image_one}
+                        img={data?.image_one}
 
                     />
                     <div className={styles.line}></div>
                     <AboutFeatureItem
-                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                        img={imgUrl3}
+                        text={data?.text_image_two}
+                        img={data?.image_two}
 
                     />
                     <div className={styles.line}></div>
 
                     <AboutFeatureItem
-                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                        img={imgUrl2}
+                        text={data?.text_image_three}
+                        img={data?.image_three}
 
                     />
                     <div className={styles.line}></div>
                     <AboutFeatureItem
-                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                        img={imgUrl1}
+                        text={data?.text_image_four}
+                        img={data?.image_four}
                     />
                 </div>
             </div>
