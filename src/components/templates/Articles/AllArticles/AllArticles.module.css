@@ -72,6 +72,10 @@
     font-weight: 400;
 }
 
+.active {
+    color: var(--color-7);
+}
+
 @media (max-width:986px) {
     .filter_btns {
         justify-content: center;

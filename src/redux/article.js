@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getDataArticle = createAsyncThunk(
-    "articles/getDataArticle",
+    "article/getDataArticle",
     async (id) => {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/${id}`, {});
         return response.data;
@@ -10,6 +10,7 @@ export const getDataArticle = createAsyncThunk(
 );
 
 const slice = createSlice({
+    
     name: "article",
     initialState: {
         data: null,

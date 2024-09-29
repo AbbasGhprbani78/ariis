@@ -14,14 +14,14 @@ import Loading from '@/components/modules/Loading/Loading';
 import Error from '@/components/modules/Error/Error';
 import axios from 'axios';
 
-const dataChart = [
+
+const datac = [
     { name: '1', value: 40, color: '#CCFFEE' },
     { name: '2', value: 10, color: '#f2f3f5' },
     { name: '3', value: 10, color: '#afc8c0' },
     { name: '4', value: 25, color: '#fd9b56' },
     { name: '5', value: 15, color: '#f1a07e' },
 ];
-
 
 export default function OurTeam() {
 
@@ -30,24 +30,31 @@ export default function OurTeam() {
     const dispatch = useDispatch()
     const { data, loading, error } = useSelector((state) => state.aboutus);
     const [mainScore, totalScore] = data ? `${data?.point}/10`.split('/') : ['0', '10'];
-    // const [dataChart, setDataChart] = useState("")
+    const [dataChart, setDataChart] = useState("")
 
     const convertToFarsiDigits = (number) => {
         const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         return number.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
     };
 
-    // const getDataChart = async () => {
-    //     try {
-    //         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/data/`, {})
-    //         console.log(response.data)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const getDataChart = async () => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/data/`, {})
+            setDataChart(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const chartData = dataChart[0]?.map((item) => ({
+        name: item.name,
+        value: parseInt(item.count),
+        color: item.name,
+    })) || [];
 
     useEffect(() => {
         dispatch(getAboutusData(language))
+        getDataChart()
     }, [language])
 
 
@@ -129,7 +136,7 @@ export default function OurTeam() {
                                 <div className={styles.chart_wrapper}>
                                     <PieChart width={200} height={200}>
                                         <Pie
-                                            data={dataChart}
+                                            data={chartData}
                                             dataKey="value"
                                             cx="50%"
                                             cy="50%"
@@ -139,10 +146,9 @@ export default function OurTeam() {
                                             endAngle={-270}
                                             paddingAngle={5}
                                         >
-                                            {dataChart.length > 0 &&
-                                                dataChart.map((entry, index) => (
-                                                    <Cell key={`cell-${index}`} fill={entry.color} />
-                                                ))}
+                                            {chartData?.map((entry, index) => (
+                                                <Cell key={`cell-${index}`} fill={entry.color} />
+                                            ))}
                                         </Pie>
                                         <text
                                             x="50%"
@@ -153,7 +159,8 @@ export default function OurTeam() {
                                             fontWeight="bold"
                                             fill="#fff"
                                         >
-                                            {language === "fa" ? convertToFarsiDigits(84) : 84}%
+                                            {language === "fa" ? convertToFarsiDigits(dataChart[1]?.count || 87) : dataChart[1]?.count || 87}%
+
                                         </text>
                                         <text
                                             x="50%"
@@ -163,11 +170,10 @@ export default function OurTeam() {
                                             fontSize={12}
                                             fill="#aaa"
                                         >
-                                            used
                                         </text>
                                     </PieChart>
                                 </div>
-                                <span className={styles.text_chart}>Lorem ipsum dolor sit</span>
+                                <span className={styles.text_chart}></span>
                             </div>
                             <div className={`${styles.item_about} ${styles.item6}`}>
                                 <div className={styles.item6_top}>
@@ -197,5 +203,4 @@ export default function OurTeam() {
         </div>
     )
 }
-
 

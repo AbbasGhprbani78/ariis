@@ -212,6 +212,17 @@ table {
     font-weight: 300;
 }
 
+input,
+textarea {
+    font-family: 'poppins', sans-serif !important;
+}
+
+.fa_language input,
+textarea {
+    font-family: "vazir",
+        sans-serif !important;
+}
+
 
 html,
 body {
@@ -267,7 +278,6 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 8px;
-
 }
 
 

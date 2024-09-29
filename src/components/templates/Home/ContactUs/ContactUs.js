@@ -61,16 +61,16 @@ export default function ContactUs() {
           setShowToast(true)
           setToastMessage({
             type: "success",
-            title: "success",
-            message: "success",
+            title: t("success"),
+            message: t("success"),
           })
         }
       } catch (error) {
         setShowToast(true)
         setToastMessage({
           type: "error",
-          title: "error",
-          message: error,
+          title: t("error"),
+          message: t("error"),
         })
       }
     }

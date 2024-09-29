@@ -20,17 +20,19 @@ export default function TopArticle() {
         }
     }
 
-    useEffect(() => {
-        fliterArticlesByLanguage(language)
-    }, [language, data])
-
-
-
+    const convertToFarsiNumber = (num) => {
+        const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        return num.toString().split('').map(x => farsiDigits[x]).join('');
+    };
 
 
     const truncateText = (text, maxLength) => {
         return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
     };
+
+    useEffect(() => {
+        fliterArticlesByLanguage(language)
+    }, [language, data])
 
     return (
 
@@ -49,17 +51,18 @@ export default function TopArticle() {
                                                 <span className={styles.user_name}>{filterArticles[0]?.user?.username}</span>
                                                 <span className={styles.date}>{
                                                     language === "fa"
-                                                        ? new Date(filterArticles[0]?.user?.date).toLocaleDateString('fa-IR', {
+                                                        ? new Date(filterArticles[0]?.date).toLocaleDateString('fa-IR', {
                                                             day: '2-digit',
                                                             month: '2-digit',
                                                             year: '2-digit',
                                                         })
-                                                        : new Date(filterArticles[0]?.user?.date).toLocaleDateString('en-GB', {
+                                                        : new Date(filterArticles[0]?.date).toLocaleDateString('en-GB', {
                                                             day: '2-digit',
                                                             month: '2-digit',
                                                             year: '2-digit',
                                                         })
-                                                }</span>
+                                                }
+                                                </span>
                                             </div>
                                         </div>
                                         <Link href={`/articles/${filterArticles[0].id}`} className={styles.texts_first_article}>
@@ -88,12 +91,12 @@ export default function TopArticle() {
                                             <span className={styles.user_name}>{filterArticles[1]?.user?.username}</span>
                                             <span className={styles.date}>{
                                                 language === "fa"
-                                                    ? new Date(filterArticles[1]?.user?.date).toLocaleDateString('fa-IR', {
+                                                    ? new Date(filterArticles[1]?.date).toLocaleDateString('fa-IR', {
                                                         day: '2-digit',
                                                         month: '2-digit',
                                                         year: '2-digit',
                                                     })
-                                                    : new Date(filterArticles[1]?.user?.date).toLocaleDateString('en-GB', {
+                                                    : new Date(filterArticles[1]?.date).toLocaleDateString('en-GB', {
                                                         day: '2-digit',
                                                         month: '2-digit',
                                                         year: '2-digit',
@@ -122,12 +125,12 @@ export default function TopArticle() {
                                             <span className={styles.user_name}>{filterArticles[2]?.user?.username}</span>
                                             <span className={styles.date}>{
                                                 language === "fa"
-                                                    ? new Date(filterArticles[2]?.user?.date).toLocaleDateString('fa-IR', {
+                                                    ? new Date(filterArticles[2]?.date).toLocaleDateString('fa-IR', {
                                                         day: '2-digit',
                                                         month: '2-digit',
                                                         year: '2-digit',
                                                     })
-                                                    : new Date(filterArticles[2]?.user?.date).toLocaleDateString('en-GB', {
+                                                    : new Date(filterArticles[2]?.date).toLocaleDateString('en-GB', {
                                                         day: '2-digit',
                                                         month: '2-digit',
                                                         year: '2-digit',
@@ -151,109 +154,210 @@ export default function TopArticle() {
                                 <div className={`${styles.item} ${styles.item_4}`}>
                                     {
                                         language === "fa" &&
-                                            data?.five_most_recent_articles_farsi.length >= 5 ?
+                                            data?.five_most_recent_articles_farsi.length ?
                                             <>
-                                                <p className={styles.top_text}>Top 5 Ariis Articles</p>
+                                                <p className={styles.top_text}>{convertToFarsiNumber(data.five_most_recent_articles_farsi.length)} مقاله برتر</p>
                                                 <div className={styles.image_container}>
-                                                    <img src="/images/article/7.jpg"
-                                                        className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
-                                                    <img src="/images/article/3.png"
-                                                        className={`${styles.circle2} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 2" />
-                                                    <img src="/images/article/5.png"
-                                                        className={`${styles.circle3} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 3" />
-                                                    <img src="/images/article/4.jpg"
-                                                        className={`${styles.circle4} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 4" />
-                                                    <img src="/images/article/9.png"
-                                                        className={`${styles.circle5} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 5" />
+                                                    {
+                                                        data.five_most_recent_articles_farsi.map((item) => (
+                                                            <Link style={{ all: "unset" }} href={`/articles/${item.id}`}>
+                                                                <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
+                                                                    className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
+                                                            </Link>
+                                                        ))
+                                                    }
+
                                                 </div>
                                             </> :
-                                            data?.five_most_recent_articles_english.length > 5 ?
+                                            data?.five_most_recent_articles_english.length ?
                                                 <>
-                                                    <p className={styles.top_text}>Top 5 Ariis Articles</p>
+                                                    <p className={styles.top_text}>{`Top ${data?.five_most_recent_articles_english.length} Articles`}</p>
                                                     <div className={styles.image_container}>
-                                                        <img src="/images/article/7.jpg"
-                                                            className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
-                                                        <img src="/images/article/3.png"
-                                                            className={`${styles.circle2} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 2" />
-                                                        <img src="/images/article/5.png"
-                                                            className={`${styles.circle3} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 3" />
-                                                        <img src="/images/article/4.jpg"
-                                                            className={`${styles.circle4} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 4" />
-                                                        <img src="/images/article/9.png"
-                                                            className={`${styles.circle5} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 5" />
+                                                        {
+                                                            data.five_most_recent_articles_english.map((item) => (
+                                                                <Link style={{ all: "unset" }} href={`/articles/${item.id}`}>
+                                                                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
+                                                                        className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
+                                                                </Link>
+                                                            ))
+                                                        }
                                                     </div>
                                                 </> : null
                                     }
                                 </div>
                             </div>
+
                             <div className={styles.toparticles_m}>
                                 <div className={`${styles.item} ${styles.item_1}`}>
-                                    <img src="/images/article/9.png" alt="image_article" />
+                                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[0].image}`} alt="image_article" />
                                     <div className={styles.firstarticle_content}>
-                                        <div className={styles.texts_first_article}>
-                                            <p className={styles.first_article_title}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            <p className={styles.first_article_text}>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.
+                                        <Link href={`/articles/${filterArticles[0].id}`} className={styles.texts_first_article}>
+                                            <p className={styles.first_article_title}>
+                                                {
+                                                    language === "fa" ?
+                                                        `${filterArticles[0]?.title_farsi}` :
+                                                        `${filterArticles[0]?.title}`
+                                                }
                                             </p>
-                                        </div>
+                                            <p className={styles.first_article_text}>
+                                                {
+                                                    language === "fa" ?
+                                                        truncateText(filterArticles[0]?.text_farsi, 150) :
+                                                        truncateText(filterArticles[0]?.text, 150)
+                                                }
+                                            </p>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className={styles.user_info}>
                                     <div className={styles.user_left}>
-                                        <img src="/images/article/1.png" alt="image" />
-                                        <span className={styles.text}>Zahra Rezai</span>
+                                        <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[0]?.user?.avatar}`} alt="image" />
+                                        <span className={styles.text}>
+                                            {filterArticles[0]?.user?.username}
+                                        </span>
                                     </div>
-                                    <span className={styles.date}>01/02/24</span>
+                                    <span className={styles.date}>
+                                        {
+                                            language === "fa"
+                                                ? new Date(filterArticles[0]?.date).toLocaleDateString('fa-IR', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: '2-digit',
+                                                })
+                                                : new Date(filterArticles[0]?.date).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: '2-digit',
+                                                })
+                                        }
+
+                                    </span>
                                 </div>
-                                <div className={`${styles.item} ${styles.item_2}`}>
-                                    <div className={styles.texts_wrapper}>
-                                        <p className={styles.user_title}>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        </p>
-                                        <p className={styles.user_text}>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.
-                                        </p>
+
+                                <div className={`${styles.item} ${styles.item_1}`}>
+                                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[1].image}`} alt="image_article" />
+                                    <div className={styles.firstarticle_content}>
+                                        <Link href={`/articles/${filterArticles[1].id}`} className={styles.texts_first_article}>
+                                            <p className={styles.first_article_title}>
+                                                {
+                                                    language === "fa" ?
+                                                        `${filterArticles[1]?.title_farsi}` :
+                                                        `${filterArticles[1]?.title}`
+                                                }
+                                            </p>
+                                            <p className={styles.first_article_text}>
+                                                {
+                                                    language === "fa" ?
+                                                        truncateText(filterArticles[1]?.text_farsi, 150) :
+                                                        truncateText(filterArticles[1]?.text, 150)
+                                                }
+                                            </p>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className={styles.user_info}>
                                     <div className={styles.user_left}>
-                                        <img src="/images/article/1.png" alt="image" />
-                                        <span className={styles.text}>Zahra Rezai</span>
+                                        <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[1]?.user?.avatar}`} alt="image" />
+                                        <span className={styles.text}>
+                                            {filterArticles[1]?.user?.username}
+                                        </span>
                                     </div>
-                                    <span className={styles.date}>01/02/24</span>
+                                    <span className={styles.date}>
+                                        {
+                                            language === "fa"
+                                                ? new Date(filterArticles[1]?.date).toLocaleDateString('fa-IR', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: '2-digit',
+                                                })
+                                                : new Date(filterArticles[1]?.date).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: '2-digit',
+                                                })
+                                        }
+
+                                    </span>
                                 </div>
-                                <div className={`${styles.item} ${styles.item_3}`}>
-                                    <img src="/images/article/10.png" alt="image_article" />
-                                    <div className={styles.texts_wrapper2}>
-                                        <p className={styles.user_title}>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        </p>
-                                        <p className={styles.user_text}>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.
-                                        </p>
+
+                                <div className={`${styles.item} ${styles.item_1}`}>
+                                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[2].image}`} alt="image_article" />
+                                    <div className={styles.firstarticle_content}>
+                                        <Link href={`/articles/${filterArticles[2].id}`} className={styles.texts_first_article}>
+                                            <p className={styles.first_article_title}>
+                                                {
+                                                    language === "fa" ?
+                                                        `${filterArticles[2]?.title_farsi}` :
+                                                        `${filterArticles[2]?.title}`
+                                                }
+                                            </p>
+                                            <p className={styles.first_article_text}>
+                                                {
+                                                    language === "fa" ?
+                                                        truncateText(filterArticles[2]?.text_farsi, 150) :
+                                                        truncateText(filterArticles[2]?.text, 150)
+                                                }
+                                            </p>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className={styles.user_info}>
                                     <div className={styles.user_left}>
-                                        <img src="/images/article/1.png" alt="image" />
-                                        <span className={styles.text}>Zahra Rezai</span>
+                                        <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[2]?.user?.avatar}`} alt="image" />
+                                        <span className={styles.text}>
+                                            {filterArticles[2]?.user?.username}
+                                        </span>
                                     </div>
-                                    <span className={styles.date}>01/02/24</span>
+                                    <span className={styles.date}>
+                                        {
+                                            language === "fa"
+                                                ? new Date(filterArticles[2]?.date).toLocaleDateString('fa-IR', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: '2-digit',
+                                                })
+                                                : new Date(filterArticles[2]?.date).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: '2-digit',
+                                                })
+                                        }
+
+                                    </span>
                                 </div>
                                 <div className={`${styles.item} ${styles.item_4}`}>
-                                    <p className={styles.top_text}>Top 5 Ariis Articles</p>
-                                    <div className={styles.image_container}>
-                                        <img src="images/article/7.jpg"
-                                            className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
-                                        <img src="images/article/6.jpg"
-                                            className={`${styles.circle2} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 2" />
-                                        <img src="images/article/5.png"
-                                            className={`${styles.circle3} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 3" />
-                                        <img src="images/article/4.jpg"
-                                            className={`${styles.circle4} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 4" />
-                                        <img src="images/article/9.png"
-                                            className={`${styles.circle5} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 5" />
-                                    </div>
+                                    {
+                                        language === "fa" &&
+                                            data?.five_most_recent_articles_farsi.length ?
+                                            <>
+                                                <p className={styles.top_text}>{convertToFarsiNumber(data.five_most_recent_articles_farsi.length)} مقاله برتر</p>
+                                                <div className={styles.image_container}>
+                                                    {
+                                                        data.five_most_recent_articles_farsi.map((item) => (
+                                                            <Link style={{ all: "unset" }} href={`/articles/${item.id}`}>
+                                                                <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
+                                                                    className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
+                                                            </Link>
+                                                        ))
+                                                    }
+
+                                                </div>
+                                            </> :
+                                            data?.five_most_recent_articles_english.length ?
+                                                <>
+                                                    <p className={styles.top_text}>{`Top ${data?.five_most_recent_articles_english.length} Ariis Articles`}</p>
+                                                    <div className={styles.image_container}>
+                                                        {
+                                                            data.five_most_recent_articles_english.map((item) => (
+                                                                <Link style={{ all: "unset" }} href={`/articles/${item.id}`}>
+                                                                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
+                                                                        className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
+                                                                </Link>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                </> : null
+                                    }
                                 </div>
                             </div>
                         </div>

@@ -7,7 +7,7 @@ import AllArticles from '@/components/templates/Articles/AllArticles/AllArticles
 
 export default function Page() {
 
-  
+
     return (
         <>
             <div className={styles.pageContainer}>

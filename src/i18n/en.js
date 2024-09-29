@@ -23,6 +23,14 @@ const en = {
     Satisfaction: "satisfaction",
     YearFounded: 'Year Founded',
     Point: "Point",
+    commentTitle: "Write Your Comment",
+    Comment: "Comment",
+    all: "all",
+    TrendingThisWeek: "Trending This Week",
+    YouMightLike: "You Might Like",
+    commentsendsuccessfully: "Comment Send Successfully",
+    success: "Success",
+    error:"Error",
     des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 }
 

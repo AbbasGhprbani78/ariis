@@ -10,15 +10,19 @@ import Link from 'next/link';
 export default function Article({ item }) {
     const { language } = useLanguage()
     const [like, setLike] = useState(item?.has_liked)
-
+    const [ip, setIp] = useState("");
 
     const truncateText = (text, maxLength) => {
         return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
     };
 
+
     const likeDisLikeArticle = async () => {
+        const body = {
+            user: ip
+        }
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/${item.id}/like/`)
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/${item.id}/like/`, body)
             if (res.status === 201 || res.status === 200) {
                 setLike(prevLike => !prevLike)
             }
@@ -26,6 +30,21 @@ export default function Article({ item }) {
             console.log(error)
         }
     }
+
+    useEffect(
+        () => {
+            const fetchIp = async () => {
+                try {
+                    const response = await axios.get("https://api.ipify.org?format=json");
+                    setIp(response.data.ip);
+                } catch (error) {
+                    console.error("Error fetching the IP address:", error);
+                }
+            };
+
+            fetchIp();
+        }, [])
+
 
     return (
         <div className={styles.article}>
@@ -64,12 +83,12 @@ export default function Article({ item }) {
                                         <span className={styles.date}>
                                             {
                                                 language === "fa"
-                                                    ? new Date(item?.user?.date).toLocaleDateString('fa-IR', {
+                                                    ? new Date(item?.date).toLocaleDateString('fa-IR', {
                                                         day: '2-digit',
                                                         month: '2-digit',
                                                         year: '2-digit',
                                                     })
-                                                    : new Date(item?.user?.date).toLocaleDateString('en-GB', {
+                                                    : new Date(item?.date).toLocaleDateString('en-GB', {
                                                         day: '2-digit',
                                                         month: '2-digit',
                                                         year: '2-digit',
