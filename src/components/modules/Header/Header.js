@@ -34,6 +34,7 @@ export default function Header() {
         dispatch(getProjectsTitle(language));
     }, [dispatch, language]);
 
+    
     const handleLanguageSwitch = (lang) => {
         if (pathname.startsWith("/articles/")) {  
             router.push("/articles")

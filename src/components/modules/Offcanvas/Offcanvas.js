@@ -11,7 +11,7 @@ import Button from '../Button/Button';
 import { usePathname } from 'next/navigation';
 import { useSelector, useDispatch } from "react-redux";
 import { getProjectsTitle } from "@/redux/header";
-
+import { useRouter } from "next/navigation";
 
 export default function Offcanvas() {
 
@@ -20,7 +20,7 @@ export default function Offcanvas() {
     const { data, loading, error } = useSelector((state) => state.header);
     const { t } = useTranslation()
     const { changeLanguage, language } = useLanguage()
-
+    const router = useRouter();
     const [open, setOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -30,6 +30,13 @@ export default function Offcanvas() {
 
     const handleDropdownToggle = () => {
         setDropdownOpen(!dropdownOpen);
+    };
+
+    const handleLanguageSwitch = (lang) => {
+        if (pathname.startsWith("/articles/")) {
+            router.push("/articles")
+        }
+        changeLanguage(lang);
     };
 
     const isActive = (href) => pathname === href;
@@ -72,7 +79,7 @@ export default function Offcanvas() {
                             {
                                 data &&
                                 data.length > 0 &&
-                                data.map(item=>(
+                                data.map(item => (
                                     <ListItemButton key={item.id} sx={{ pl: 4 }} className={`${styles.link_item} `}>
                                         <Link className={styles.link_offcanvas} href={`/product/${item.id}`}>{item?.name}</Link>
                                     </ListItemButton>
@@ -90,8 +97,8 @@ export default function Offcanvas() {
                         <Link className={styles.link_offcanvas} href={"/contactus"}>{t("ContactUs")}</Link>
                     </ListItemButton>
                     <div className={styles.header_wrap_btn_switch}>
-                        <button className={`${styles.btn_switch} ${language === "en" && styles.active}`} onClick={() => changeLanguage('en')}>En</button>
-                        <button className={`${styles.btn_switch} ${language === "fa" && styles.active}`} onClick={() => changeLanguage('fa')}>Fa</button>
+                        <button className={`${styles.btn_switch} ${language === "en" && styles.active}`} onClick={() => handleLanguageSwitch("en")}>En</button>
+                        <button className={`${styles.btn_switch} ${language === "fa" && styles.active}`} onClick={() => handleLanguageSwitch("fa")}>Fa</button>
                     </div>
                     <div className={styles.btn_wrappper}>
                         <Button text={t('ContactUs')} icon={EastIcon} />
