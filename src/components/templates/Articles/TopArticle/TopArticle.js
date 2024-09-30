@@ -34,6 +34,9 @@ export default function TopArticle() {
         fliterArticlesByLanguage(language)
     }, [language, data])
 
+
+
+
     return (
 
         <>
@@ -106,7 +109,11 @@ export default function TopArticle() {
                                     </div>
                                     <Link href={`/articles/${filterArticles[1].id}`} className={styles.texts_wrapper}>
                                         <p className={styles.user_title}>
-                                            {`${filterArticles[0].title}`}
+                                            {
+                                                language === "fa" ?
+                                                    `${filterArticles[1]?.title_farsi}` :
+                                                    `${filterArticles[1]?.title}`
+                                            }
                                         </p>
                                         <p className={styles.user_text}>
                                             {
@@ -140,7 +147,12 @@ export default function TopArticle() {
                                     </div>
                                     <Link href={`/articles/${filterArticles[2].id}`} className={styles.texts_wrapper}>
                                         <p className={styles.user_title}>
-                                            {`${filterArticles[2].title}`}
+                                            {
+
+                                                language === "fa" ?
+                                                    `${filterArticles[2]?.title_farsi}` :
+                                                    `${filterArticles[2]?.title}`
+                                            }
                                         </p>
                                         <p className={styles.user_text}>
                                             {

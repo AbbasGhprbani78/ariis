@@ -1,21 +1,4 @@
 .member_wrapper {
     margin-top: 3rem;
-    max-height: 90vh;
-    overflow-y: auto;
 }
 
-.member_wrapper::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE and Edge */
-.member_wrapper {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-}
-
-/* Hide scrollbar for Firefox */
-.member_wrapper {
-    scrollbar-width: none;
-    /* Firefox */
-}
