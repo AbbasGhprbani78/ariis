@@ -1,5 +1,6 @@
 .container {
     padding-top: 90px;
+    position: relative;
 }
 
 .toparticles {
@@ -14,6 +15,7 @@
     height: 80px;
     border-radius: var(--border-redi2);
     overflow: hidden;
+    color: #fff;
 }
 
 .item_1 {
@@ -37,6 +39,7 @@
     justify-content: end;
     height: 100%;
     padding: 20px;
+    z-index: 5;
 }
 
 .texts_first_article {
@@ -83,6 +86,7 @@
     align-items: start;
     width: max-content;
     z-index: 2;
+    color: #fff;
 }
 
 .user_info>img {
@@ -96,7 +100,6 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    color: var(--color-1);
     justify-content: space-around;
     font-weight: 400;
     height: 60px;
@@ -184,16 +187,16 @@
     transition: all .3s;
 }
 
-.circle {
+.link_article:not(:nth-child(1)) {
+    all: unset;
     margin-left: -30px;
 }
 
-.circle_right {
+.link_article_right:not(:nth-child(1)) {
+    all: unset;
     margin-left: 0%;
     margin-right: -30px;
 }
-
-
 
 .circle:hover {
     transform: translateY(-10px);
@@ -230,6 +233,43 @@
 .r_circle {
     margin-right: 0;
 }
+
+
+.item_1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 51.5%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+}
+
+.item_2::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 51.5%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+}
+
+.item_3::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 51.5%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+}
+
+
+
 
 @media (max-width: 1025px) {
     .item {
@@ -304,10 +344,16 @@
         margin-top: 2rem;
     }
 
-    .circle {
+    .link_article:not(:nth-child(1)) {
+        all: unset;
         margin-left: -20px;
     }
 
+    .link_article_right:not(:nth-child(1)) {
+        all: unset;
+        margin-left: 0;
+        margin-right: -20px;
+    }
 
     .user_info {
         display: flex;

@@ -73,7 +73,21 @@
 }
 
 .active {
-    color: var(--color-7);
+    color: #fff;
+    background-color: #000;
+}
+
+
+@media (max-width:1200px) {
+    .right_article {
+        flex-direction: row;
+    }
+
+    .trending,
+    .filtering {
+        width: 45%;
+
+    }
 }
 
 @media (max-width:986px) {

@@ -13,17 +13,16 @@ import useWindowWidth from "@/hook/WindowWidth";
 import { usePathname } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { getProjectsTitle } from "@/redux/header";
-import { useRouter } from 'next/navigation';
-
+import { useRouter } from "next/navigation";
 
 export default function Header() {
     const pathname = usePathname();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const { t } = useTranslation();
     const { changeLanguage, language } = useLanguage();
     const { data, loading, error } = useSelector((state) => state.header);
     const width = useWindowWidth();
-    const router = useRouter()
+    const router = useRouter();
 
     if (width === undefined) {
         return null;
@@ -32,8 +31,15 @@ export default function Header() {
     const isActive = (href) => pathname === href;
 
     useEffect(() => {
-        dispatch(getProjectsTitle(language))
-    }, [])
+        dispatch(getProjectsTitle(language));
+    }, [dispatch, language]);
+
+    const handleLanguageSwitch = (lang) => {
+        if (pathname.startsWith("/articles/")) {  
+            router.push("/articles")
+        }
+        changeLanguage(lang);
+    };
 
     return (
         <>
@@ -61,10 +67,9 @@ export default function Header() {
                                     <ExpandMoreIcon className={styles.icon_drop} />
                                 </div>
                                 <ul className={styles.drop}>
-                                    {
-                                        data &&
+                                    {data &&
                                         data.length > 0 &&
-                                        data.map(item => (
+                                        data.map((item) => (
                                             <Link
                                                 key={item.id}
                                                 className={`${styles.product_link}  ${language === "fa" && styles.right_product_link}`}
@@ -72,8 +77,7 @@ export default function Header() {
                                             >
                                                 {item.name}
                                             </Link>
-                                        ))
-                                    }
+                                        ))}
                                 </ul>
                             </li>
                             <Link
@@ -99,13 +103,13 @@ export default function Header() {
                             <div className={styles.header_wrap_btn_switch}>
                                 <button
                                     className={`${styles.btn_switch} ${language === "en" && styles.active}`}
-                                    onClick={() => changeLanguage("en")}
+                                    onClick={() => handleLanguageSwitch("en")}
                                 >
                                     En
                                 </button>
                                 <button
                                     className={`${styles.btn_switch} ${language === "fa" && styles.active}`}
-                                    onClick={() => changeLanguage("fa")}
+                                    onClick={() => handleLanguageSwitch("fa")}
                                 >
                                     Fa
                                 </button>

@@ -54,7 +54,6 @@ export default function ContactUs() {
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/home/contact-us/`, formdata, {})
         if (response.status === 201) {
-          console.log(response.data)
           formdata.email = ""
           formdata.message = ""
           formdata.name = ""

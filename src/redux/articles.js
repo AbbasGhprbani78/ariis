@@ -3,8 +3,12 @@ import axios from "axios";
 
 export const getDataArticles = createAsyncThunk(
     "articles/getDataArticles",
-    async () => {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/custom/`, {});
+    async (ip) => {
+        const body = {
+            user: ip
+        }
+        // console.log(ip)
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/custom/`, body);
         return response.data;
     }
 );

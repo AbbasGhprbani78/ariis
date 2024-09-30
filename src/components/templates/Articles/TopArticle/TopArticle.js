@@ -160,7 +160,7 @@ export default function TopArticle() {
                                                 <div className={styles.image_container}>
                                                     {
                                                         data.five_most_recent_articles_farsi.map((item) => (
-                                                            <Link style={{ all: "unset" }} href={`/articles/${item.id}`}>
+                                                            <Link className={styles.link_article_right} href={`/articles/${item.id}`}>
                                                                 <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
                                                                     className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
                                                             </Link>
@@ -175,7 +175,7 @@ export default function TopArticle() {
                                                     <div className={styles.image_container}>
                                                         {
                                                             data.five_most_recent_articles_english.map((item) => (
-                                                                <Link style={{ all: "unset" }} href={`/articles/${item.id}`}>
+                                                                <Link className={styles.link_article} href={`/articles/${item.id}`}>
                                                                     <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
                                                                         className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
                                                                 </Link>
@@ -334,7 +334,7 @@ export default function TopArticle() {
                                                 <div className={styles.image_container}>
                                                     {
                                                         data.five_most_recent_articles_farsi.map((item) => (
-                                                            <Link style={{ all: "unset" }} href={`/articles/${item.id}`}>
+                                                            <Link className={styles.link_article_right} href={`/articles/${item.id}`}>
                                                                 <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
                                                                     className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
                                                             </Link>
@@ -349,7 +349,7 @@ export default function TopArticle() {
                                                     <div className={styles.image_container}>
                                                         {
                                                             data.five_most_recent_articles_english.map((item) => (
-                                                                <Link style={{ all: "unset" }} href={`/articles/${item.id}`}>
+                                                                <Link className={styles.link_article} href={`/articles/${item.id}`}>
                                                                     <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
                                                                         className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
                                                                 </Link>

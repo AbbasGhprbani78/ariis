@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+"use client"
+import React, { use, useEffect, useState } from 'react'
 import styles from './Article.module.css'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
@@ -7,10 +8,17 @@ import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import { useLanguage } from '@/context/LangContext';
 import axios from 'axios';
 import Link from 'next/link';
+
 export default function Article({ item }) {
     const { language } = useLanguage()
-    const [like, setLike] = useState(item?.has_liked)
+    const [like, setLike] = useState()
     const [ip, setIp] = useState("");
+
+   
+
+    useEffect(() => {
+        setLike(item.has_liked)
+    }, [item])
 
     const truncateText = (text, maxLength) => {
         return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
@@ -50,12 +58,12 @@ export default function Article({ item }) {
         <div className={styles.article}>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, md: 12, xl: 4 }}>
+                    <Grid size={{ xs: 12, sm: 4 }}>
                         <div className={styles.img_wrapper}>
                             <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${item?.image}`} alt="image" className={styles.image_article} />
                         </div>
                     </Grid>
-                    <Grid size={{ xs: 12, md: 12, xl: 8 }}>
+                    <Grid size={{ xs: 12, sm: 8 }}>
                         <div className={styles.content}>
                             <Link className={styles.link_text} href={`/articles/${item.id}`}>
                                 <p className={styles.title}>

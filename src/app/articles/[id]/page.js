@@ -6,6 +6,7 @@ import Footer from '@/components/modules/Footer/Footer'
 import Comments from '@/components/templates/Articles/Comments/Comments'
 export default function mainArticle({ params }) {
     const idArticle = params.id
+    
     return (
         <>
             <Header />

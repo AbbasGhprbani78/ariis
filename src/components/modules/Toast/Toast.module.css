@@ -25,6 +25,7 @@
     transform: translateY(calc(100% + 30px));
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.25, 1.35);
     opacity: .5;
+    color: #fff;
 }
 
 .error_color {
@@ -66,7 +67,7 @@
 .error_icon,
 .warning_icon {
     color: #fff;
-    margin:0 20px;
+    margin: 0 20px;
 }
 
 /* Toast Texts */
@@ -78,6 +79,7 @@
 .toast_texts_right {
     padding-right: 0;
     padding-left: 30px;
+    color: #fff;
 }
 
 .toast_title {

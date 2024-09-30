@@ -9,6 +9,7 @@ import Toast from '@/components/modules/Toast/Toast';
 import { useRouter } from 'next/navigation';
 
 export default function Comments({ id }) {
+    
     const { t } = useTranslation();
     const router = useRouter();
 
@@ -45,7 +46,6 @@ export default function Comments({ id }) {
                 };
                 const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/comments/`, body);
                 if (res.status === 201) {
-                    console.log(res.data);
                     setShowToast(true);
                     setToastMessage({
                         type: "success",
