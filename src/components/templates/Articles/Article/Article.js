@@ -33,14 +33,14 @@ export default function Article({ id }) {
                 <Box sx={{ flexGrow: 1 }} >
                     <Grid container spacing={0} >
                         <Grid size={{ xs: 12, md: 5 }} className={styles.left_main}>
-                            <h1 className={styles.title}>{data?.title}</h1>
-                            <p className={styles.main_text}>
+                            <div className={styles.title}>{data?.title}</div>
+                            <div className={styles.main_text}>
                                 {
                                     language === "fa" ?
                                         data?.subject_farsi :
                                         data?.subject
                                 }
-                            </p>
+                            </div>
                         </Grid>
                         <Grid size={{ xs: 12, md: 7 }}>
                             <img src={`${data?.image}`} alt="image_article" className={styles.img_mainarticle} />
@@ -49,13 +49,13 @@ export default function Article({ id }) {
                 </Box>
             </div>
             <div className={styles.article_content}>
-                <p className={styles.text_content}>
+                <div className={styles.text_content}>
                     {
                         language == "fa" ?
                             data?.text_farsi :
                             data?.text
                     }
-                </p>
+                </div>
                 <div className={styles.user_profile}>
                     <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.user?.avatar}`} alt="image_profile" className={styles.img_profile} />
                     <div className={styles.user_texts}>

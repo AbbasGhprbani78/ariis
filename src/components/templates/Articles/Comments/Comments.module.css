@@ -4,10 +4,10 @@
     color: #fff;
 }
 
-.comment_container {
+/* .comment_container {
     max-height: 90vh;
     overflow-y: auto;
-}
+} */
 
 .comment_container::-webkit-scrollbar {
     width: 4px

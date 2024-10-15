@@ -20,6 +20,7 @@ export default function HeaderHome() {
     const { data, loading, error } = useSelector((state) => state.home);
 
     useEffect(() => {
+        
         if (typeof window !== 'undefined' && window.visualViewport) {
             const updateVisualHeight = () => {
                 document.documentElement.style.setProperty("--visual-height", `${window.visualViewport.height}px`);

@@ -232,10 +232,10 @@ body {
 }
 
 
-body {
+/* body {
     max-width: 1676px;
     margin: 0 auto;
-}
+} */
 
 button {
     all: unset;

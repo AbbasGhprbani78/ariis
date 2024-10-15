@@ -8,7 +8,7 @@ const en = {
     HeaderHome: "HeaderHome",
     Submit: "Submit",
     TryNow: "Try Now",
-    ViewMore: "ViewMore",
+    ViewMore: "View More",
     Name: "Name",
     EmailAddress: "Email Address",
     Message: "Message",
