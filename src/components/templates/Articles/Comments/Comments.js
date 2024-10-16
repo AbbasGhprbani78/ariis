@@ -9,7 +9,7 @@ import Toast from '@/components/modules/Toast/Toast';
 import { useRouter } from 'next/navigation';
 
 export default function Comments({ id }) {
-    
+
     const { t } = useTranslation();
     const router = useRouter();
 
@@ -26,42 +26,64 @@ export default function Comments({ id }) {
         text: ""
     });
 
+    
+    const [errors, setErrors] = useState({
+        user: "",
+        text: ""
+    });
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setCommentData((prevData) => ({
             ...prevData,
             [name]: value
         }));
+  
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: ""
+        }));
     };
 
     const sendComment = async (e) => {
         e.preventDefault();
 
-        if (commentData.user.trim() && commentData.text.trim()) {
-            try {
-                const body = {
-                    user: commentData.user,
-                    text: commentData.text,
-                    article: id
-                };
-                const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/comments/`, body);
-                if (res.status === 201) {
-                    setShowToast(true);
-                    setToastMessage({
-                        type: "success",
-                        title: t("success"),
-                        message: t("commentsendsuccessfully"),
-                    });
-                    setCommentData({
-                        user: "",
-                        text: ""
-                    });
+        let newErrors = {};
+        if (!commentData.user.trim()) {
+            newErrors.user = t("Name is required");
+        }
+        if (!commentData.text.trim()) {
+            newErrors.text = t("Comment is required");
+        }
 
-                    router.push(`/articles/${id}`);
-                }
-            } catch (error) {
-                console.log(error);
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        try {
+            const body = {
+                user: commentData.user,
+                text: commentData.text,
+                article: id
+            };
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/comments/`, body);
+            if (res.status === 201) {
+                setShowToast(true);
+                setToastMessage({
+                    type: "success",
+                    title: t("success"),
+                    message: t("commentsendsuccessfully"),
+                });
+                setCommentData({
+                    user: "",
+                    text: ""
+                });
+
+                router.push(`/articles/${id}`);
             }
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -88,6 +110,7 @@ export default function Comments({ id }) {
                         className={styles.input_name_comment}
                         autoComplete='off'
                     />
+                    {errors.user && <p className={styles.error_message}>{errors.user}</p>}
                 </div>
                 <div className={styles.input_wrapper}>
                     <p>{t("Comment")}</p>
@@ -100,6 +123,7 @@ export default function Comments({ id }) {
                         autoComplete='off'
                     >
                     </textarea>
+                    {errors.text && <p className={styles.error_message}>{errors.text}</p>}
                 </div>
                 <button type='submit' className={styles.btn}>{t("Send")}</button>
             </form>

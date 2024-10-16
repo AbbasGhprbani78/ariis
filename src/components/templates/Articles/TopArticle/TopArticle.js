@@ -4,6 +4,7 @@ import styles from './TopArticle.module.css'
 import { useLanguage } from '@/context/LangContext'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
+import DOMPurify from 'dompurify'
 export default function TopArticle() {
 
     const { language } = useLanguage()
@@ -69,20 +70,17 @@ export default function TopArticle() {
                                             </div>
                                         </div>
                                         <Link href={`/articles/${filterArticles[0].id}`} className={styles.texts_first_article}>
-                                            <p className={styles.first_article_title}>
-                                                {
-                                                    language === "fa" ?
-                                                        `${filterArticles[0]?.title_farsi}` :
-                                                        `${filterArticles[0]?.title}`
-                                                }
-                                            </p>
-                                            <p className={styles.first_article_text}>
-                                                {
-                                                    language === "fa" ?
-                                                        truncateText(filterArticles[0]?.text_farsi, 150) :
-                                                        truncateText(filterArticles[0]?.text, 150)
-                                                }
-                                            </p>
+                                            <div className={styles.first_article_title} dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(language === "fa" ?
+                                                    `${filterArticles[0]?.title_farsi}` :
+                                                    `${filterArticles[0]?.title}`
+                                                ) }}>
+                                            </div>
+                                            <div className={styles.first_article_text} dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(language === "fa" ?
+                                                    truncateText(filterArticles[0]?.text_farsi, 150) :
+                                                    truncateText(filterArticles[0]?.text, 150)) }}>
+                                            </div>
                                         </Link>
                                     </div>
                                 </div>
@@ -108,20 +106,17 @@ export default function TopArticle() {
                                         </div>
                                     </div>
                                     <Link href={`/articles/${filterArticles[1].id}`} className={styles.texts_wrapper}>
-                                        <p className={styles.user_title}>
-                                            {
+                                        <div className={styles.user_title} dangerouslySetInnerHTML={{
+                                            __html: DOMPurify.sanitize(
                                                 language === "fa" ?
                                                     `${filterArticles[1]?.title_farsi}` :
-                                                    `${filterArticles[1]?.title}`
-                                            }
-                                        </p>
-                                        <p className={styles.user_text}>
-                                            {
-                                                language === "fa" ?
-                                                    truncateText(filterArticles[1].text_farsi, 150) :
-                                                    truncateText(filterArticles[1].text, 150)
-                                            }
-                                        </p>
+                                                    `${filterArticles[1]?.title}`) }}>
+                                        </div>
+                                        <div className={styles.user_text} dangerouslySetInnerHTML={{
+                                            __html: DOMPurify.sanitize(language === "fa" ?
+                                                truncateText(filterArticles[1].text_farsi, 150) :
+                                                truncateText(filterArticles[1].text, 150)) }}>
+                                        </div>
                                     </Link>
                                 </div>
                                 <div className={`${styles.item} ${styles.item_3}`}>
@@ -146,21 +141,16 @@ export default function TopArticle() {
                                         </div>
                                     </div>
                                     <Link href={`/articles/${filterArticles[2].id}`} className={styles.texts_wrapper}>
-                                        <p className={styles.user_title}>
-                                            {
-
-                                                language === "fa" ?
-                                                    `${filterArticles[2]?.title_farsi}` :
-                                                    `${filterArticles[2]?.title}`
-                                            }
-                                        </p>
-                                        <p className={styles.user_text}>
-                                            {
-                                                language === "fa" ?
-                                                    truncateText(filterArticles[2].text_farsi, 150) :
-                                                    truncateText(filterArticles[2].text, 150)
-                                            }
-                                        </p>
+                                        <div className={styles.user_title} dangerouslySetInnerHTML={{
+                                            __html: DOMPurify.sanitize(language === "fa" ?
+                                                `${filterArticles[2]?.title_farsi}` :
+                                                `${filterArticles[2]?.title}`) }}>
+                                        </div>
+                                        <div className={styles.user_text} dangerouslySetInnerHTML={{
+                                            __html: DOMPurify.sanitize(language === "fa" ?
+                                                truncateText(filterArticles[2].text_farsi, 150) :
+                                                truncateText(filterArticles[2].text, 150)) }}>
+                                        </div>
                                     </Link>
                                 </div>
                                 <div className={`${styles.item} ${styles.item_4}`}>
@@ -204,20 +194,16 @@ export default function TopArticle() {
                                     <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[0].image}`} alt="image_article" />
                                     <div className={styles.firstarticle_content}>
                                         <Link href={`/articles/${filterArticles[0].id}`} className={styles.texts_first_article}>
-                                            <p className={styles.first_article_title}>
-                                                {
-                                                    language === "fa" ?
-                                                        `${filterArticles[0]?.title_farsi}` :
-                                                        `${filterArticles[0]?.title}`
-                                                }
-                                            </p>
-                                            <p className={styles.first_article_text}>
-                                                {
-                                                    language === "fa" ?
-                                                        truncateText(filterArticles[0]?.text_farsi, 150) :
-                                                        truncateText(filterArticles[0]?.text, 150)
-                                                }
-                                            </p>
+                                            <div className={styles.first_article_title} dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(language === "fa" ?
+                                                    `${filterArticles[0]?.title_farsi}` :
+                                                    `${filterArticles[0]?.title}`)}}>
+                                            </div>
+                                            <div className={styles.first_article_text} dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(language === "fa" ?
+                                                    truncateText(filterArticles[0]?.text_farsi, 150) :
+                                                    truncateText(filterArticles[0]?.text, 150)) }}>
+                                            </div>
                                         </Link>
                                     </div>
                                 </div>
@@ -250,20 +236,16 @@ export default function TopArticle() {
                                     <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[1].image}`} alt="image_article" />
                                     <div className={styles.firstarticle_content}>
                                         <Link href={`/articles/${filterArticles[1].id}`} className={styles.texts_first_article}>
-                                            <p className={styles.first_article_title}>
-                                                {
-                                                    language === "fa" ?
-                                                        `${filterArticles[1]?.title_farsi}` :
-                                                        `${filterArticles[1]?.title}`
-                                                }
-                                            </p>
-                                            <p className={styles.first_article_text}>
-                                                {
-                                                    language === "fa" ?
-                                                        truncateText(filterArticles[1]?.text_farsi, 150) :
-                                                        truncateText(filterArticles[1]?.text, 150)
-                                                }
-                                            </p>
+                                            <div className={styles.first_article_title} dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(language === "fa" ?
+                                                    `${filterArticles[1]?.title_farsi}` :
+                                                    `${filterArticles[1]?.title}`) }}>
+                                            </div>
+                                            <div className={styles.first_article_text} dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(language === "fa" ?
+                                                    truncateText(filterArticles[1]?.text_farsi, 150) :
+                                                    truncateText(filterArticles[1]?.text, 150)) }}>
+                                            </div>
                                         </Link>
                                     </div>
                                 </div>
@@ -296,20 +278,17 @@ export default function TopArticle() {
                                     <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${filterArticles[2].image}`} alt="image_article" />
                                     <div className={styles.firstarticle_content}>
                                         <Link href={`/articles/${filterArticles[2].id}`} className={styles.texts_first_article}>
-                                            <p className={styles.first_article_title}>
-                                                {
-                                                    language === "fa" ?
-                                                        `${filterArticles[2]?.title_farsi}` :
-                                                        `${filterArticles[2]?.title}`
-                                                }
-                                            </p>
-                                            <p className={styles.first_article_text}>
-                                                {
-                                                    language === "fa" ?
-                                                        truncateText(filterArticles[2]?.text_farsi, 150) :
-                                                        truncateText(filterArticles[2]?.text, 150)
-                                                }
-                                            </p>
+                                            <div className={styles.first_article_title} dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(language === "fa" ?
+                                                    `${filterArticles[2]?.title_farsi}` :
+                                                    `${filterArticles[2]?.title}`) }}>
+                                               
+                                            </div>
+                                            <div className={styles.first_article_text} dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(language === "fa" ?
+                                                    truncateText(filterArticles[2]?.text_farsi, 150) :
+                                                    truncateText(filterArticles[2]?.text, 150)) }}>
+                                            </div>
                                         </Link>
                                     </div>
                                 </div>

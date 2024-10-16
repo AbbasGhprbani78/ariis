@@ -8,13 +8,14 @@ import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import { useLanguage } from '@/context/LangContext';
 import axios from 'axios';
 import Link from 'next/link';
+import DOMPurify from 'dompurify'
 
 export default function Article({ item }) {
     const { language } = useLanguage()
     const [like, setLike] = useState()
     const [ip, setIp] = useState("");
 
-   
+
 
     useEffect(() => {
         setLike(item.has_liked)
@@ -66,22 +67,10 @@ export default function Article({ item }) {
                     <Grid size={{ xs: 12, sm: 8 }}>
                         <div className={styles.content}>
                             <Link className={styles.link_text} href={`/articles/${item.id}`}>
-                                <p className={styles.title}>
-                                    {
-                                        language === "fa" ?
+                                <div className={styles.title} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(language === "fa" ? item?.title_farsi : item?.title) }}>
+                                </div>
 
-                                            item?.title_farsi :
-                                            item?.title
-                                    }
-                                </p>
-
-                                <p className={styles.text}>
-                                    {
-                                        language === "fa" ?
-                                            truncateText(item?.text_farsi, 150) :
-                                            truncateText(item?.text, 150)
-                                    }
-                                </p>
+                                <div className={styles.text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(language === "fa" ? truncateText(item?.text_farsi, 150) : truncateText(item?.text, 150)) }}></div>
                             </Link>
                             <div className={styles.user_info}>
                                 <div className={styles.user_profile}>

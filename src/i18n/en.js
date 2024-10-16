@@ -30,7 +30,9 @@ const en = {
     YouMightLike: "You Might Like",
     commentsendsuccessfully: "Comment Send Successfully",
     success: "Success",
-    error:"Error",
+    error: "Error",
+    Nameisrequired: "Name is required",
+    Commentisrequired: "Comment is required",
     des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 }
 

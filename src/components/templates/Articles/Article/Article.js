@@ -8,6 +8,7 @@ import { useLanguage } from '@/context/LangContext';
 import { getDataArticle } from '@/redux/article';
 import Loading from '@/components/modules/Loading/Loading';
 import Error from '@/components/modules/Error/Error';
+import DOMPurify from 'dompurify'
 
 export default function Article({ id }) {
 
@@ -18,7 +19,7 @@ export default function Article({ id }) {
     useEffect(() => {
         dispatch(getDataArticle(id))
     }, [language])
-    
+
     if (loading) {
         return <Loading />;
     }
@@ -33,13 +34,8 @@ export default function Article({ id }) {
                 <Box sx={{ flexGrow: 1 }} >
                     <Grid container spacing={0} >
                         <Grid size={{ xs: 12, md: 5 }} className={styles.left_main}>
-                            <div className={styles.title}>{data?.title}</div>
-                            <div className={styles.main_text}>
-                                {
-                                    language === "fa" ?
-                                        data?.subject_farsi :
-                                        data?.subject
-                                }
+                            <div className={styles.title} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.title)}}></div>
+                            <div className={styles.main_text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(language === "fa" ? data?.subject_farsi : data?.subject) }}>
                             </div>
                         </Grid>
                         <Grid size={{ xs: 12, md: 7 }}>
@@ -49,12 +45,7 @@ export default function Article({ id }) {
                 </Box>
             </div>
             <div className={styles.article_content}>
-                <div className={styles.text_content}>
-                    {
-                        language == "fa" ?
-                            data?.text_farsi :
-                            data?.text
-                    }
+                <div className={styles.text_content} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(language == "fa" ? data?.text_farsi : data?.text) }}>
                 </div>
                 <div className={styles.user_profile}>
                     <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.user?.avatar}`} alt="image_profile" className={styles.img_profile} />

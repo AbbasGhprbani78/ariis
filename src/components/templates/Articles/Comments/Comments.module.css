@@ -74,7 +74,11 @@
 
 .comment_title {
     font-family: 700;
+}
 
+.error_message {
+    color: var(--color-6);
+    margin-top: 15px;
 }
 
 @media (max-width:1025px) {

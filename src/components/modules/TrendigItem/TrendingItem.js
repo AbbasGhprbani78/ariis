@@ -3,18 +3,17 @@ import React from 'react'
 import styles from './TrendingItem.module.css'
 import { useLanguage } from '@/context/LangContext'
 import Link from 'next/link'
+import DOMPurify from 'dompurify'
 export default function TrendingItem({ trend }) {
     const { language } = useLanguage()
     return (
         <div className={`${styles.trending_item} ${language == 'fa' && styles.trending_item_right}`}>
             <Link href={`/articles/${trend?.id}`} className={styles.link_article}>
-                <p className={styles.title_trending}>
-                    {
-                        language === "fa" ?
-                            trend?.title_farsi :
-                            trend?.title
-                    }
-                </p>
+                <div className={styles.title_trending} dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(language === "fa" ?
+                        trend?.title_farsi :
+                        trend?.title) }}>
+                </div>
             </Link>
             <div className={styles.user_info}>
                 <div className={styles.user_left}>
