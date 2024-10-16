@@ -63,13 +63,17 @@ export default function Offcanvas() {
                 }}
             >
                 <List sx={{ padding: "10px" }}>
-                    <ListItemButton className={`${styles.link_item} ${isActive("/") && styles.active_route}`}>
+                    <ListItemButton className={`${styles.link_item} ${isActive("/") && styles.active_route}`} sx={{
+                        padding: ".8rem 0",
+                        marginTop: "1rem"
+                    }}>
                         <Link className={styles.link_offcanvas} href={"/"}>{t("Home")}</Link>
                     </ListItemButton>
                     <ListItemButton className={`${styles.link_item}`} onClick={handleDropdownToggle} sx={{
                         display: "flex",
-                        justifyContent: "space-between"
-
+                        justifyContent: "space-between",
+                        padding: ".8rem 0",
+                        marginTop: "1rem"
                     }}>
                         <li className={styles.products_wrapper}>{t("Products")}</li>
                         {dropdownOpen ? <ExpandLess /> : <ExpandMore />}
@@ -80,20 +84,29 @@ export default function Offcanvas() {
                                 data &&
                                 data.length > 0 &&
                                 data.map(item => (
-                                    <ListItemButton key={item.id} sx={{ pl: 4 }} className={`${styles.link_item} `}>
+                                    <ListItemButton key={item.id} sx={{ pl: 4, padding: ".8rem 0", marginTop: "1rem" }} className={`${styles.link_item} `}>
                                         <Link className={styles.link_offcanvas} href={`/product/${item.id}`}>{item?.name}</Link>
                                     </ListItemButton>
                                 ))
                             }
                         </List>
                     </Collapse>
-                    <ListItemButton className={`${styles.link_item} ${isActive("/articles") && styles.active_route}`}>
+                    <ListItemButton className={`${styles.link_item} ${isActive("/articles") && styles.active_route}`} sx={{
+                        padding: ".8rem 0",
+                        marginTop: "1rem"
+                    }}>
                         <Link className={styles.link_offcanvas} href={"/articles"}>{t("Articles")}</Link>
                     </ListItemButton>
-                    <ListItemButton className={`${styles.link_item} ${isActive("/aboutus") && styles.active_route}`}>
+                    <ListItemButton className={`${styles.link_item} ${isActive("/aboutus") && styles.active_route}`} sx={{
+                        padding: ".8rem 0",
+                        marginTop: "1rem"
+                    }}>
                         <Link className={styles.link_offcanvas} href={"/aboutus"}>{t("AboutUs")}</Link>
                     </ListItemButton>
-                    <ListItemButton className={`${styles.link_item} ${isActive("/contactus") && styles.active_route}`}>
+                    <ListItemButton className={`${styles.link_item} ${isActive("/contactus") && styles.active_route}`} sx={{
+                        padding: ".8rem 0",
+                        marginTop: "1rem"
+                    }}>
                         <Link className={styles.link_offcanvas} href={"/contactus"}>{t("ContactUs")}</Link>
                     </ListItemButton>
                     <div className={styles.header_wrap_btn_switch}>
