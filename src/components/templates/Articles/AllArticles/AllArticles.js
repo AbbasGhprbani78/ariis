@@ -61,6 +61,8 @@ export default function AllArticles() {
     };
 
 
+
+    
     useEffect(
         () => {
             const fetchIp = async () => {
@@ -87,7 +89,6 @@ export default function AllArticles() {
     }, [language, ip]);
 
 
-   
 
     if (loading || loadingc) {
         return <Loading />;
@@ -104,7 +105,11 @@ export default function AllArticles() {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={4}>
                         <Grid size={{ xs: 12, md: 12, lg: 9 }}>
-                            <div className={`${styles.left_article} ${language === "fa" && styles.left_article_right}`}>
+                            <div className={
+                                `${styles.left_article} 
+                                ${language === "fa" && styles.left_article_right}
+                                `}
+                                >
                                 {filterArticles?.length > 0 &&
                                     filterArticles?.map((item) => <Article item={item} key={item.id} />)}
                             </div>

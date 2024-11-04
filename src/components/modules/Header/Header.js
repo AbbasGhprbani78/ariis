@@ -34,9 +34,9 @@ export default function Header() {
         dispatch(getProjectsTitle(language));
     }, [dispatch, language]);
 
-    
+
     const handleLanguageSwitch = (lang) => {
-        if (pathname.startsWith("/articles/")) {  
+        if (pathname.startsWith("/articles/")) {
             router.push("/articles")
         }
         changeLanguage(lang);
@@ -52,54 +52,57 @@ export default function Header() {
                     </>
                 ) : (
                     <>
-                        <div className={styles.header_logo}>
-                            <Image src={"/images/logo.svg"} width={70} height={33} alt="logo" />
+                            <div className={styles.section_one_header}>
+                            <div className={styles.header_logo}>
+                                <Image src={"/images/logo.svg"} width={70} height={33} alt="logo" />
+                            </div>
+                            <nav className={styles.header_menu}>
+                                <Link
+                                    className={`${styles.header_link} ${isActive("/") && styles.active_route}`}
+                                    href="/"
+                                >
+                                    {t("Home")}
+                                </Link>
+                                <li className={styles.header_items_wrapper}>
+                                    <div className={styles.header_dropdown}>
+                                        <span className={styles.products_text}>{t("Products")}</span>
+                                        <ExpandMoreIcon className={styles.icon_drop} />
+                                    </div>
+                                    <ul className={styles.drop}>
+                                        {data &&
+                                            data.length > 0 &&
+                                            data.map((item) => (
+                                                <Link
+                                                    key={item.id}
+                                                    className={`${styles.product_link}  ${language === "fa" && styles.right_product_link}`}
+                                                    href={`/product/${item.id}`}
+                                                >
+                                                    {item.name}
+                                                </Link>
+                                            ))}
+                                    </ul>
+                                </li>
+                                <Link
+                                    className={`${styles.header_link} ${isActive("/articles") && styles.active_route}`}
+                                    href="/articles"
+                                >
+                                    {t("Articles")}
+                                </Link>
+                                <Link
+                                    className={`${styles.header_link} ${isActive("/aboutus") && styles.active_route}`}
+                                    href="/aboutus"
+                                >
+                                    {t("AboutUs")}
+                                </Link>
+                                <Link
+                                    className={`${styles.header_link} ${isActive("/contactus") && styles.active_route}`}
+                                    href="/contactus"
+                                >
+                                    {t("ContactUs")}
+                                </Link>
+                            </nav>
                         </div>
-                        <nav className={styles.header_menu}>
-                            <Link
-                                className={`${styles.header_link} ${isActive("/") && styles.active_route}`}
-                                href="/"
-                            >
-                                {t("Home")}
-                            </Link>
-                            <li className={styles.header_items_wrapper}>
-                                <div className={styles.header_dropdown}>
-                                    <span className={styles.products_text}>{t("Products")}</span>
-                                    <ExpandMoreIcon className={styles.icon_drop} />
-                                </div>
-                                <ul className={styles.drop}>
-                                    {data &&
-                                        data.length > 0 &&
-                                        data.map((item) => (
-                                            <Link
-                                                key={item.id}
-                                                className={`${styles.product_link}  ${language === "fa" && styles.right_product_link}`}
-                                                href={`/product/${item.id}`}
-                                            >
-                                                {item.name}
-                                            </Link>
-                                        ))}
-                                </ul>
-                            </li>
-                            <Link
-                                className={`${styles.header_link} ${isActive("/articles") && styles.active_route}`}
-                                href="/articles"
-                            >
-                                {t("Articles")}
-                            </Link>
-                            <Link
-                                className={`${styles.header_link} ${isActive("/aboutus") && styles.active_route}`}
-                                href="/aboutus"
-                            >
-                                {t("AboutUs")}
-                            </Link>
-                            <Link
-                                className={`${styles.header_link} ${isActive("/contactus") && styles.active_route}`}
-                                href="/contactus"
-                            >
-                                {t("ContactUs")}
-                            </Link>
-                        </nav>
+
                         <div className={styles.header_actions}>
                             <div className={styles.header_wrap_btn_switch}>
                                 <button
@@ -115,7 +118,7 @@ export default function Header() {
                                     Fa
                                 </button>
                             </div>
-                            <Button text={t("ContactUs")} icon={EastIcon} />
+                            {/* <Button text={t("ContactUs")} icon={EastIcon} /> */}
                         </div>
                     </>
                 )}

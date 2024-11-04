@@ -15,14 +15,6 @@ import Error from '@/components/modules/Error/Error';
 import axios from 'axios';
 
 
-const datac = [
-    { name: '1', value: 40, color: '#CCFFEE' },
-    { name: '2', value: 10, color: '#f2f3f5' },
-    { name: '3', value: 10, color: '#afc8c0' },
-    { name: '4', value: 25, color: '#fd9b56' },
-    { name: '5', value: 15, color: '#f1a07e' },
-];
-
 export default function OurTeam() {
 
     const { t } = useTranslation()
@@ -34,7 +26,7 @@ export default function OurTeam() {
 
     const convertToFarsiDigits = (number) => {
         const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-        return number.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
+        return number?.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
     };
 
     const getDataChart = async () => {
@@ -47,9 +39,9 @@ export default function OurTeam() {
     }
 
     const chartData = dataChart[0]?.map((item) => ({
-        name: item.name,
-        value: parseInt(item.count),
-        color: item.name,
+        name: item?.name,
+        value: parseInt(item?.count),
+        color: item?.name,
     })) || [];
 
     useEffect(() => {

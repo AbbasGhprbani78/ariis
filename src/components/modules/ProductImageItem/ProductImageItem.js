@@ -18,13 +18,16 @@ export default function ProductImageItem({ img, style, children }) {
         <div className={styles.img_wrapper} data-aos="flip-left">
             <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${img}`} alt="product" />
             {children}
-            {/* <div className={`${language === "fa" ? styles.btn1_wrapper_right : styles.btn1_wrapper}`}>
+          
+        </div>
+    )
+}
+
+
+{/* <div className={`${language === "fa" ? styles.btn1_wrapper_right : styles.btn1_wrapper}`}>
                 <Button
                     text={t("ViewMore")}
                     icon={EastIcon}
                     style={style}
                 />
             </div> */}
-        </div>
-    )
-}

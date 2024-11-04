@@ -46,11 +46,11 @@ export default function Info() {
                 language === "en" ?
                   <div className={styles.info_logo}> <Image src={"/images/logo.svg"} width={100} height={63} alt='logo' /></div>
                   :
-                  <p className={styles.ariis_text}>آریس</p>
+                  <p className={styles.ariis_text}> {data?.title_image_one}</p>
               }
 
               <p className={styles.text_info}>
-                {data?.name}
+                {data?.text_image_one}
               </p>
             </div>
           </Grid>

@@ -101,12 +101,12 @@ export default function ContactUs() {
     return (
       <div className={styles.contactus_container}>
         <Box sx={{ flexGrow: 1 }}>
+          <p className={`${styles.contactus_title} ${styles.contactus_form} ${language === "fa" && styles.contactus_form_right}`}>
+            {t("ContactUs")}
+          </p>
           <Grid container spacing={10}>
             <Grid size={{ xs: 12, md: 7 }} >
               <div className={`${styles.contactus_form} ${language === "fa" && styles.contactus_form_right}`}>
-                <p className={styles.contactus_title}>
-                  {t("ContactUs")}
-                </p>
                 <form className={styles.form} onSubmit={sendData}>
                   <Box sx={{ flexGrow: 1 }}>
                     <Grid container rowSpacing={7} columnSpacing={4}>
@@ -146,39 +146,41 @@ export default function ContactUs() {
               </div>
             </Grid>
             <Grid size={{ xs: 12, md: 5 }} >
-              <div className={styles.contactus_socialmedia}>
-                <div className={styles.media_item}>
-                  <LocationOnOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_loc}`} />
-                  <p className={styles.text_media}>
+              <div className={styles.wrap_left_contactus}>
+                <div className={styles.contactus_socialmedia}>
+                  <div className={styles.media_item}>
+                    <LocationOnOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_loc}`} />
+                    <p className={styles.text_media}>
+                      {
+                        language === "en" ?
+                          data && data[0]?.address :
+                          data && data[0].address_farsi
+                      }
+
+                    </p>
+                  </div>
+                  <div className={styles.media_item}>
+                    <LocalPhoneOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_phone}`} />
+                    <p className={styles.text_media} style={{ direction: "ltr", width: "max-content" }}> {language === "fa" ? convertToFarsiDigits(data && data[0]?.phone_number) : data && data[0]?.phone_number}</p>
+                  </div>
+                  <div className={styles.media_item}>
+                    <MailOutlineOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_email}`} />
+                    <p className={styles.text_media}>
+                      {data && data[0]?.email}
+                    </p>
+                  </div>
+                  <div className={styles.media_item}>
                     {
-                      language === "en" ?
-                        data && data[0]?.address :
-                        data && data[0].address_farsi
+                      data && data[0] &&
+                      <>
+                        <MediaItem icon={InstagramIcon} url_link={`https://www.instagram.com/${data[0].instagram}`} />
+                        <MediaItem icon={TelegramIcon} url_link={`https://t.me/${data[0].telegram}`} />
+                        <MediaItem icon={WhatsAppIcon} url_link={`https://wa.me/${data[0].whatsapp}`} />
+                        <MediaItem icon={LinkedInIcon} url_link={`https://www.linkedin.com/in/${data[0].linkedin}`} />
+                      </>
                     }
 
-                  </p>
-                </div>
-                <div className={styles.media_item}>
-                  <LocalPhoneOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_phone}`} />
-                  <p className={styles.text_media} style={{ direction: "ltr", width: "max-content" }}> {language === "fa" ? convertToFarsiDigits(data && data[0]?.phone_number) : data && data[0]?.phone_number}</p>
-                </div>
-                <div className={styles.media_item}>
-                  <MailOutlineOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media}${styles.icon_email}`} />
-                  <p className={styles.text_media}>
-                    {data && data[0]?.email}
-                  </p>
-                </div>
-                <div className={styles.media_item}>
-                  {
-                    data && data[0] &&
-                    <>
-                      <MediaItem icon={InstagramIcon} url_link={`https://www.instagram.com/${data[0].instagram}`} />
-                      <MediaItem icon={TelegramIcon} url_link={`https://t.me/${data[0].telegram}`} />
-                      <MediaItem icon={WhatsAppIcon} url_link={`https://wa.me/${data[0].whatsapp}`} />
-                      <MediaItem icon={LinkedInIcon} url_link={`https://www.linkedin.com/in/${data[0].linkedin}`} />
-                    </>
-                  }
-
+                  </div>
                 </div>
               </div>
             </Grid>

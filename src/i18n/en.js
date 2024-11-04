@@ -1,13 +1,13 @@
 
 const en = {
     Home: "Home",
-    Products: "Products",
+    Products: "Services",
     Articles: "Articles",
     AboutUs: "About Us",
     ContactUs: "Contact Us",
     HeaderHome: "HeaderHome",
     Submit: "Submit",
-    TryNow: "Try Now",
+    TryNow: "See More",
     ViewMore: "View More",
     Name: "Name",
     EmailAddress: "Email Address",
