@@ -1,7 +1,8 @@
+"use client"
 import React from 'react'
 import styles from './Coustomers.module.css'
 import CoustomerItem from '@/components/modules/CoustomerItem/CoustomerItem';
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 export default function Coustomers() {
 
 

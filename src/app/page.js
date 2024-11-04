@@ -1,4 +1,4 @@
-"use client"
+
 import styles from "./page.module.css";
 import Header from "@/components/modules/Header/Header";
 import HeaderHome from "@/components/templates/Home/HeaderHome/HeaderHome";
@@ -8,8 +8,6 @@ import Slider from "@/components/templates/Home/Slider/Slider";
 import ContactUs from "@/components/templates/Home/ContactUs/ContactUs";
 import Coustomers from "@/components/templates/Home/Coustomers/Coustomers";
 import Footer from "@/components/modules/Footer/Footer";
-import axios from "axios";
-
 
 export default function Home() {
 

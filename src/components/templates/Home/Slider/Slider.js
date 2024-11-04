@@ -48,11 +48,12 @@ export default function Slider() {
       <Swiper
         ref={swiperRef}
         modules={[Autoplay]}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={data?.projects.length > 1}
         slidesPerView={1}
         className={styles.swiper_slider}
         dir='ltr'
+        
       >
         {
           width < 1024 ?
@@ -101,7 +102,7 @@ export default function Slider() {
                           {truncateText(project?.text_home, 200)}
 
                         </p>
-                        <Button icon={EastIcon} text={t('TryNow')} link={`/product/${project?.project_id}`} />
+                        <Button  text={t('TryNow')} link={`/product/${project?.project_id}`} />
                       </div>
                     </div>
                   </SwiperSlide>
@@ -128,7 +129,6 @@ export default function Slider() {
             <KeyboardArrowLeftIcon className={styles.arrowIcon} /> :
             <KeyboardArrowRightIcon className={styles.arrowIcon} />
           }
-
         </button>
       </div>
     </div>

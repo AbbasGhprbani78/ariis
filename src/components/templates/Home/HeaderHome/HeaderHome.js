@@ -19,6 +19,8 @@ export default function HeaderHome() {
 
     const { data, loading, error } = useSelector((state) => state.home);
 
+    // console.log(data)
+
     useEffect(() => {
         
         if (typeof window !== 'undefined' && window.visualViewport) {
@@ -46,9 +48,9 @@ export default function HeaderHome() {
                             <p className={styles.text}>
                                 {data?.header_text}
                             </p>
-                            <div className={`${styles.btn_wrapper} ${language === "fa" && styles.btn_wrapper_right}`}>
+                            {/* <div className={`${styles.btn_wrapper} ${language === "fa" && styles.btn_wrapper_right}`}>
                                 <Button text={t("TryNow")} icon={EastIcon} />
-                            </div>
+                            </div> */}
                         </div>
 
                     </> :
@@ -61,10 +63,10 @@ export default function HeaderHome() {
                                 <p className={styles.text}>
                                     {data?.header_text}
                                     <div className={`${styles.btn_wrapper} ${language === "fa" && styles.btn_wrapper_right}`}>
-                                        <button className={`${styles.btn_sec1} ${language === "fa" && styles.btn_right}`}>
+                                        {/* <button className={`${styles.btn_sec1} ${language === "fa" && styles.btn_right}`}>
                                             {t("TryNow")}
                                             <EastIcon className={`${styles.icon_east} ${language == "fa" && styles.east_right}`} />
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </p>
                             </div>
