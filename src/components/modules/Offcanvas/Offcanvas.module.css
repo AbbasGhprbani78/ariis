@@ -25,9 +25,9 @@
 }
 
 .link_item {
-    padding-top: .8rem !important;
-    padding-bottom: .8rem !important;
-    margin-top: 1rem !important;
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+    margin-top: 1rem;
 }
 
 .active_route {
