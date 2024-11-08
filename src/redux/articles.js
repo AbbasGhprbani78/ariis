@@ -7,7 +7,6 @@ export const getDataArticles = createAsyncThunk(
         const body = {
             user: ip
         }
-        // console.log(ip)
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/custom/`, body);
         return response.data;
     }

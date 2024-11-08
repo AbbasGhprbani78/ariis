@@ -19,7 +19,7 @@
 .product_title {
     color: var(--color-1);
     font-weight: 600;
-    font-size: calc(1.3rem + .6vw);
+    font-size: calc(1.1rem + .6vw);
     width: 50%;
     margin: 3rem 0 3rem 0;
     line-height: 48px;
@@ -61,8 +61,9 @@
     }
 
     .product_title {
-        width: 80%;
+        width: 100%;
         margin: 2rem 0 4rem 0;
+        text-align: justify;
     }
 
     .btn_wrapper {

@@ -48,10 +48,6 @@
     margin-right: 5px;
 }
 
-.wrap_left_contactus {
-    display: flex;
-    justify-content: center;
-}
 
 .contactus_socialmedia {
     display: flex;
@@ -64,8 +60,6 @@
     align-items: start;
     margin-bottom: 2.6rem;
 }
-
-
 
 .text_media {
     line-height: 20px;
@@ -81,6 +75,14 @@
     transform: rotate(180deg);
     margin-left: 0;
     margin-right: 5px;
+}
+
+
+@media (min-width:900px) {
+    .wrap_left_contactus {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media (max-width:900px) {

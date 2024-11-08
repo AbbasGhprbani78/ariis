@@ -6,14 +6,15 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import Toast from '@/components/modules/Toast/Toast';
-import { useRouter } from 'next/navigation';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 
 export default function Comments({ id }) {
 
     const { t } = useTranslation();
-    const router = useRouter();
+    const [showAll, setShowAll] = useState(false);
 
-    const { data, loading, error } = useSelector((state) => state.article);
+    const { data } = useSelector((state) => state.article);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState({
         type: "",
@@ -26,7 +27,7 @@ export default function Comments({ id }) {
         text: ""
     });
 
-    
+
     const [errors, setErrors] = useState({
         user: "",
         text: ""
@@ -38,7 +39,7 @@ export default function Comments({ id }) {
             ...prevData,
             [name]: value
         }));
-  
+
         setErrors((prevErrors) => ({
             ...prevErrors,
             [name]: ""
@@ -80,23 +81,44 @@ export default function Comments({ id }) {
                     text: ""
                 });
 
-                router.push(`/articles/${id}`);
+                location.reload()
             }
         } catch (error) {
             console.log(error);
         }
     };
 
+
+    const handleShowMoreClick = () => {
+        setShowAll((prev) => !prev);
+    }
+
     return (
         <div className={styles.comment_wrapper}>
-            <p className={styles.comment_title}>Comments</p>
+            <p className={styles.comment_title}>{t("Comments")}</p>
             <div className={styles.comment_container}>
                 {
                     data?.comments?.length > 0 &&
-                    data?.comments.slice().reverse().map((item) => (
-                        <CommentItem key={item.id} comment={item} />
-                    ))
+                        !showAll ?
+                        data?.comments.slice().reverse().slice(0, 3).map((item) => (
+                            <CommentItem key={item.id} comment={item} />
+                        )) :
+                        data?.comments.slice().reverse().map((item) => (
+                            <CommentItem key={item.id} comment={item} />
+                        ))
                 }
+                {
+                    data?.comments?.length > 3 &&
+                    <div className={styles.wrap_btn_show}>
+                        <button className={styles.show_more_btn} onClick={handleShowMoreClick}>
+                            {
+                                showAll ? t("ShowLess") : t("ShowMore")
+                            }
+                            <KeyboardArrowDownIcon />
+                        </button>
+                    </div>
+                }
+
             </div>
             <p className={styles.comment_title}>{t("commentTitle")}</p>
             <form onSubmit={sendComment} className={styles.send_comment_form}>
@@ -127,6 +149,7 @@ export default function Comments({ id }) {
                 </div>
                 <button type='submit' className={styles.btn}>{t("Send")}</button>
             </form>
+
             <Toast
                 type={toastMessage.type}
                 title={toastMessage.title}

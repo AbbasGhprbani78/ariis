@@ -39,7 +39,7 @@ export default function Info() {
   return (
     <div className={styles.Info_container}>
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
           <Grid size={{ xs: 12, md: 6 }} >
             <div className={`${styles.text_info_wrapper} ${language === "fa" && styles.text_info_right}`}>
               {
@@ -58,8 +58,22 @@ export default function Info() {
             display: 'flex',
             justifyContent: "center"
           }}>
-            <div data-aos="fade-up" className={styles.img_wrapper}>
-              <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.image_one}`} alt='mobile in hand' />
+            <div className={styles.images_wrapper}>
+              <div className={`${styles.item_image} ${styles.item_image_1}`}>
+                <Image src={'/images/2.png'} alt='info image' layout='fill'></Image>
+              </div>
+              <div className={`${styles.item_image} ${styles.item_image_2}`}>
+                <Image src={'/images/2.png'} alt='info image' layout='fill'></Image>
+              </div>
+              <div className={`${styles.item_image} ${styles.item_image_3}`}>
+                <Image src={'/images/2.png'} alt='info image' layout='fill'></Image>
+              </div>
+              <div className={`${styles.item_image} ${styles.item_image_4}`}>
+                <Image src={'/images/2.png'} alt='info image' layout='fill'></Image>
+              </div>
+              <div className={`${styles.item_image} ${styles.item_image_5}`}>
+                <Image src={'/images/2.png'} alt='info image' layout='fill'></Image>
+              </div>
             </div>
           </Grid>
         </Grid>

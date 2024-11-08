@@ -87,7 +87,7 @@ video {
     vertical-align: baseline;
 }
 
-/* HTML5 display-role reset for older browsers */
+
 
 article,
 aside,
@@ -232,10 +232,7 @@ body {
 }
 
 
-/* body {
-    max-width: 1676px;
-    margin: 0 auto;
-} */
+
 
 button {
     all: unset;
@@ -281,7 +278,23 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-/* globals.css */
+/* body {
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+}
+
+
+body {
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+} */
+
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
 .page-transition-enter {
     opacity: 0;
     transform: translateY(20px);

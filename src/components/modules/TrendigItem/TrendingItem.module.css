@@ -14,6 +14,7 @@
 .title_trending {
     margin-bottom: 1.5rem;
     line-height: 24px;
+    font-size: 1.2rem;
 }
 
 .user_info {
@@ -45,4 +46,9 @@
 .link_article {
     all: unset;
     cursor: pointer;
+}
+
+.trend_item {
+    text-decoration: none;
+    color: #000;
 }

@@ -21,7 +21,6 @@
 }
 
 .products_items {
-    padding: 0 24px;
     margin: 0 auto;
 }
 
@@ -52,7 +51,13 @@
     font-size: 1rem;
 }
 
-@media (max-width:1210px) {}
+
+
+@media (min-width:900px) {
+    .products_items {
+        padding: 0 24px;
+    }
+}
 
 @media (max-width:600px) {
 

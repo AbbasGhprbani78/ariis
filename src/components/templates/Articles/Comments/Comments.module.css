@@ -1,7 +1,7 @@
 .comment_wrapper {
     padding: 0 3.2rem;
     margin-top: 3.5rem;
-    color: #fff;
+    color: #000;
 }
 
 /* .comment_container {
@@ -66,6 +66,7 @@
 .btn {
     margin: 20px 0;
     background-color: #000;
+    color: #ffff;
     min-width: 130px;
     padding: 10px 0;
     text-align: center;
@@ -79,6 +80,17 @@
 .error_message {
     color: var(--color-6);
     margin-top: 15px;
+}
+
+.wrap_btn_show {
+    display: flex;
+    justify-content: center;
+}
+
+.show_more_btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 @media (max-width:1025px) {
@@ -100,6 +112,10 @@
 
     .send_comment_form {
         width: 100%;
+    }
+
+    .wrap_btn_show {
+        margin-bottom: 2rem;
     }
 }
 

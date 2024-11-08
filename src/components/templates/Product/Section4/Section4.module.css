@@ -88,4 +88,8 @@
         width: 95%;
         height: auto;
     }
+
+    .how_work_text {
+        text-align: justify;
+    }
 }

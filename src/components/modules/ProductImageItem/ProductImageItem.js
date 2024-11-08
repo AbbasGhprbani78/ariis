@@ -15,10 +15,9 @@ export default function ProductImageItem({ img, style, children }) {
         AOS.init();
     }, []);
     return (
-        <div className={styles.img_wrapper} data-aos="flip-left">
+        <div className={styles.img_wrapper} data-aos="fade-up">
             <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${img}`} alt="product" />
             {children}
-          
         </div>
     )
 }

@@ -7,6 +7,7 @@ import aboutus from "./aboutus";
 import articles from "./articles";
 import article from "./article";
 import category from "./category";
+import getIp from './getIp'
 const store = configureStore({
     reducer: {
         home: home,
@@ -16,7 +17,8 @@ const store = configureStore({
         aboutus: aboutus,
         articles: articles,
         article: article,
-        category: category
+        category: category,
+        getIp: getIp
     }
 })
 

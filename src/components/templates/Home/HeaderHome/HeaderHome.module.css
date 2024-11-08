@@ -1,8 +1,7 @@
-
 .header_home {
     height: var(--visual-height);
     width: 100%;
-    background: url("/images/hederback.png");
+    background: url("/images/2.png");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -102,7 +101,7 @@
 
 @media (max-width:1025px) {
     .header_home {
-        background: url("/images/hederback.png");
+        background: url("/images/2.png");
         background-size: 100% 100%;
         background-position: center;
         background-repeat: no-repeat;

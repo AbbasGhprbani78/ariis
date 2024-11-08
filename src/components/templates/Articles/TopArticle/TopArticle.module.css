@@ -12,6 +12,7 @@
 }
 
 .item {
+    text-decoration: none;
     height: 80px;
     border-radius: var(--border-redi2);
     overflow: hidden;
@@ -120,6 +121,7 @@
 .user_title {
     font-weight: 700;
     margin-bottom: 2rem;
+    font-size: 1.5rem;
 }
 
 .user_text {}
@@ -161,7 +163,7 @@
 .top_text {
     font-weight: 700;
     font-size: calc(2rem + .8rem);
-    color: #fff;
+    color: #000;
 }
 
 .f_article {
@@ -194,8 +196,11 @@
 
 .link_article_right:not(:nth-child(1)) {
     all: unset;
-    margin-left: 0%;
     margin-right: -30px;
+}
+
+.circle_right:hover {
+    transform: translateY(-10px);
 }
 
 .circle:hover {
@@ -314,6 +319,8 @@
         display: block;
     }
 
+
+
     .item_4 {
         flex-direction: column;
         align-items: start;
@@ -361,7 +368,7 @@
         justify-content: space-between;
         font-size: .9rem;
         margin: 10px 0 2rem 0;
-        color: #fff;
+        color: #000;
         width: 100%;
     }
 

@@ -13,6 +13,7 @@ export default function Products() {
     const { t } = useTranslation()
     const { data, loading, error } = useSelector((state) => state.home);
 
+
     return (
         <div className={styles.products_container}>
             <div className={styles.product_title_wrapper}>
@@ -27,7 +28,7 @@ export default function Products() {
                             <ProductImageItem img={`${data?.image_two}`} style="bgcolor" >
                                 <div className={styles.wrapper_text_image}>
                                     <p className={styles.title_image}>
-                                        Computer  Vision
+                                        {data?.title_image_two}
                                     </p>
                                     <p className={styles.text_image}>
                                         {data?.text_image_two}
@@ -39,7 +40,7 @@ export default function Products() {
                             <ProductImageItem img={`${data?.image_three}`} style="bgcolor" >
                                 <div className={styles.wrapper_text_image}>
                                     <p className={styles.title_image}>
-                                        Computer  Vision
+                                        {data?.title_image_three}
                                     </p>
                                     <p className={styles.text_image}>
                                         {data?.text_image_three}
@@ -51,7 +52,7 @@ export default function Products() {
                             <ProductImageItem img={`${data?.image_four}`} >
                                 <div className={styles.wrapper_text_image}>
                                     <p className={styles.title_image}>
-                                        Data  Mining
+                                        {data?.title_image_four}
                                     </p>
                                     <p className={styles.text_image}>
                                         {data?.text_image_four}
@@ -63,7 +64,7 @@ export default function Products() {
                             <ProductImageItem img={`${data?.image_five}`} >
                                 <div className={styles.wrapper_text_image}>
                                     <p className={styles.title_image}>
-                                        Data  Mining
+                                        {data?.title_image_five}
                                     </p>
                                     <p className={styles.text_image}>
                                         {data?.text_image_five}

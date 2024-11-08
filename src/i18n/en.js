@@ -33,7 +33,11 @@ const en = {
     error: "Error",
     Nameisrequired: "Name is required",
     Commentisrequired: "Comment is required",
-    des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    RelatedArticles: "Related Articles",
+    Comments: "Comments",
+    ShowMore: "Show More",
+    ShowLess: "Show Less"
+
 }
 
 export default en

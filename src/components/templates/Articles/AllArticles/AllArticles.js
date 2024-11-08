@@ -12,7 +12,7 @@ import Loading from '@/components/modules/Loading/Loading';
 import Error from '@/components/modules/Error/Error';
 import { getCategoryData } from '@/redux/category';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { getIPData } from '@/redux/getIp';
 
 export default function AllArticles() {
     const { t } = useTranslation();
@@ -20,11 +20,16 @@ export default function AllArticles() {
     const dispatch = useDispatch();
     const { data, loading, error } = useSelector((state) => state.articles);
     const { datac, loadingc, errorc } = useSelector((state) => state.category);
+    const { datap } = useSelector((state) => state.getIp)
     const [fliterArticlesLanguage, setFliterArticlesLanguage] = useState([]);
     const [filterArticles, setFilterArticles] = useState([]);
     const [activeCategory, setActiveCategory] = useState("all");
     const scrollDivRef = useRef(null);
-    const [ip, setIp] = useState("");
+    const [showAll, setShowAll] = useState(false);
+
+    const handleShowMoreClick = () => {
+        setShowAll((prev) => !prev);
+    }
 
     const fliterArticlesByLanguage = (lang) => {
         if (lang === "fa") {
@@ -55,28 +60,68 @@ export default function AllArticles() {
         if (scrollDivRef.current) {
             scrollDivRef.current.scrollIntoView({
                 behavior: 'smooth',
-                block: 'start', 
+                block: 'start',
             });
         }
     };
 
 
+    // useEffect(() => {
+    //     const handleScroll = (event) => {
+    //         if (leftMainRef.current) {
+    //             const scrollTop = leftMainRef.current.scrollTop;
+    //             const scrollHeight = leftMainRef.current.scrollHeight;
+    //             const clientHeight = leftMainRef.current.clientHeight;
 
-    
-    useEffect(
-        () => {
-            const fetchIp = async () => {
-                try {
-                    const response = await axios.get("https://api.ipify.org?format=json");
-                    setIp(response.data.ip);
-                } catch (error) {
-                    console.error("Error fetching the IP address:", error);
-                }
-            };
+    //             leftMainRef.current.scrollTop += event.deltaY;
 
-            fetchIp();
-        }, [])
+    //             const targetScrollTop = leftMainRef.current.scrollTop + event.deltaY;
+    //             smoothScroll(targetScrollTop);
 
+    //             if (scrollHeight - scrollTop <= clientHeight) {
+    //                 document.body.style.overflow = 'auto';
+    //             }
+    //             else if (scrollTop === 0) {
+    //                 document.body.style.overflow = 'auto';
+    //             }
+    //             else {
+    //                 document.body.style.overflow = 'hidden';
+    //             }
+    //         }
+    //     };
+
+    //     const smoothScroll = (targetScrollTop) => {
+    //         const currentScrollTop = leftMainRef.current.scrollTop;
+    //         const distance = targetScrollTop - currentScrollTop;
+    //         const duration = 200;
+    //         const startTime = performance.now();
+
+    //         const animate = (time) => {
+    //             const timeElapsed = time - startTime;
+    //             const progress = Math.min(timeElapsed / duration, 1);
+    //             leftMainRef.current.scrollTop = currentScrollTop + distance * progress;
+
+    //             if (progress < 1) {
+    //                 requestAnimationFrame(animate);
+    //             }
+    //         };
+    //         requestAnimationFrame(animate);
+    //     };
+
+    //     document.body.style.overflow = 'hidden';
+
+    //     window.addEventListener('wheel', handleScroll);
+
+    //     return () => {
+    //         document.body.style.overflow = 'auto';
+    //         window.removeEventListener('wheel', handleScroll);
+    //     };
+    // }, []);
+
+
+    useEffect(() => {
+        dispatch(getIPData())
+    }, [])
 
     useEffect(() => {
         fliterArticlesByLanguage(language);
@@ -84,9 +129,9 @@ export default function AllArticles() {
 
 
     useEffect(() => {
-        dispatch(getDataArticles(ip));
+        dispatch(getDataArticles(datap?.ip));
         dispatch(getCategoryData());
-    }, [language, ip]);
+    }, [language, datap?.ip]);
 
 
 
@@ -105,11 +150,7 @@ export default function AllArticles() {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={4}>
                         <Grid size={{ xs: 12, md: 12, lg: 9 }}>
-                            <div className={
-                                `${styles.left_article} 
-                                ${language === "fa" && styles.left_article_right}
-                                `}
-                                >
+                            <div className={`${language === "en" ? styles.left_article : styles.left_article_right}`}>
                                 {filterArticles?.length > 0 &&
                                     filterArticles?.map((item) => <Article item={item} key={item.id} />)}
                             </div>
@@ -120,13 +161,27 @@ export default function AllArticles() {
                                     data?.most_liked_articles_farsi?.length > 0) && (
                                         <div className={styles.trending}>
                                             <p className={styles.trendig_text}>{t("TrendingThisWeek")}</p>
-                                            {language === "fa"
-                                                ? data?.most_liked_articles_farsi?.map((trend) => (
-                                                    <TrendingItem key={trend.id} trend={trend} />
-                                                ))
-                                                : data?.most_liked_articles_english?.map((trend) => (
-                                                    <TrendingItem key={trend.id} trend={trend} />
-                                                ))}
+                                            <div className={styles.trending_item_wrapper}>
+                                                {language === "fa"
+                                                    ? (showAll ? data?.most_liked_articles_farsi : data?.most_liked_articles_farsi.slice(0, 3)).map((trend) => (
+                                                        <TrendingItem key={trend.id} trend={trend} />
+                                                    ))
+                                                    : (showAll ? data?.most_liked_articles_english : data?.most_liked_articles_english.slice(0, 3)).map((trend) => (
+                                                        <TrendingItem key={trend.id} trend={trend} />
+                                                    ))}
+
+                                                {
+                                                    data?.most_liked_articles_english?.length > 3 ||
+                                                    data?.most_liked_articles_farsi?.length > 3 &&
+                                                    <div className={styles.showmore_wrapper}>
+                                                        <button className={styles.show_more_btn} onClick={handleShowMoreClick}>
+                                                            {
+                                                                showAll ? t("ShowLess") : t("ShowMore")
+                                                            }
+                                                        </button>
+                                                    </div>
+                                                }
+                                            </div>
                                         </div>
                                     )}
                                 {datac && (

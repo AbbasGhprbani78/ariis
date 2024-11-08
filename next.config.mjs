@@ -6,6 +6,9 @@ const nextConfig = {
     serverRuntimeConfig: {
         baseUrl: process.env.BASE_URL || 'https://x.ariisco.com/api/v1',
     },
+    images: {
+        domains: ['x.ariisco.com'], // Add the allowed domain here
+    },
 };
 
 export default nextConfig;

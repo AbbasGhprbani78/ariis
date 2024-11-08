@@ -5,32 +5,28 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { useLanguage } from '@/context/LangContext';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIPData } from '@/redux/getIp';
 export default function CommentItem({ comment }) {
 
     const { language } = useLanguage()
-    const [ip, setIp] = useState("");
+
     const [likeCount, setLikeCount] = useState(comment?.like_count)
     const [disLikeCount, setdisLikeCount] = useState(comment?.dislike_count)
+    const dispatch = useDispatch();
+    const { datap } = useSelector((state) => state.getIp)
 
-    useEffect(
-        () => {
-            const fetchIp = async () => {
-                try {
-                    const response = await axios.get("https://api.ipify.org?format=json");
-                    setIp(response.data.ip);
-                } catch (error) {
-                    console.error("Error fetching the IP address:", error);
-                }
-            };
 
-            fetchIp();
-        }, [])
+
+    useEffect(() => {
+        dispatch(getIPData())
+    }, [])
 
 
     const disLikeCommentHandler = async (id) => {
         try {
             const body = {
-                user: ip
+                user: datap?.ip
             }
             const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/comment/${id}/dislike/`, body)
             if (res.status === 200) {
@@ -44,7 +40,7 @@ export default function CommentItem({ comment }) {
     const likeCommentHandler = async (id) => {
         try {
             const body = {
-                user: ip
+                user: datap?.ip
             }
             const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/comment/${id}/like/`, body)
             if (res.status === 201) {
@@ -66,7 +62,7 @@ export default function CommentItem({ comment }) {
                         <p className={styles.user_text}>{comment?.text}</p>
                         <div className={styles.likes_wrapper}>
                             <div className={styles.dislike_w}>
-                                <span className={`${styles.like_number}${styles.dis_number}`}>{disLikeCount}</span>
+                                <span className={`${styles.like_number} ${styles.dis_number}`}>{disLikeCount}</span>
                                 <span className={`${styles.like} ${styles.disl}`} onClick={() => disLikeCommentHandler(comment.id)}>
                                     <ThumbDownIcon className={styles.like_icon} />
                                 </span>
