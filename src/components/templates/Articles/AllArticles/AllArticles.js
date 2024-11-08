@@ -26,6 +26,8 @@ export default function AllArticles() {
     const [activeCategory, setActiveCategory] = useState("all");
     const scrollDivRef = useRef(null);
     const [showAll, setShowAll] = useState(false);
+    const scrollContentRef = useRef(null);
+
 
     const handleShowMoreClick = () => {
         setShowAll((prev) => !prev);
@@ -66,58 +68,64 @@ export default function AllArticles() {
     };
 
 
-    // useEffect(() => {
-    //     const handleScroll = (event) => {
-    //         if (leftMainRef.current) {
-    //             const scrollTop = leftMainRef.current.scrollTop;
-    //             const scrollHeight = leftMainRef.current.scrollHeight;
-    //             const clientHeight = leftMainRef.current.clientHeight;
 
-    //             leftMainRef.current.scrollTop += event.deltaY;
+    useEffect(() => {
+        const smoothScroll = (targetScrollTop) => {
+            const startScrollTop = scrollContentRef.current.scrollTop;
+            const distance = targetScrollTop - startScrollTop;
+            const duration = 300;
+            const startTime = performance.now();
 
-    //             const targetScrollTop = leftMainRef.current.scrollTop + event.deltaY;
-    //             smoothScroll(targetScrollTop);
+            const animateScroll = (time) => {
+                const elapsed = time - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                scrollContentRef.current.scrollTop = startScrollTop + distance * progress;
 
-    //             if (scrollHeight - scrollTop <= clientHeight) {
-    //                 document.body.style.overflow = 'auto';
-    //             }
-    //             else if (scrollTop === 0) {
-    //                 document.body.style.overflow = 'auto';
-    //             }
-    //             else {
-    //                 document.body.style.overflow = 'hidden';
-    //             }
-    //         }
-    //     };
+                if (progress < 1) {
+                    requestAnimationFrame(animateScroll);
+                }
+            };
 
-    //     const smoothScroll = (targetScrollTop) => {
-    //         const currentScrollTop = leftMainRef.current.scrollTop;
-    //         const distance = targetScrollTop - currentScrollTop;
-    //         const duration = 200;
-    //         const startTime = performance.now();
+            requestAnimationFrame(animateScroll);
+        };
 
-    //         const animate = (time) => {
-    //             const timeElapsed = time - startTime;
-    //             const progress = Math.min(timeElapsed / duration, 1);
-    //             leftMainRef.current.scrollTop = currentScrollTop + distance * progress;
+        const handleScroll = (event) => {
+            if (!scrollContentRef.current) return;
 
-    //             if (progress < 1) {
-    //                 requestAnimationFrame(animate);
-    //             }
-    //         };
-    //         requestAnimationFrame(animate);
-    //     };
+            const scrollContentTop = scrollContentRef.current.getBoundingClientRect().top;
+            const scrollTop = scrollContentRef.current.scrollTop;
+            const scrollHeight = scrollContentRef.current.scrollHeight;
+            const clientHeight = scrollContentRef.current.clientHeight;
+            const isScrollable = scrollHeight > clientHeight;
 
-    //     document.body.style.overflow = 'hidden';
+            if (scrollContentTop <= 90 && isScrollable) {
+                const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+                if (atBottom && event.deltaY > 0) {
+                    document.body.style.overflow = 'auto';
+                }
+                else if (scrollTop === 0 && event.deltaY < 0) {
+                    document.body.style.overflow = 'auto';
+                }
+                else {
+                    document.body.style.overflow = 'hidden';
 
-    //     window.addEventListener('wheel', handleScroll);
+                    const targetScrollTop = scrollTop + event.deltaY;
+                    smoothScroll(targetScrollTop);
 
-    //     return () => {
-    //         document.body.style.overflow = 'auto';
-    //         window.removeEventListener('wheel', handleScroll);
-    //     };
-    // }, []);
+                    event.preventDefault();
+                }
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        };
 
+        window.addEventListener('wheel', handleScroll, { passive: false });
+
+        return () => {
+            document.body.style.overflow = 'auto';
+            window.removeEventListener('wheel', handleScroll);
+        };
+    }, []);
 
     useEffect(() => {
         dispatch(getIPData())
@@ -150,7 +158,13 @@ export default function AllArticles() {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={4}>
                         <Grid size={{ xs: 12, md: 12, lg: 9 }}>
-                            <div className={`${language === "en" ? styles.left_article : styles.left_article_right}`}>
+                            <div className={`${language === "en" ?
+                                styles.left_article :
+                                styles.left_article_right}
+                                 ${styles.scroll_content}`
+                            }
+                                ref={scrollContentRef}
+                            >
                                 {filterArticles?.length > 0 &&
                                     filterArticles?.map((item) => <Article item={item} key={item.id} />)}
                             </div>

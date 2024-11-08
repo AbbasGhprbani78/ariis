@@ -261,8 +261,9 @@ body {
     --sb-track-color: #232E33;
     --sb-thumb-color: #afc8c0;
     --sb-size: 9px;
+    
 }
-
+/* 
 body::-webkit-scrollbar {
     width: var(--sb-size)
 }
@@ -275,7 +276,7 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 8px;
-}
+} */
 
 
 /* body {
@@ -293,6 +294,7 @@ body {
 body::-webkit-scrollbar {
     display: none;
 }
+
 
 
 .page-transition-enter {

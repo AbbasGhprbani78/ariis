@@ -11,6 +11,7 @@
 
 .left_main::-webkit-scrollbar {
     display: none;
+
 }
 
 .imgcontainer {
@@ -126,7 +127,8 @@
     .left_main {
         max-height: 80vh;
         overflow-y: auto;
-        scroll-behavior: smooths;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
     .related_article_bottom {
