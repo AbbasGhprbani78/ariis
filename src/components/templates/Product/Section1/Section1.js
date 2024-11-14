@@ -7,26 +7,22 @@ import EastIcon from '@mui/icons-material/East';
 import { useSelector } from 'react-redux'
 
 export default function Section1() {
-
-  const { t } = useTranslation()
-  const { data, loading, error } = useSelector((state) => state.product);
-
+  const { t } = useTranslation();
+  const { logo, title, link } = useSelector((state) => state?.product?.data || {});
 
   return (
     <div className={styles.section1_wrapper}>
-      <div className={styles.logo_wrapper}>
-        <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.logo}`} alt="logo" />
-      </div>
-      <h1 className={styles.product_title}>
-        {data?.title && data?.title}
-      </h1>
-      {
-        data?.link &&
-        <div className={styles.btn_wrapper}>
-          <Button text={t("ViewMore")} icon={EastIcon} link={data?.link} />
+      {logo && (
+        <div className={styles.logo_wrapper}>
+          <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo}`} alt="logo" />
         </div>
-      }
-
+      )}
+      {title && <h1 className={styles.product_title}>{title}</h1>}
+      {link && (
+        <div className={styles.btn_wrapper}>
+          <Button text={t("ViewMore")} icon={EastIcon} link={link} />
+        </div>
+      )}
     </div>
-  )
+  );
 }

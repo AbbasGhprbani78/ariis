@@ -4,7 +4,7 @@
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    height: var(--visual-height);
+    height: 100dvh;
 }
 
 .aboutus_content {

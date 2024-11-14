@@ -31,7 +31,8 @@ export default function Slider() {
         swiperRef.current?.swiper.slidePrev();
     };
 
-    const { data, loading, error } = useSelector((state) => state.aboutus);
+    const { customer_comment } = useSelector((state) => state.aboutus?.data || {});
+
 
 
     return (
@@ -80,7 +81,7 @@ export default function Slider() {
                             dir={rtlSwitch}
                             modules={[Autoplay]}
                             autoplay={{ delay: 3000, disableOnInteraction: false }}
-                            loop={data?.customer_comment.length > 1}
+                            loop={customer_comment?.length > 1}
                             className={styles.swiper_slider}
                             spaceBetween={30}
                             breakpoints={{
@@ -99,9 +100,9 @@ export default function Slider() {
                             }}
                         >
                             {
-                                data &&
-                                data.customer_comment.length > 0 &&
-                                data.customer_comment.map((item, i) => (
+                               customer_comment &&
+                               customer_comment.length > 0 &&
+                               customer_comment.map((item, i) => (
                                     <SwiperSlide key={i}>
                                         <SliderItem item={item} />
                                     </SwiperSlide>

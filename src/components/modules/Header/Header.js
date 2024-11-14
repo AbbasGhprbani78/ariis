@@ -48,13 +48,13 @@ export default function Header() {
                 {width < 1025 ? (
                     <>
                         <Offcanvas />
-                        <Image src={"/images/logo.svg"} width={70} height={33} alt="logo" />
+                        <Image src={"/images/g14.svg"} width={25} height={33} alt="logo" />
                     </>
                 ) : (
                     <>
-                            <div className={styles.section_one_header}>
+                        <div className={styles.section_one_header}>
                             <div className={styles.header_logo}>
-                                <Image src={"/images/logo.svg"} width={70} height={33} alt="logo" />
+                                <Image src={"/images/g14.svg"} width={30} height={33} alt="logo" />
                             </div>
                             <nav className={styles.header_menu}>
                                 <Link

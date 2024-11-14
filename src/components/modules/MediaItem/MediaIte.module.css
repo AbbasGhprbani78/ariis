@@ -9,11 +9,30 @@
     align-items: center;
     justify-content: space-between;
     margin-right: 40px;
+    transition: all .3s ease-in-out;
 }
 
-.rightmedia {
+.mediaItem .rightmedia {
     margin-right: 0;
     margin-left: 40px;
 }
 
-.icon {}
+.mediaItem:hover .icon {
+    transform: scale(1.2);
+}
+
+.instaback:hover {
+    background: linear-gradient(45deg, #F58529, #F77737, #D62976);
+}
+
+.telback:hover {
+    background: linear-gradient(45deg, #0088cc, #00aaff);
+}
+
+.whatsback:hover {
+    background: linear-gradient(45deg, #25D366, #128C7E);
+}
+
+.linback:hover {
+    background: linear-gradient(45deg, #0077B5, #00A0DC);
+}

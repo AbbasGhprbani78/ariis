@@ -6,35 +6,28 @@ import { useSelector } from 'react-redux'
 import Link from 'next/link'
 import DOMPurify from 'dompurify'
 import { truncateText } from '@/utils/Maxtext'
+import { convertToFarsiDigits } from '@/utils/ConvertNumberToFarsi'
 export default function TopArticle() {
 
     const { language } = useLanguage()
-    const { data, loading, error } = useSelector((state) => state.articles);
+    const { all_articles,
+        five_most_recent_articles_farsi,
+        five_most_recent_articles_english } = useSelector((state) => state.articles?.data || {});
     const [filterArticles, setFilterArticles] = useState([])
 
     const fliterArticlesByLanguage = (lang) => {
         if (lang === "fa") {
-            const articles = data?.all_articles?.filter((article) => article.is_farsi === true)
+            const articles = all_articles?.filter((article) => article.is_farsi === true)
             setFilterArticles(articles)
         } else {
-            const articles = data?.all_articles?.filter((article) => article.is_farsi === false)
+            const articles = all_articles?.filter((article) => article.is_farsi === false)
             setFilterArticles(articles)
         }
     }
 
-    const convertToFarsiNumber = (num) => {
-        const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-        return num.toString().split('').map(x => farsiDigits[x]).join('');
-    };
-
-
-
-
     useEffect(() => {
         fliterArticlesByLanguage(language)
-    }, [language, data])
-
-
+    }, [language, all_articles])
 
 
     return (
@@ -161,12 +154,12 @@ export default function TopArticle() {
                                 <div className={`${styles.item} ${styles.item_4}`}>
                                     {
                                         language === "fa" &&
-                                            data?.five_most_recent_articles_farsi.length ?
+                                            five_most_recent_articles_farsi?.length ?
                                             <>
-                                                <p className={styles.top_text}>{convertToFarsiNumber(data.five_most_recent_articles_farsi.length)} مقاله برتر</p>
+                                                <p className={styles.top_text}>{convertToFarsiDigits(five_most_recent_articles_farsi?.length)} مقاله برتر</p>
                                                 <div className={styles.image_container}>
                                                     {
-                                                        data.five_most_recent_articles_farsi.map((item) => (
+                                                        five_most_recent_articles_farsi.map((item) => (
                                                             <Link className={styles.link_article_right} href={`/articles/${item.id}`}>
                                                                 <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
                                                                     className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
@@ -176,14 +169,18 @@ export default function TopArticle() {
 
                                                 </div>
                                             </> :
-                                            data?.five_most_recent_articles_english.length ?
+                                            five_most_recent_articles_english?.length ?
                                                 <>
-                                                    <p className={styles.top_text}>{`Top ${data?.five_most_recent_articles_english.length} Articles`}</p>
+                                                    <p className={styles.top_text}>{`Top ${five_most_recent_articles_english?.length} Articles`}</p>
                                                     <div className={styles.image_container}>
                                                         {
-                                                            data.five_most_recent_articles_english.map((item) => (
-                                                                <Link className={`${language === "en" ? styles.link_article : styles.link_article_right}`} href={`/articles/${item.id}`}>
-                                                                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}className={`${styles.circle1} ${styles.circle}`} alt="Image 1" />
+                                                            five_most_recent_articles_english.map((item) => (
+                                                                <Link
+                                                                    className={`${language === "en" ? styles.link_article : styles.link_article_right}`}
+                                                                    href={`/articles/${item.id}`}
+                                                                    key={item.id}
+                                                                >
+                                                                    <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`} className={`${styles.circle1} ${styles.circle}`} alt="Image 1" />
                                                                 </Link>
                                                             ))
                                                         }
@@ -329,12 +326,12 @@ export default function TopArticle() {
                                 <div className={`${styles.item} ${styles.item_4}`}>
                                     {
                                         language === "fa" &&
-                                            data?.five_most_recent_articles_farsi.length ?
+                                            five_most_recent_articles_farsi?.length ?
                                             <>
-                                                <p className={styles.top_text}>{convertToFarsiNumber(data.five_most_recent_articles_farsi.length)} مقاله برتر</p>
+                                                <p className={styles.top_text}>{convertToFarsiDigits(five_most_recent_articles_farsi?.length)} مقاله برتر</p>
                                                 <div className={styles.image_container}>
                                                     {
-                                                        data.five_most_recent_articles_farsi.map((item) => (
+                                                        five_most_recent_articles_farsi.map((item) => (
                                                             <Link className={styles.link_article_right} href={`/articles/${item.id}`}>
                                                                 <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
                                                                     className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
@@ -344,13 +341,13 @@ export default function TopArticle() {
 
                                                 </div>
                                             </> :
-                                            data?.five_most_recent_articles_english.length ?
+                                            five_most_recent_articles_english?.length ?
                                                 <>
-                                                    <p className={styles.top_text}>{`Top ${data?.five_most_recent_articles_english.length} Ariis Articles`}</p>
+                                                    <p className={styles.top_text}>{`Top ${five_most_recent_articles_english?.length} Ariis Articles`}</p>
                                                     <div className={styles.image_container}>
                                                         {
-                                                            data.five_most_recent_articles_english.map((item) => (
-                                                                <Link className={styles.link_article} href={`/articles/${item.id}`}>
+                                                            five_most_recent_articles_english.map((item) => (
+                                                                <Link className={styles.link_article} href={`/articles/${item.id}`} key={item.id}>
                                                                     <img src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
                                                                         className={`${styles.circle1} ${language == "fa" ? styles.circle_right : styles.circle}`} alt="Image 1" />
                                                                 </Link>

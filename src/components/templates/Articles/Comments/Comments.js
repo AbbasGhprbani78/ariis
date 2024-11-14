@@ -13,8 +13,7 @@ export default function Comments({ id }) {
 
     const { t } = useTranslation();
     const [showAll, setShowAll] = useState(false);
-
-    const { data } = useSelector((state) => state.article);
+    const { comments } = useSelector((state) => state.article.data || {});
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState({
         type: "",
@@ -98,27 +97,23 @@ export default function Comments({ id }) {
             <p className={styles.comment_title}>{t("Comments")}</p>
             <div className={styles.comment_container}>
                 {
-                    data?.comments?.length > 0 &&
-                        !showAll ?
-                        data?.comments.slice().reverse().slice(0, 3).map((item) => (
+                    comments?.length > 0 && !showAll
+                        ? comments.slice().reverse().slice(0, 3).map((item) => (
                             <CommentItem key={item.id} comment={item} />
                         )) :
-                        data?.comments.slice().reverse().map((item) => (
+                        comments?.slice().reverse().map((item) => (
                             <CommentItem key={item.id} comment={item} />
                         ))
                 }
                 {
-                    data?.comments?.length > 3 &&
+                    comments?.length > 3 &&
                     <div className={styles.wrap_btn_show}>
                         <button className={styles.show_more_btn} onClick={handleShowMoreClick}>
-                            {
-                                showAll ? t("ShowLess") : t("ShowMore")
-                            }
+                            {showAll ? t("ShowLess") : t("ShowMore")}
                             <KeyboardArrowDownIcon />
                         </button>
                     </div>
                 }
-
             </div>
             <p className={styles.comment_title}>{t("commentTitle")}</p>
             <form onSubmit={sendComment} className={styles.send_comment_form}>
@@ -155,7 +150,9 @@ export default function Comments({ id }) {
                 title={toastMessage.title}
                 message={toastMessage.message}
                 showToast={showToast}
-                setShowToast={setShowToast} />
+                setShowToast={setShowToast}
+            />
         </div>
     );
+
 }

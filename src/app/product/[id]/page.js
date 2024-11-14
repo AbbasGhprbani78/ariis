@@ -1,6 +1,4 @@
 
-import Footer from '@/components/modules/Footer/Footer';
-import Header from '@/components/modules/Header/Header';
 import React from 'react';
 import Section1 from '@/components/templates/Product/Section1/Section1';
 import Section2 from '@/components/templates/Product/Section2/Section2';
@@ -15,14 +13,14 @@ export default function ProductPage({ params }) {
 
     return (
         <>
-            <Header />
+           
             <Section1 />
             <Section2 />
             <Section3 id={idProduct}/>
             <Section4 />
             <Section5 />
             <Section6 />
-            <Footer />
+            
         </>
     );
 }

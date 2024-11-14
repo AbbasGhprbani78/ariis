@@ -18,8 +18,10 @@ export default function AllArticles() {
     const { t } = useTranslation();
     const { language } = useLanguage();
     const dispatch = useDispatch();
-    const { data, loading, error } = useSelector((state) => state.articles);
-    const { datac, loadingc, errorc } = useSelector((state) => state.category);
+    const { all_articles, most_liked_articles_english, most_liked_articles_farsi } = useSelector((state) => state.articles.data || {});
+    const { category_farsi, category_english } = useSelector((state) => state.category.datac || {});
+    const {loading, error } = useSelector((state) => state.articles);
+    const {loadingc, errorc } = useSelector((state) => state.category);
     const { datap } = useSelector((state) => state.getIp)
     const [fliterArticlesLanguage, setFliterArticlesLanguage] = useState([]);
     const [filterArticles, setFilterArticles] = useState([]);
@@ -35,11 +37,11 @@ export default function AllArticles() {
 
     const fliterArticlesByLanguage = (lang) => {
         if (lang === "fa") {
-            const articles = data?.all_articles?.filter((article) => article.is_farsi === true);
+            const articles = all_articles?.filter((article) => article.is_farsi === true);
             setFilterArticles(articles);
             setFliterArticlesLanguage(articles);
         } else {
-            const articles = data?.all_articles?.filter((article) => article.is_farsi === false);
+            const articles = all_articles?.filter((article) => article.is_farsi === false);
             setFilterArticles(articles);
             setFliterArticlesLanguage(articles);
         }
@@ -68,64 +70,46 @@ export default function AllArticles() {
     };
 
 
+  useEffect(() => {
+    const handleScroll = (event) => {
+        if (!scrollContentRef.current) return;
 
-    useEffect(() => {
-        const smoothScroll = (targetScrollTop) => {
-            const startScrollTop = scrollContentRef.current.scrollTop;
-            const distance = targetScrollTop - startScrollTop;
-            const duration = 300;
-            const startTime = performance.now();
+        const scrollContentTop = scrollContentRef.current.getBoundingClientRect().top;
+        const scrollTop = scrollContentRef.current.scrollTop;
+        const scrollHeight = scrollContentRef.current.scrollHeight;
+        const clientHeight = scrollContentRef.current.clientHeight;
+        const isScrollable = scrollHeight > clientHeight;
 
-            const animateScroll = (time) => {
-                const elapsed = time - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                scrollContentRef.current.scrollTop = startScrollTop + distance * progress;
-
-                if (progress < 1) {
-                    requestAnimationFrame(animateScroll);
-                }
-            };
-
-            requestAnimationFrame(animateScroll);
-        };
-
-        const handleScroll = (event) => {
-            if (!scrollContentRef.current) return;
-
-            const scrollContentTop = scrollContentRef.current.getBoundingClientRect().top;
-            const scrollTop = scrollContentRef.current.scrollTop;
-            const scrollHeight = scrollContentRef.current.scrollHeight;
-            const clientHeight = scrollContentRef.current.clientHeight;
-            const isScrollable = scrollHeight > clientHeight;
-
-            if (scrollContentTop <= 90 && isScrollable) {
-                const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
-                if (atBottom && event.deltaY > 0) {
-                    document.body.style.overflow = 'auto';
-                }
-                else if (scrollTop === 0 && event.deltaY < 0) {
-                    document.body.style.overflow = 'auto';
-                }
-                else {
-                    document.body.style.overflow = 'hidden';
-
-                    const targetScrollTop = scrollTop + event.deltaY;
-                    smoothScroll(targetScrollTop);
-
-                    event.preventDefault();
-                }
-            } else {
+        if (scrollContentTop <= 90 && isScrollable) {
+            const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+            if (atBottom && event.deltaY > 0) {
                 document.body.style.overflow = 'auto';
             }
-        };
+            else if (scrollTop === 0 && event.deltaY < 0) {
+                document.body.style.overflow = 'auto';
+            }
+            else {
+                document.body.style.overflow = 'hidden';
 
-        window.addEventListener('wheel', handleScroll, { passive: false });
+                const targetScrollTop = scrollTop + event.deltaY;
+                // Directly set scrollTop without animation
+                scrollContentRef.current.scrollTop = targetScrollTop;
 
-        return () => {
+                event.preventDefault();
+            }
+        } else {
             document.body.style.overflow = 'auto';
-            window.removeEventListener('wheel', handleScroll);
-        };
-    }, []);
+        }
+    };
+
+    window.addEventListener('wheel', handleScroll, { passive: false });
+
+    return () => {
+        document.body.style.overflow = 'auto';
+        window.removeEventListener('wheel', handleScroll);
+    };
+}, []);
+
 
     useEffect(() => {
         dispatch(getIPData())
@@ -133,7 +117,7 @@ export default function AllArticles() {
 
     useEffect(() => {
         fliterArticlesByLanguage(language);
-    }, [language, data]);
+    }, [language, activeCategory, all_articles]);
 
 
     useEffect(() => {
@@ -152,84 +136,64 @@ export default function AllArticles() {
     }
 
     return (
-        <>
-            <div ref={scrollDivRef} style={{ height: "1px" }}></div>
+        <div ref={scrollDivRef}>
             <div className={styles.allarticle}>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={4}>
-                        <Grid size={{ xs: 12, md: 12, lg: 9 }}>
-                            <div className={`${language === "en" ?
-                                styles.left_article :
-                                styles.left_article_right}
-                                 ${styles.scroll_content}`
-                            }
+                        <Grid item xs={12} md={9}>
+                            <div
+                                className={`${language === "en" ? styles.left_article : styles.left_article_right} ${styles.scroll_content}`}
                                 ref={scrollContentRef}
                             >
                                 {filterArticles?.length > 0 &&
-                                    filterArticles?.map((item) => <Article item={item} key={item.id} />)}
+                                    filterArticles.map((item) => <Article item={item} key={item.id} />)}
                             </div>
                         </Grid>
-                        <Grid size={{ xs: 12, md: 12, lg: 3 }}>
+                        <Grid item xs={12} md={3}>
                             <div className={styles.right_article}>
-                                {(data?.most_liked_articles_english?.length > 0 ||
-                                    data?.most_liked_articles_farsi?.length > 0) && (
+                                {(most_liked_articles_english?.length > 0 ||
+                                    most_liked_articles_farsi?.length > 0) && (
                                         <div className={styles.trending}>
                                             <p className={styles.trendig_text}>{t("TrendingThisWeek")}</p>
                                             <div className={styles.trending_item_wrapper}>
-                                                {language === "fa"
-                                                    ? (showAll ? data?.most_liked_articles_farsi : data?.most_liked_articles_farsi.slice(0, 3)).map((trend) => (
-                                                        <TrendingItem key={trend.id} trend={trend} />
-                                                    ))
-                                                    : (showAll ? data?.most_liked_articles_english : data?.most_liked_articles_english.slice(0, 3)).map((trend) => (
-                                                        <TrendingItem key={trend.id} trend={trend} />
-                                                    ))}
+                                                {(language === "fa"
+                                                    ? (showAll ? most_liked_articles_farsi : most_liked_articles_farsi.slice(0, 3))
+                                                    : (showAll ? most_liked_articles_english : most_liked_articles_english.slice(0, 3))
+                                                ).map((trend) => (
+                                                    <TrendingItem key={trend.id} trend={trend} />
+                                                ))}
 
-                                                {
-                                                    data?.most_liked_articles_english?.length > 3 ||
-                                                    data?.most_liked_articles_farsi?.length > 3 &&
-                                                    <div className={styles.showmore_wrapper}>
-                                                        <button className={styles.show_more_btn} onClick={handleShowMoreClick}>
-                                                            {
-                                                                showAll ? t("ShowLess") : t("ShowMore")
-                                                            }
-                                                        </button>
-                                                    </div>
-                                                }
+                                                {(most_liked_articles_english?.length > 3 ||
+                                                    most_liked_articles_farsi?.length > 3) && (
+                                                        <div className={styles.showmore_wrapper}>
+                                                            <button className={styles.show_more_btn} onClick={handleShowMoreClick}>
+                                                                {showAll ? t("ShowLess") : t("ShowMore")}
+                                                            </button>
+                                                        </div>
+                                                    )}
                                             </div>
                                         </div>
                                     )}
-                                {datac && (
+
+                                {(category_farsi || category_english) && (
                                     <div className={styles.filtering}>
                                         <p className={styles.filter_title}>{t("YouMightLike")}</p>
                                         <div className={styles.filter_btns}>
                                             <button
-                                                className={`${styles.btn_filter} ${activeCategory === "all" ? styles.active : ""
-                                                    }`}
+                                                className={`${styles.btn_filter} ${activeCategory === "all" ? styles.active : ""}`}
                                                 onClick={() => handleCategoryClick("all")}
                                             >
                                                 {t("all")}
                                             </button>
-                                            {language === "fa"
-                                                ? datac?.category_farsi?.map((item) => (
-                                                    <button
-                                                        key={item.id}
-                                                        className={`${styles.btn_filter} ${activeCategory === item.name ? styles.active : ""
-                                                            }`}
-                                                        onClick={() => handleCategoryClick(item.name)}
-                                                    >
-                                                        {item.name}
-                                                    </button>
-                                                ))
-                                                : datac?.category_english?.map((item) => (
-                                                    <button
-                                                        key={item.id}
-                                                        className={`${styles.btn_filter} ${activeCategory === item.name ? styles.active : ""
-                                                            }`}
-                                                        onClick={() => handleCategoryClick(item.name)}
-                                                    >
-                                                        {item.name}
-                                                    </button>
-                                                ))}
+                                            {(language === "fa" ? category_farsi : category_english)?.map((item) => (
+                                                <button
+                                                    key={item.id}
+                                                    className={`${styles.btn_filter} ${activeCategory === item.name ? styles.active : ""}`}
+                                                    onClick={() => handleCategoryClick(item.name)}
+                                                >
+                                                    {item.name}
+                                                </button>
+                                            ))}
                                         </div>
                                     </div>
                                 )}
@@ -238,6 +202,6 @@ export default function AllArticles() {
                     </Grid>
                 </Box>
             </div>
-        </>
+        </div>
     );
 }

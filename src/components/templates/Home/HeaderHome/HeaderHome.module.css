@@ -1,5 +1,5 @@
 .header_home {
-    height: var(--visual-height);
+    height: 100dvh;
     width: 100%;
     background: url("/images/2.png");
     background-size: 100% 100%;

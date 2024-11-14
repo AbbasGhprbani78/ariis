@@ -13,30 +13,34 @@ import { getAboutusData } from '@/redux/aboutus';
 import Loading from '@/components/modules/Loading/Loading';
 import Error from '@/components/modules/Error/Error';
 import axios from 'axios';
+import { convertToFarsiDigits } from '@/utils/ConvertNumberToFarsi';
 
 
 export default function OurTeam() {
+    const { t } = useTranslation();
+    const { language } = useLanguage();
+    const dispatch = useDispatch();
 
-    const { t } = useTranslation()
-    const { language } = useLanguage()
-    const dispatch = useDispatch()
-    const { data, loading, error } = useSelector((state) => state.aboutus);
-    const [mainScore, totalScore] = data ? `${data?.point}/10`.split('/') : ['0', '10'];
-    const [dataChart, setDataChart] = useState("")
 
-    const convertToFarsiDigits = (number) => {
-        const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-        return number?.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
-    };
+    const { our_team_text,
+        year_founded,
+        experience,
+        number_of_projects,
+        satisfaction_level,
+        number_of_cooperation_with_other_countries,
+        point, loading, error } = useSelector((state) => state?.aboutus?.data || {});
+
+    const [mainScore, totalScore] = point ? `${point}/10`.split('/') : ['0', '10'];
+    const [dataChart, setDataChart] = useState("");
 
     const getDataChart = async () => {
         try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/data/`, {})
-            setDataChart(response.data)
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/data/`, {});
+            setDataChart(response.data);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    };
 
     const chartData = dataChart[0]?.map((item) => ({
         name: item?.name,
@@ -45,10 +49,9 @@ export default function OurTeam() {
     })) || [];
 
     useEffect(() => {
-        dispatch(getAboutusData(language))
-        getDataChart()
-    }, [language])
-
+        dispatch(getAboutusData(language));
+        getDataChart();
+    }, [language]);
 
     if (loading) {
         return <Loading />;
@@ -58,24 +61,25 @@ export default function OurTeam() {
         return <Error />;
     }
 
+ 
 
     return (
         <div className={styles.ourteam_wrapper}>
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={3} >
-                    <Grid size={{ xs: 12, md: 12, lg: 5, xl: 6 }} >
+                <Grid container spacing={3}>
+                    <Grid size={{ xs: 12, md: 12, lg: 5, xl: 6 }}>
                         <p className={styles.title_our}>
                             {t("OurTeam")}
                         </p>
                         <p className={styles.text_Our}>
-                            {data?.our_team_text}
+                            {our_team_text}
                         </p>
                     </Grid>
                     <Grid size={{ xs: 12, md: 12, lg: 7, xl: 6 }}>
                         <div className={styles.about_feature}>
                             <div className={`${styles.item_about} ${styles.item1}`}>
                                 <p className={styles.number_year}>
-                                    {language === "fa" ? convertToFarsiDigits(data?.year_founded) : data?.year_founded}
+                                    {language === "fa" ? convertToFarsiDigits(year_founded) : year_founded}
                                 </p>
                                 <span className={styles.text_year}>
                                     {t("YearFounded")}
@@ -87,7 +91,7 @@ export default function OurTeam() {
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
                                         <span className={styles.number}>
-                                            {language === "fa" ? convertToFarsiDigits(data?.experience) : data?.experience}
+                                            {language === "fa" ? convertToFarsiDigits(experience) : experience}
                                         </span>
                                     </div>
                                 </div>
@@ -96,7 +100,7 @@ export default function OurTeam() {
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
                                         <span className={styles.number}>
-                                            {language === "fa" ? `${convertToFarsiDigits(data?.number_of_projects)}` : data?.number_of_projects}<span className={styles.letter}>M</span>
+                                            {language === "fa" ? `${convertToFarsiDigits(number_of_projects)}` : number_of_projects}<span className={styles.letter}>M</span>
                                         </span>
                                     </div>
                                 </div>
@@ -104,7 +108,7 @@ export default function OurTeam() {
                                     <span className={styles.year_founded_item}>{t("Satisfaction")}</span>
                                     <div className={styles.wrap_number}>
                                         <span className={styles.number}>
-                                            {language === "fa" ? convertToFarsiDigits(data?.satisfaction_level) : data?.satisfaction_level}
+                                            {language === "fa" ? convertToFarsiDigits(satisfaction_level) : satisfaction_level}
                                         </span>
                                         <PercentIcon className={styles.icon_number} />
                                     </div>
@@ -152,16 +156,6 @@ export default function OurTeam() {
                                             fill="#fff"
                                         >
                                             {language === "fa" ? convertToFarsiDigits(dataChart[1]?.count || 87) : dataChart[1]?.count || 87}%
-
-                                        </text>
-                                        <text
-                                            x="50%"
-                                            y="60%"
-                                            textAnchor="middle"
-                                            dominantBaseline="middle"
-                                            fontSize={12}
-                                            fill="#aaa"
-                                        >
                                         </text>
                                     </PieChart>
                                 </div>
@@ -172,8 +166,8 @@ export default function OurTeam() {
                                     <div className={styles.wrap_number}>
                                         <AddIcon className={styles.icon_number} />
                                         <span className={styles.number}>
-                                            {language === "fa" ? convertToFarsiDigits(data?.number_of_cooperation_with_other_countries) :
-                                                data?.number_of_cooperation_with_other_countries}
+                                            {language === "fa" ? convertToFarsiDigits(number_of_cooperation_with_other_countries) :
+                                                number_of_cooperation_with_other_countries}
                                         </span>
                                     </div>
                                     <p className={`${styles.item6_text} ${language === "fa" && styles.item6_text_fa}`}>
@@ -193,6 +187,6 @@ export default function OurTeam() {
                 </Grid>
             </Box>
         </div>
-    )
+    );
 }
 

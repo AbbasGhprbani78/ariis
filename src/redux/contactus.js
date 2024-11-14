@@ -10,7 +10,8 @@ export const getContactusData = createAsyncThunk(
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/home/get-about/`, {
             headers
         });
-        return response.data;
+
+        return response?.data[0];
     }
 );
 

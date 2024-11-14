@@ -10,33 +10,43 @@ import { useSelector } from 'react-redux'
 
 export default function Section4() {
 
-    const { t } = useTranslation()
-    const { data, loading, error } = useSelector((state) => state.product);
+    const { t } = useTranslation();
+
+    const { how_it_work, image_two_work, image_three_work, image_four_work, image_five_work, image_one_work } = useSelector((state) => ({
+        how_it_work: state.product.data?.how_it_work,
+        image_two_work: state.product.data?.image_two_work,
+        image_three_work: state.product.data?.image_three_work,
+        image_four_work: state.product.data?.image_four_work,
+        image_five_work: state.product.data?.image_five_work,
+        image_one_work: state.product.data?.image_one_work,
+    }));
+
     useEffect(() => {
         AOS.init();
     }, []);
+
     return (
         <div className={styles.section4_wrapper}>
             <p className={styles.title}>
                 {t("HowItWorks")}
             </p>
             <div>
-                <Box sx={{ flexGrow: 1 }} >
+                <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2} className={styles.catalog_wrapper}>
                         <Grid size={{ xs: 12, sm: 5.5 }}>
                             <p className={styles.how_work_text}>
-                                {data?.how_it_work}
+                                {how_it_work}
                             </p>
                             <div className={styles.img_screen} data-aos="flip-left">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.image_two_work}`}
+                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${image_two_work}`}
                                     alt="Mobile screen 2"
                                     style={{ objectFit: 'contain' }}
                                 />
                             </div>
                             <div className={styles.img_screen} data-aos="flip-left">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.image_three_work}`}
+                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${image_three_work}`}
                                     alt="Mobile screen 3"
                                     style={{ objectFit: 'contain' }}
                                 />
@@ -46,21 +56,21 @@ export default function Section4() {
                             sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <div className={styles.img_screen} data-aos="flip-left">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.image_four_work}`}
+                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${image_four_work}`}
                                     alt="Mobile screen 4"
                                     style={{ objectFit: 'contain' }}
                                 />
                             </div>
                             <div className={styles.img_screen} data-aos="flip-left">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.image_five_work}`}
+                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${image_five_work}`}
                                     alt="Mobile screen 5"
                                     style={{ objectFit: 'contain' }}
                                 />
                             </div>
                             <div className={styles.img_screen_last} data-aos="flip-left">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${data?.image_one_work}`}
+                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${image_one_work}`}
                                     alt="Mobile screen 6"
                                     style={{ objectFit: 'contain' }}
                                 />

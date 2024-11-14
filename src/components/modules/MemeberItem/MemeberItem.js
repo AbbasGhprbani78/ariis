@@ -4,12 +4,10 @@ import styles from './Member.module.css'
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import { useLanguage } from '@/context/LangContext';
+import { convertToFarsiDigits } from '@/utils/ConvertNumberToFarsi';
 
 
-const convertToFarsiDigits = (number) => {
-    const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-    return number.toString().replace(/\d/g, (digit) => farsiDigits[digit]);
-};
+
 
 
 export default function MemeberItem({ member }) {
