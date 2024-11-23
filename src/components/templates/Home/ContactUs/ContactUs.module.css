@@ -10,15 +10,14 @@
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     width: max-content;
-    padding-right: 4rem;
 }
 
 .contactus_form {
-    padding: 0 0 0 4rem;
+   
 }
 
 .contactus_form_right {
-    padding: 0 4rem 0 0;
+   
 }
 
 .btn_wrapper {
@@ -65,6 +64,7 @@
     line-height: 20px;
     color: var(--color-1);
     width: 80%;
+    margin: 0 5px;
 }
 
 .btn_rtl {
@@ -88,9 +88,8 @@
 
 @media (max-width:900px) {
     .contactus_container {
-        width: 90%;
+        width: 100%;
         margin: 2rem 0 0 0;
-        padding: 0 20px;
     }
 
     .contactus_form {

@@ -7,10 +7,10 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
 
-    const [language, setLanguage] = useState('en'); 
+    const [language, setLanguage] = useState('fa'); 
 
     useEffect(() => {
-        const storedLanguage = localStorage.getItem('language') || 'en';
+        const storedLanguage = localStorage.getItem('language') || 'fa';
         setLanguage(storedLanguage);
         i18n.changeLanguage(storedLanguage); 
     }, []);

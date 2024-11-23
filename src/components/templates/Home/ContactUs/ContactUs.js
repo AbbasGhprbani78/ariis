@@ -135,19 +135,19 @@ export default function ContactUs() {
             <div className={styles.wrap_left_contactus}>
               <div className={styles.contactus_socialmedia}>
                 <div className={styles.media_item}>
-                  <LocationOnOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media} ${styles.icon_loc}`} />
+                  <LocationOnOutlinedIcon  className={`${styles.icon_media} ${styles.icon_loc}`} />
                   <p className={styles.text_media}>
                     {language === "en" ? address : address_farsi}
                   </p>
                 </div>
                 <div className={styles.media_item}>
-                  <LocalPhoneOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media} ${styles.icon_phone}`} />
+                  <LocalPhoneOutlinedIcon  className={`${styles.icon_media} ${styles.icon_phone}`} />
                   <p className={styles.text_media} style={{ direction: "ltr", width: "max-content" }}>
                     {language === "fa" ? convertToFarsiDigits(phone_number) : phone_number}
                   </p>
                 </div>
                 <div className={styles.media_item}>
-                  <MailOutlineOutlinedIcon sx={{ margin: "0 5px" }} className={`${styles.icon_media} ${styles.icon_email}`} />
+                  <MailOutlineOutlinedIcon  className={`${styles.icon_media} ${styles.icon_email}`} />
                   <p className={styles.text_media}>{email}</p>
                 </div>
                 <div className={styles.media_item}>
@@ -156,7 +156,6 @@ export default function ContactUs() {
                   <MediaItem icon={WhatsAppIcon} url_link={`https://wa.me/${whatsapp}`} backStyle={"whatsback"} />
                   <MediaItem icon={LinkedInIcon} url_link={`https://www.linkedin.com/in/${linkedin}`} backStyle={"linback"} />
                 </div>
-
               </div>
             </div>
           </Grid>

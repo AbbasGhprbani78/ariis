@@ -20,7 +20,8 @@ export default function OurTeam() {
     const { t } = useTranslation();
     const { language } = useLanguage();
     const dispatch = useDispatch();
-
+    const [mainScore, totalScore] = point ? `${point}/10`.split('/') : ['0', '10'];
+    const [dataChart, setDataChart] = useState("");
 
     const { our_team_text,
         year_founded,
@@ -30,8 +31,6 @@ export default function OurTeam() {
         number_of_cooperation_with_other_countries,
         point, loading, error } = useSelector((state) => state?.aboutus?.data || {});
 
-    const [mainScore, totalScore] = point ? `${point}/10`.split('/') : ['0', '10'];
-    const [dataChart, setDataChart] = useState("");
 
     const getDataChart = async () => {
         try {
@@ -175,11 +174,11 @@ export default function OurTeam() {
                                     </p>
                                 </div>
                                 <div className={styles.item6_flag}>
-                                    <img className={styles.flag_img} src="/images/flag/usa.png" alt="flag" />
-                                    <img className={styles.flag_img} src="/images/flag/canada.png" alt="flag" />
-                                    <img className={styles.flag_img} src="/images/flag/afg.png" alt="flag" />
-                                    <img className={styles.flag_img} src="/images/flag/france.png" alt="flag" />
-                                    <img className={styles.flag_img} src="/images/flag/united-kingdom.png" alt="flag" />
+                                    <img className={styles.flag_img} src="/images/usa.png" alt="flag" />
+                                    <img className={styles.flag_img} src="/images/france.png" alt="flag" />
+                                    <img className={styles.flag_img} src="/images/afg.png" alt="flag" />
+                                    <img className={styles.flag_img} src="/images/france.png" alt="flag" />
+                                    <img className={styles.flag_img} src="/images/united-kingdom.png" alt="flag" />
                                 </div>
                             </div>
                         </div>

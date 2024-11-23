@@ -52,7 +52,7 @@ export default function Info() {
             <div className={`${styles.text_info_wrapper} ${language === "fa" && styles.text_info_right}`}>
               {language === "en" ? (
                 <div className={styles.info_logo}>
-                  <Image src="/images/logo.svg" width={100} height={63} alt='logo' />
+                  <Image src="/images/g14.svg" width={100} height={63} alt='logo' />
                 </div>
               ) : (
                 <p className={styles.ariis_text}>{title_image_one}</p>

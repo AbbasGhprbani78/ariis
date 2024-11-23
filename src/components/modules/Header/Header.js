@@ -51,19 +51,22 @@ export default function Header() {
                         <Image src={"/images/g14.svg"} width={25} height={33} alt="logo" />
                     </>
                 ) : (
-                    <>
-                        <div className={styles.section_one_header}>
-                            <div className={styles.header_logo}>
-                                <Image src={"/images/g14.svg"} width={30} height={33} alt="logo" />
-                            </div>
+                    <div className={styles.header_wrapper}>
+                        <div className={styles.section_one_header}>        
                             <nav className={styles.header_menu}>
+                                  <div className={`${styles.header_logo} ${language==="en" ?styles.header_link_left:styles.header_link_right}`}>
+                                    <Image src={"/images/g14.svg"} width={30} height={33} alt="logo" />
+                                </div> 
                                 <Link
-                                    className={`${styles.header_link} ${isActive("/") && styles.active_route}`}
+                                    className={`${styles.header_link} 
+                                    ${language==="en" ?styles.header_link_left:styles.header_link_right}
+                                     ${isActive("/") && styles.active_route}`}
                                     href="/"
                                 >
                                     {t("Home")}
                                 </Link>
-                                <li className={styles.header_items_wrapper}>
+                                <li className={`${styles.header_items_wrapper}
+                                 ${language==="en" ?styles.header_link_left:styles.header_link_right}`}>
                                     <div className={styles.header_dropdown}>
                                         <span className={styles.products_text}>{t("Products")}</span>
                                         <ExpandMoreIcon className={styles.icon_drop} />
@@ -83,26 +86,31 @@ export default function Header() {
                                     </ul>
                                 </li>
                                 <Link
-                                    className={`${styles.header_link} ${isActive("/articles") && styles.active_route}`}
+                                    className={`${styles.header_link}
+                                     ${language==="en" ?styles.header_link_left:styles.header_link_right}
+                                      ${isActive("/articles") && styles.active_route}`}
                                     href="/articles"
                                 >
                                     {t("Articles")}
                                 </Link>
                                 <Link
-                                    className={`${styles.header_link} ${isActive("/aboutus") && styles.active_route}`}
+                                    className={`${styles.header_link}
+                                     ${language==="en" ?styles.header_link_left:styles.header_link_right} 
+                                     ${isActive("/aboutus") && styles.active_route}`}
                                     href="/aboutus"
                                 >
                                     {t("AboutUs")}
                                 </Link>
                                 <Link
-                                    className={`${styles.header_link} ${isActive("/contactus") && styles.active_route}`}
+                                    className={`${styles.header_link}
+                                     ${language==="en" ?styles.header_link_left:styles.header_link_right}
+                                      ${isActive("/contactus") && styles.active_route}`}
                                     href="/contactus"
                                 >
                                     {t("ContactUs")}
                                 </Link>
                             </nav>
                         </div>
-
                         <div className={styles.header_actions}>
                             <div className={styles.header_wrap_btn_switch}>
                                 <button
@@ -120,9 +128,11 @@ export default function Header() {
                             </div>
                             {/* <Button text={t("ContactUs")} icon={EastIcon} /> */}
                         </div>
-                    </>
+                    </div>
                 )}
             </header>
         </>
     );
 }
+
+

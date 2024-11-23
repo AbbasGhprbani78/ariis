@@ -6,10 +6,12 @@ import Header from "@/components/modules/Header/Header";
 import Footer from "@/components/modules/Footer/Footer";
 
 export const metadata = {
-  title: "",
+  title: "Nobinco",
   description: "",
+  icons: {
+    icon: "/images/g14.svg",
+  },
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

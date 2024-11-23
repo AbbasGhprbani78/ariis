@@ -14,7 +14,7 @@ export default function Coustomers() {
                         <img
                             src={`${process.env.NEXT_PUBLIC_BASE_URL}${item}`}
                             alt="Customer logo"
-                            style={{ width: "50px", height: "50px" }}
+                            style={{ width: "70px", height: "70px" }}
                         />
                     </div>
                 ))

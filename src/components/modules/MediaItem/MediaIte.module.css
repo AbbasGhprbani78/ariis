@@ -8,11 +8,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 40px;
     transition: all .3s ease-in-out;
+    margin-right: 40px;
 }
 
-.mediaItem .rightmedia {
+.rightmedia {
     margin-right: 0;
     margin-left: 40px;
 }
