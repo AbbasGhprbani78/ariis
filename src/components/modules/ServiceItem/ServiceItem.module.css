@@ -1,0 +1,125 @@
+.serviceItem_wrapper {
+    width: 100%;
+    height: 470px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.serviceItem_wrapper:hover {
+    border-radius: 12px;
+}
+
+.image_wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    border-radius: 12px;
+}
+
+
+.left_border {
+    border-left: 1px solid #c7c7d6;
+    transition: all 0.3s ease;
+}
+
+.right_border {
+    border-right: 1px solid #c7c7d6;
+    transition: all 0.3s ease;
+}
+
+.right_border:hover,
+.left_border {
+    border: none;
+}
+
+.image_wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    clip-path: inset(68% 16px 0 16px round 8px);
+    transition: clip-path 0.3s ease, transform 0.3s ease, width 0.3s ease;
+    border-radius: 12px;
+}
+
+
+.serviceItem_wrapper:hover .image_wrapper img {
+    clip-path: inset(0);
+    margin: 0;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    position: relative;
+    z-index: 5;
+}
+
+.wrap_icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all .3s ease;
+}
+
+.serviceItem_wrapper:hover .wrap_icon {
+    background-color: #fff;
+    color: #000;
+}
+
+.wrap_icon .icon {
+    transition: fill 0.3s ease;
+}
+
+.serviceItem_title {
+    font-size: 1.2rem;
+    margin: 2rem 0 1.2rem 0;
+    font-weight: 500;
+    line-height: 28px;
+    text-align: justify;
+}
+
+.serviceItem_text {
+    font-size: .9rem;
+    line-height: 28px;
+    text-align: justify;
+    font-weight: 300;
+}
+
+.serviceItem_wrapper:hover {
+    color: #fff;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 4;
+    transition: clip-path 0.3s ease, background-color 0.3s ease;
+    clip-path: inset(68% 16px 0 16px round 8px);
+    border-radius: 12px;
+}
+
+.serviceItem_wrapper:hover .overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    clip-path: inset(0);
+}

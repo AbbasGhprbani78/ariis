@@ -29,10 +29,10 @@
 .images_wrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(2, minmax(180px, 1fr));
+    grid-template-rows: repeat(2, minmax(170px, 1fr));
     grid-template-areas:
-        "sec_1 sec_1 sec_2 sec_2 sec_3 sec_3 sec_3"
-        "sec_4 sec_4 sec_4 sec_4 sec_4 sec_5 sec_5";
+        "sec_1 sec_1 sec_3 sec_3 sec_3 sec_3 sec_3"
+        "sec_4 sec_4 sec_4 sec_4 sec_4 sec_2 sec_2";
     gap: 1rem;
     width: 100%;
     height: 100%;
@@ -40,11 +40,12 @@
 
 .item_image {
     position: relative;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .item_image_1 {
     grid-area: sec_1;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,23 +79,17 @@
     justify-content: center;
 }
 
-.item_image_5 {
-    grid-area: sec_5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+
 
 
 @media (max-width:1210px) {
     .images_wrapper {
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(2, minmax(180px, 1fr));
         grid-template-areas:
-            "sec_1 sec_1 sec_2 sec_2 sec_3 sec_3"
-            "sec_5 sec_5 sec_4 sec_4 sec_4 sec_4";
+            "sec_1 sec_1 sec_3 sec_3 "
+            "sec_4 sec_4  sec_2 sec_2";
         gap: 1rem;
         width: 100%;
         height: 100%;
@@ -110,20 +105,18 @@
 }
 
 
-@media (max-width:1025px) {
-}
+@media (max-width:1025px) {}
 
 @media (max-width:900px) {
-   
 
     .images_wrapper {
         margin-top: 2rem;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(2, minmax(150px, 1fr));
         grid-template-areas:
-            "sec_1 sec_2 sec_3 sec_3 sec_3"
-            "sec_4 sec_4 sec_4 sec_4 sec_5";
+            "sec_1 sec_2 sec_3 sec_3"
+            "sec_4 sec_4 sec_4 sec_4";
         gap: 1rem;
         width: 100%;
         height: 100%;
@@ -147,12 +140,11 @@
 
     .images_wrapper {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 150px);
+        grid-template-rows: repeat(4, 180px);
         grid-template-areas:
             "sec_1"
             "sec_2"
             "sec_3"
             "sec_4"
-            "sec_5";
     }
 }

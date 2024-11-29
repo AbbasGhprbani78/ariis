@@ -20,7 +20,6 @@ export default function OurTeam() {
     const { t } = useTranslation();
     const { language } = useLanguage();
     const dispatch = useDispatch();
-    const [mainScore, totalScore] = point ? `${point}/10`.split('/') : ['0', '10'];
     const [dataChart, setDataChart] = useState("");
 
     const { our_team_text,
@@ -30,6 +29,7 @@ export default function OurTeam() {
         satisfaction_level,
         number_of_cooperation_with_other_countries,
         point, loading, error } = useSelector((state) => state?.aboutus?.data || {});
+         const [mainScore, totalScore] = point ? `${point}/10`.split('/') : ['0', '10'];
 
 
     const getDataChart = async () => {

@@ -36,8 +36,10 @@ const en = {
     RelatedArticles: "Related Articles",
     Comments: "Comments",
     ShowMore: "Show More",
-    ShowLess: "Show Less"
-
+    ShowLess: "Show Less",
+    brand_text:"Customers who trusted us",
+    nobinServices:"Nobin Services",
+    customers:"Customers"
 }
 
 export default en

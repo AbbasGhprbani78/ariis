@@ -5,8 +5,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LangContext';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDataHome } from '@/redux/home';
 import Loading from '@/components/modules/Loading/Loading';
@@ -28,10 +26,7 @@ export default function Info() {
   
   const { loading, error } = useSelector((state) => state.home);
 
-  useEffect(() => {
-    AOS.init();
-  }, []);
-
+  
   useEffect(() => {
     dispatch(getDataHome(language));
   }, [language]);
@@ -62,7 +57,7 @@ export default function Info() {
           </Grid>
           <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', justifyContent: "center" }}>
             <div className={styles.images_wrapper}>
-              {[info_image_one, info_image_two, info_image_three, info_image_four, info_image_five].map((image, index) => (
+              {[info_image_one, info_image_two, info_image_three, info_image_four].map((image, index) => (
                 <div key={index} className={`${styles.item_image} ${styles[`item_image_${index + 1}`]}`}>
                   <Image src={`${process.env.NEXT_PUBLIC_BASE_URL}${image}`} alt='info image' layout='fill' />
                 </div>

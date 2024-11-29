@@ -1,17 +1,18 @@
-
 import HeaderHome from "@/components/templates/Home/HeaderHome/HeaderHome";
 import Info from "@/components/templates/Home/Info/Info";
 import Products from "@/components/templates/Home/Products/Products";
 import Slider from "@/components/templates/Home/Slider/Slider";
 import ContactUs from "@/components/templates/Home/ContactUs/ContactUs";
+import Brands from "@/components/templates/Home/Brands/Brands";
+import styles from "./page.module.css";
 import Coustomers from "@/components/templates/Home/Coustomers/Coustomers";
-import styles from './page.module.css'
 
 export const metadata = {
   title: "Nobinco",
   openGraph: {
     title: "Nobinco",
-    description: "Explore Nobinco for the best products and services in the market.",
+    description:
+      "Explore Nobinco for the best products and services in the market.",
     url: "https://nobinco.com",
     metadataBase: new URL("https://nobinco.com"),
     siteName: "Nobinco",
@@ -30,15 +31,19 @@ export const metadata = {
 };
 
 export default function Home() {
-
   return (
     <div className={styles.container}>
       <HeaderHome />
-     <Info />
+      <Info />
       <Products />
-       <Coustomers />
-       <Slider />
-      <ContactUs />
+      <Coustomers />
+      <Brands />
+      <Slider />
     </div>
   );
 }
+
+
+ {
+   /*<ContactUs /> */
+ }

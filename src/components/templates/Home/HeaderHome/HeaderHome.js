@@ -1,64 +1,70 @@
-"use client"
-import React from 'react'
-import styles from './HeaderHome.module.css'
-import { useTranslation } from 'react-i18next';
-import Button from '@/components/modules/Button/Button';
-import EastIcon from '@mui/icons-material/East';
-import { useLanguage } from '@/context/LangContext';
-import useWindowWidth from '@/hook/WindowWidth';
-import { useSelector } from 'react-redux';
-
+"use client";
+import React, { useState } from "react";
+import styles from "./HeaderHome.module.css";
+import useWindowWidth from "@/hook/WindowWidth";
+import { useSelector } from "react-redux";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 export default function HeaderHome() {
-    const { t } = useTranslation();
-    const { language } = useLanguage();
-    const width = useWindowWidth();
+  const width = useWindowWidth();
 
-    if (width === undefined) {
-        return null;
-    }
+  const headerText = useSelector(
+    (state) => state.home.data?.header_text || "Default Header"
+  );
 
-    const headerText = useSelector((state) => state.home.data?.header_text);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-    return (
-        <>
-            {
-                width < 760 ?
-                    <>
-                        <div className={`${styles.header_home} ${language === "fa" && styles.header_home_right}`}></div>
-                        <div className={styles.header_text_wrraper_m}>
-                            <h1 className={styles.explore}>Explore</h1>
-                            <p className={styles.future}>FUTURE</p>
-                            <p className={styles.text}>
-                                {headerText}
-                            </p>
-                        </div>
-                    </> :
-                    <div className={`${styles.header_home} ${language === "fa" && styles.header_home_right}`}>
-                        <div className={`${styles.texts_header_home_wrappper} ${language === "fa" && styles.texts_header_home_wrappper_right}`}>
-                            <div className={`${styles.texts_header_home} ${language === "fa" && styles.texts_header_home_right}`}>
-                                <h1 className={styles.explore}>Explore</h1>
-                                <p className={styles.future}>FUTURE</p>
-                                <p className={styles.text}>
-                                    {headerText}
-                                    <div className={`${styles.btn_wrapper} ${language === "fa" && styles.btn_wrapper_right}`}>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-            }
-        </>
-    );
+  const panels = [
+    {
+      title: "Explore The World",
+      image:
+        "https://images.unsplash.com/photo-1558979158-65a1eaa08691?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+    },
+    {
+      title: "Wild Forest",
+      image:
+        "https://images.unsplash.com/photo-1572276596237-5db2c3e16c5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+    },
+    {
+      title: "Sunny Beach",
+      image:
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80",
+    },
+    {
+      title: "City on Winter",
+      image:
+        "https://images.unsplash.com/photo-1551009175-8a68da93d5f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
+    },
+  ];
+
+  if (width === undefined) {
+    return null;
+  }
+
+  const handlePanelClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  return (
+    <div className={styles.container_slide}>
+      {panels.map((panel, index) => (
+        <div
+          key={index}
+          className={`${styles.panel} ${
+            index === activeIndex ? styles.active : ""
+          }`}
+          style={{ backgroundImage: `url(${panel.image})` }}
+          onClick={() => handlePanelClick(index)}
+        >
+          {index !== activeIndex && (
+            <img src="/images/plus.png" className={styles.icon} />
+          )}
+          <div
+            className={styles.title_wrap}>
+            <CircleOutlinedIcon/>
+            <span className={styles.text_panel}>تایتل اسلاید 1</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
-
-
-
-{/* <div className={`${styles.btn_wrapper} ${language === "fa" && styles.btn_wrapper_right}`}>
-                                <Button text={t("TryNow")} icon={EastIcon} />
-                            </div> */}
-
-
-{/* <button className={`${styles.btn_sec1} ${language === "fa" && styles.btn_right}`}>
-                                            {t("TryNow")}
-                                            <EastIcon className={`${styles.icon_east} ${language == "fa" && styles.east_right}`} />
-                                        </button> */}

@@ -263,6 +263,11 @@ body {
     --sb-size: 9px;
     
 }
+
+
+video {
+    object-fit: fill;
+}
 /* 
 body::-webkit-scrollbar {
     width: var(--sb-size)
