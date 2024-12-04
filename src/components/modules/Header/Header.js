@@ -13,7 +13,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProjectsTitle } from "@/redux/header";
 import { useRouter } from "next/navigation";
 
-
 export default function Header() {
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ export default function Header() {
   useEffect(() => {
     dispatch(getProjectsTitle(language));
   }, [dispatch, language]);
-  
 
   const handleLanguageSwitch = (lang) => {
     if (pathname.startsWith("/articles/")) {
@@ -41,7 +39,7 @@ export default function Header() {
     changeLanguage(lang);
   };
 
-
+  console.log(data);
 
   return (
     <>
@@ -105,7 +103,13 @@ export default function Header() {
                     {data?.product_nobin && (
                       <li className={styles.dropDown_item}>
                         {t("nobinp")}
-                        <ul className={`${styles.subMenu} ${language==="en" ?styles.subMenu_en :styles.subMenu_fa}`}>
+                        <ul
+                          className={`${styles.subMenu} ${
+                            language === "en"
+                              ? styles.subMenu_en
+                              : styles.subMenu_fa
+                          }`}
+                        >
                           {data.product_nobin.map((product) => (
                             <li
                               className={styles.subMenu_item}
@@ -115,7 +119,9 @@ export default function Header() {
                                 href={`/product/${product.id}`}
                                 className={styles.link_dropDown}
                               >
-                                {product.name}
+                                {language === "en"
+                                  ? product.name
+                                  : product.name_farsi}
                               </Link>
                             </li>
                           ))}
@@ -125,7 +131,13 @@ export default function Header() {
                     {data?.product_custom && (
                       <li className={styles.dropDown_item}>
                         {t("customp")}
-                        <ul className={`${styles.subMenu} ${language==="en" ?styles.subMenu_en :styles.subMenu_fa}`}>
+                        <ul
+                          className={`${styles.subMenu} ${
+                            language === "en"
+                              ? styles.subMenu_en
+                              : styles.subMenu_fa
+                          }`}
+                        >
                           {data?.product_custom.map((product) => (
                             <li
                               className={styles.subMenu_item}
@@ -135,7 +147,9 @@ export default function Header() {
                                 href={`/product/${product.id}`}
                                 className={styles.link_dropDown}
                               >
-                                {product.name}
+                                {language === "en"
+                                  ? product.name
+                                  : product.name_farsi}
                               </Link>
                             </li>
                           ))}
@@ -144,7 +158,7 @@ export default function Header() {
                     )}
                   </ul>
                 </li>
-                <Link
+                {/* <Link
                   className={`${styles.header_link}
                                      ${
                                        language === "en"
@@ -158,7 +172,7 @@ export default function Header() {
                   href="/articles"
                 >
                   {t("Articles")}
-                </Link>
+                </Link> */}
                 <Link
                   className={`${styles.header_link}
                                      ${

@@ -41,26 +41,24 @@ export default function HeaderHome() {
     },
   ];
 
-
   const panelsMobile = [
-      {
-        title: homeData?.sidebar_image_one_text || "Default Title",
-        image: homeData?.sidebar_image_mobile_one || null,
-      },
-      {
-        title: homeData?.sidebar_image_two_text || "Default Title",
-        image: homeData?.sidebar_image_mobile_two || null,
-      },
-      {
-        title: homeData?.sidebar_image_three_text || "Default Title",
-        image: homeData?.sidebar_image_mobile_three || null,
-      },
-      {
-        title: homeData?.sidebar_image_four_text || "Default Title",
-        image: homeData?.sidebar_image_mobile_five || null,
-      },
+    {
+      title: homeData?.sidebar_image_one_text || "Default Title",
+      image: homeData?.sidebar_image_mobile_one || null,
+    },
+    {
+      title: homeData?.sidebar_image_two_text || "Default Title",
+      image: homeData?.sidebar_image_mobile_two || null,
+    },
+    {
+      title: homeData?.sidebar_image_three_text || "Default Title",
+      image: homeData?.sidebar_image_mobile_three || null,
+    },
+    {
+      title: homeData?.sidebar_image_four_text || "Default Title",
+      image: homeData?.sidebar_image_mobile_four || null,
+    },
   ];
-
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -99,6 +97,7 @@ export default function HeaderHome() {
                     <img
                       src={`${process.env.NEXT_PUBLIC_BASE_URL}${panel?.image}`}
                       alt=""
+                      className={styles.image_header_item}
                     />
                     <div
                       className={`${styles.wrap_title_m} ${

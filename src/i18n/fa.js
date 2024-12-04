@@ -29,6 +29,7 @@ const fa = {
   YouMightLike: "شاید بپسندید",
   commentsendsuccessfully: "کامنت با موفقیت ارسال شد",
   success: "موفقیت",
+  sendMessage: "پیام با موفقیت ارسال شد",
   error: "خطا",
   Nameisrequired: "وارد کردن نام اجباری است",
   Commentisrequired: "نوشتن کامنت اجباری است",
@@ -41,6 +42,7 @@ const fa = {
   customers: "مشتریان ما",
   nobinp: "محصولات نوبین",
   customp: "محصولات سفارشی",
+  Nobin: "نوبین",
 };
 
 export default fa

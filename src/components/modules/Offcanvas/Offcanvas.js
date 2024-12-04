@@ -61,11 +61,9 @@ export default function Offcanvas() {
     dispatch(getProjectsTitle(language));
   }, []);
 
-    useEffect(() => {
-      setOpen(false);
-    }, [pathname]);
-
-
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <div className={styles.offcanvas_container}>
@@ -135,7 +133,9 @@ export default function Offcanvas() {
                               className={styles.link_offcanvas}
                               href={`/product/${product.id}`}
                             >
-                              {product?.name}
+                              {language === "en"
+                                ? product.name
+                                : product.name_farsi}
                             </Link>
                           </ListItemButton>
                         ))}
@@ -165,7 +165,9 @@ export default function Offcanvas() {
                               className={styles.link_offcanvas}
                               href={`/product/${product.id}`}
                             >
-                              {product?.name}
+                              {language === "en"
+                                ? product.name
+                                : product.name_farsi}
                             </Link>
                           </ListItemButton>
                         ))}
@@ -175,7 +177,7 @@ export default function Offcanvas() {
               )}
             </List>
           </Collapse>
-          <ListItemButton
+          {/* <ListItemButton
             className={`${styles.link_item} ${
               isActive("/articles") && styles.active_route
             }`}
@@ -183,7 +185,7 @@ export default function Offcanvas() {
             <Link className={styles.link_offcanvas} href={"/articles"}>
               {t("Articles")}
             </Link>
-          </ListItemButton>
+          </ListItemButton> */}
           <ListItemButton
             className={`${styles.link_item} ${
               isActive("/aboutus") && styles.active_route
@@ -217,9 +219,8 @@ export default function Offcanvas() {
   );
 }
 
-
- {
-   /* <ListItemButton
+{
+  /* <ListItemButton
             className={`${styles.link_item} ${
               isActive("/contactus") && styles.active_route
             }`}
@@ -228,10 +229,10 @@ export default function Offcanvas() {
               {t("ContactUs")}
             </Link>
           </ListItemButton> */
- }
+}
 
- {
-   /* <div className={styles.btn_wrappper}>
+{
+  /* <div className={styles.btn_wrappper}>
             <Button text={t("ContactUs")} icon={EastIcon} />
           </div> */
- }
+}

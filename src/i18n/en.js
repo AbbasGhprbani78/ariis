@@ -41,6 +41,8 @@ const en = {
   customers: "Customers",
   nobinp: "Nobin Product",
   customp: "Custom Product",
+  sendMessage: "Send Message Successfully",
+  Nobin: "Nobin",
 };
 
 export default en;

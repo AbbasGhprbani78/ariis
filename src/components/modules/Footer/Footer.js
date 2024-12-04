@@ -29,13 +29,13 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MediaItem from "../MediaItem/MediaItem";
 import { convertToFarsiDigits } from "@/utils/ConvertNumberToFarsi";
 import { getContactusData } from "@/redux/contactus";
-import Image from "next/image";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 
 export default function Footer() {
   const { language } = useLanguage();
   const { t } = useTranslation();
   const [showToast, setShowToast] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { i18n } = useTranslation();
   const rtlSwitch = i18n?.dir();
   const swiperRef = useRef(null);
@@ -78,38 +78,78 @@ export default function Footer() {
     }));
   };
 
+const validateForm = () => {
+  const errors = [];
+
+  const errorMessages = {
+    en: {
+      nameRequired: "Name is required.",
+      emailRequired: "Email is required.",
+      emailInvalid: "Invalid email format.",
+      messageRequired: "Message is required.",
+    },
+    fa: {
+      nameRequired: "نام لازم است.",
+      emailRequired: "ایمیل لازم است.",
+      emailInvalid: "فرمت ایمیل نامعتبر است.",
+      messageRequired: "پیام لازم است.",
+    },
+  };
+
+  const messages = errorMessages[language] || errorMessages.en;
+
+  if (!formdata.name.trim()) errors.push(messages.nameRequired);
+  if (!formdata.email.trim()) {
+    errors.push(messages.emailRequired);
+  } else if (!/^\S+@\S+\.\S+$/.test(formdata.email)) {
+    errors.push(messages.emailInvalid);
+  }
+  if (!formdata.message.trim()) errors.push(messages.messageRequired);
+
+  if (errors.length > 0) {
+    setToastMessage({
+      type: "error",
+      title: language === "en" ? "Validation Errors" : "خطاهای اعتبارسنجی",
+      message: errors.join(" "),
+    });
+    setShowToast(true);
+    return false;
+  }
+
+  return true;
+};
+
   const sendData = async (e) => {
     e.preventDefault();
-    if (
-      formdata.email.trim() &&
-      formdata.email.trim() &&
-      formdata.message.trim()
-    ) {
-      try {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/home/contact-us/`,
-          formdata,
-          {}
-        );
-        if (response.status === 201) {
-          formdata.email = "";
-          formdata.message = "";
-          formdata.name = "";
-          setShowToast(true);
-          setToastMessage({
-            type: "success",
-            title: t("success"),
-            message: t("success"),
-          });
-        }
-      } catch (error) {
+    if (!validateForm()) return;
+
+    try {
+      setLoading(true)
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/home/contact-us/`,
+        formdata,
+        {}
+      );
+      if (response.status === 201) {
+        formdata.email = "";
+        formdata.message = "";
+        formdata.name = "";
         setShowToast(true);
         setToastMessage({
-          type: "error",
-          title: t("error"),
-          message: t("error"),
+          type: "success",
+          title: t("success"),
+          message: t("sendMessage"),
         });
       }
+    } catch (error) {
+      setShowToast(true);
+      setToastMessage({
+        type: "error",
+        title: t("error"),
+        message: t("error"),
+      });
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -165,7 +205,7 @@ export default function Footer() {
                       placeholder={t("Message")}
                     />
                     <div className={styles.btn_wrapper}>
-                      <button
+                      <button disabled={loading}
                         className={`${styles.btn} ${
                           language === "fa" && styles.btn_rtl
                         }`}
@@ -248,13 +288,11 @@ export default function Footer() {
           </Box>
         </div>
       </div>
+      <p className={styles.title_footer}>{t("Nobin")}</p>
       <div className={styles.footer_wrapper_bottom}>
         <Grid container spacing={4} className={styles.footer_content_bottom}>
           <Grid size={{ xs: 12, md: 4 }}>
             <div className={styles.wrap_logo_text}>
-              <div className={styles.wrap_logo}>
-                <Image src={"/images/nobinw.svg"} width={40} height={40} />
-              </div>
               <p className={styles.text_footer}>{text}</p>
             </div>
           </Grid>
