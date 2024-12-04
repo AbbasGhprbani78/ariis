@@ -2,9 +2,6 @@
     background-color: #000;
     color: #fff;
     direction: ltr;
-}
-
-.item_wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,7 +9,10 @@
     padding: 9px 30px;
     font-size: .9rem;
     width: 181px;
+    min-height: 41.2px;
 }
+
+
 
 .img_wrapper {
     width: 20px;

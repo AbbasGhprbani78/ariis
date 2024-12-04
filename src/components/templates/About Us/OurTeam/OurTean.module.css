@@ -1,5 +1,5 @@
 .ourteam_wrapper {
-    padding: 3rem 3rem 2rem 3rem;
+    padding: 3rem 0 2rem 0;
 }
 
 .title_our {
@@ -16,7 +16,7 @@
     color: var(--color-1);
     line-height: 24px;
     text-align: justify;
-    width: 90%;
+    width: 100%;
 }
 
 .about_feature {
@@ -170,7 +170,7 @@
 
 .item6_top {
     display: flex;
-    align-items: start;
+    align-items: center;
     color: #fff;
 }
 
@@ -211,14 +211,18 @@
 
 @media (max-width:1025px) {
     .ourteam_wrapper {
-        padding: 3rem 2rem 2rem 2rem;
+        padding: 3rem 0 2rem 0;
+    }
+
+    .title_our {
+        font-size: calc(1.4rem + .4vw)
     }
 }
 
 @media (max-width: 768px) {
 
     .item_about {
-        height: 300px;
+        height: 210px;
     }
 
     .about_feature {
@@ -235,6 +239,6 @@
 
 @media (max-width:600px) {
     .ourteam_wrapper {
-        padding: 3rem 1.5rem 2rem 1.5rem;
+        padding: 3rem 0 2rem 0;
     }
 }

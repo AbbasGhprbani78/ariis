@@ -1,9 +1,9 @@
 .featureitem {
     display: flex;
-    align-items: center;
+    align-items: start;
     width: 45%;
     margin-bottom: 23px;
-    justify-content: center;
+    justify-content: start;
 }
 
 .icon_wrapper {

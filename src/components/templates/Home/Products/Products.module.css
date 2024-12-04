@@ -11,3 +11,10 @@
 }
 
 .services_wrapper {}
+
+
+@media (max-width:1024px) {
+    .title {
+        font-size: calc(1.4rem + .4vw);
+    }
+}

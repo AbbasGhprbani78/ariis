@@ -1,4 +1,6 @@
-.footer_container {}
+.footer_container {
+    margin-bottom: 20px;
+}
 
 .footer_wrapper_top {
     background-color: var(--color-1);
@@ -32,8 +34,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     border-radius: var(--border-redi);
     padding: 10px 20px;
     min-width: 90px;
@@ -75,8 +77,8 @@
 
 .btn_slider {
     border-radius: 50%;
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,7 +106,7 @@
 }
 
 
-.contactus_socialmedia {
+.contactus {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -113,23 +115,87 @@
 .media_item {
     display: flex;
     align-items: start;
-    margin-bottom: 2.6rem;
+    margin-bottom: 1.5rem;
 }
 
 .text_media {
-    line-height: 20px;
+    line-height: 24px;
     color: var(--color-1);
-    width: 80%;
     margin: 0 5px;
+    font-size: .9rem;
 }
 
+.wrap_logo_text {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+}
+
+.wrap_logo {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    min-height: 60px;
+    min-width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+}
+
+.text_footer {
+    font-size: .9rem;
+    line-height: 24px;
+    text-align: justify;
+}
+
+.medias_wrap {
+    border-bottom: 1px solid #9f9f9f;
+    height: fit-content;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: max-content;
+}
+
+.nobin_text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #9f9f9f;
+    font-size: .9rem;
+}
+
+
 @media (max-width:1025px) {
+
+    .footer_content_bottom {
+        width: 100%;
+        padding: 0 20px;
+    }
+
     .contactus_form_left {
         padding: 0 20px;
     }
 
     .contactus_form_right {
         padding: 0 20px;
+    }
+}
+
+@media (min-width:900px) {
+    .wrap_part_footer_2 {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+
+    .wrap_part_footer_3 {
+        display: flex;
+        align-items: end;
     }
 }
 
@@ -141,9 +207,17 @@
     .wrap_sliders {
         padding: 0 20px;
     }
+    .wrap_part_footer_3{
+        align-items: center;
+    }
 }
 
 @media (max-width:600px) {
+    .footer_content_bottom {
+        width: 100%;
+        padding: 0 15px;
+    }
+
     .actions_slider {
         display: none;
     }

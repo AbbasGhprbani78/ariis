@@ -29,6 +29,8 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MediaItem from "../MediaItem/MediaItem";
 import { convertToFarsiDigits } from "@/utils/ConvertNumberToFarsi";
 import { getContactusData } from "@/redux/contactus";
+import Image from "next/image";
+import CopyrightIcon from "@mui/icons-material/Copyright";
 
 export default function Footer() {
   const { language } = useLanguage();
@@ -43,7 +45,7 @@ export default function Footer() {
   const { customer_comment } = useSelector(
     (state) => state.aboutus?.data || {}
   );
-  
+
   const {
     address,
     address_farsi,
@@ -53,6 +55,7 @@ export default function Footer() {
     telegram,
     whatsapp,
     linkedin,
+    text,
   } = useSelector((state) => state?.contactus?.data || {});
 
   const [formdata, setFormData] = useState({
@@ -122,7 +125,6 @@ export default function Footer() {
     dispatch(getAboutusData(language));
     dispatch(getContactusData(language));
   }, [language]);
-
 
   return (
     <footer className={styles.footer_container}>
@@ -247,36 +249,59 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.footer_wrapper_bottom}>
-        <div className={styles.footer_content_bottom}>
-          <div className={styles.contactus_socialmedia}>
-            <div className={styles.media_item}>
-              <LocationOnOutlinedIcon
-                className={`${styles.icon_media} ${styles.icon_loc}`}
-              />
-              <p className={styles.text_media}>
-                {language === "en" ? address : address_farsi}
-              </p>
+        <Grid container spacing={4} className={styles.footer_content_bottom}>
+          <Grid size={{ xs: 12, md: 4 }}>
+            <div className={styles.wrap_logo_text}>
+              <div className={styles.wrap_logo}>
+                <Image src={"/images/nobinw.svg"} width={40} height={40} />
+              </div>
+              <p className={styles.text_footer}>{text}</p>
             </div>
-            <div className={styles.media_item}>
-              <LocalPhoneOutlinedIcon
-                className={`${styles.icon_media} ${styles.icon_phone}`}
-              />
-              <p
-                className={styles.text_media}
-                style={{ direction: "ltr", width: "max-content" }}
-              >
-                {language === "fa"
-                  ? convertToFarsiDigits(phone_number)
-                  : phone_number}
-              </p>
+          </Grid>
+          <Grid
+            className={styles.wrap_part_footer_2}
+            size={{ xs: 12, md: 4 }}
+            sx={{ display: "flex" }}
+          >
+            <div className={styles.contactus}>
+              <div className={styles.media_item}>
+                <LocationOnOutlinedIcon
+                  className={`${styles.icon_media} ${styles.icon_loc}`}
+                />
+                <p className={styles.text_media}>
+                  {language === "en" ? address : address_farsi}
+                </p>
+              </div>
+              <div className={styles.media_item}>
+                <MailOutlineOutlinedIcon
+                  className={`${styles.icon_media} ${styles.icon_email}`}
+                />
+                <p className={styles.text_media}>{email}</p>
+              </div>
+              <div className={styles.media_item}>
+                <LocalPhoneOutlinedIcon
+                  className={`${styles.icon_media} ${styles.icon_phone}`}
+                />
+                <p
+                  className={styles.text_media}
+                  style={{ direction: "ltr", width: "max-content" }}
+                >
+                  {language === "fa"
+                    ? convertToFarsiDigits(phone_number)
+                    : phone_number}
+                </p>
+              </div>
             </div>
-            <div className={styles.media_item}>
-              <MailOutlineOutlinedIcon
-                className={`${styles.icon_media} ${styles.icon_email}`}
-              />
-              <p className={styles.text_media}>{email}</p>
-            </div>
-            <div className={styles.media_item}>
+          </Grid>
+          <Grid
+            className={styles.wrap_part_footer_3}
+            size={{ xs: 12, md: 4 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div className={`${styles.media_item} ${styles.medias_wrap}`}>
               <MediaItem
                 icon={InstagramIcon}
                 url_link={`https://www.instagram.com/${instagram}`}
@@ -298,8 +323,12 @@ export default function Footer() {
                 backStyle={"linback"}
               />
             </div>
-          </div>
-        </div>
+            <p className={styles.nobin_text}>
+              <CopyrightIcon />
+              2024 Nobin All Rights Reserved
+            </p>
+          </Grid>
+        </Grid>
       </div>
       <Toast
         type={toastMessage.type}

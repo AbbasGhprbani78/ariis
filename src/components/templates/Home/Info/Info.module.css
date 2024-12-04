@@ -105,7 +105,16 @@
 }
 
 
-@media (max-width:1025px) {}
+@media (max-width:1023px) {
+    .wrap_nobin_images{
+        display: none;
+    }
+
+        .ariis_text {     
+            font-size: calc(1.4rem + .4vw);
+        }
+    
+}
 
 @media (max-width:900px) {
 
@@ -133,11 +142,6 @@
         display: flex;
         justify-content: center;
     }
-
-    .ariis_text {
-        text-align: center;
-    }
-
     .images_wrapper {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, 180px);

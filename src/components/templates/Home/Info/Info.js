@@ -14,14 +14,13 @@ export default function Info() {
   const { language } = useLanguage();
   const dispatch = useDispatch();
 
-  const { title_image_one, text_image_one, info_image_one, info_image_two, info_image_three, info_image_four, info_image_five } = useSelector((state) => ({
+  const { title_image_one, text_image_one, info_image_one, info_image_two, info_image_three, info_image_four} = useSelector((state) => ({
     title_image_one: state.home.data?.title_image_one,
     text_image_one: state.home.data?.text_image_one,
     info_image_one: state.home.data?.info_image_one,
     info_image_two: state.home.data?.info_image_two,
     info_image_three: state.home.data?.info_image_three,
     info_image_four: state.home.data?.info_image_four,
-    info_image_five: state.home.data?.info_image_five
   }));
   
   const { loading, error } = useSelector((state) => state.home);
@@ -55,7 +54,7 @@ export default function Info() {
               <p className={styles.text_info}>{text_image_one}</p>
             </div>
           </Grid>
-          <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', justifyContent: "center" }}>
+          <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', justifyContent: "center" }} className={styles.wrap_nobin_images}>
             <div className={styles.images_wrapper}>
               {[info_image_one, info_image_two, info_image_three, info_image_four].map((image, index) => (
                 <div key={index} className={`${styles.item_image} ${styles[`item_image_${index + 1}`]}`}>

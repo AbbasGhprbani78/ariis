@@ -1,108 +1,179 @@
-.section1_wrapper {
-    width: 100%;
-    background: url("/images/aboutusback.png");
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100dvh;
-}
-
 .aboutus_content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 100%;
-    padding: 0 3rem;
+    width: 100%;
 }
 
-.aboutus_top {
-    /* margin-bottom: 5rem; */
-}
-
-.aboutus_title {
-    font-size: calc(1.5rem + 1vw);
-    font-weight: 500;
-    background: linear-gradient(90deg, #AFC8C0 0%, #F1A07E 100%);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    width: max-content;
-    margin-bottom: 2rem;
-}
-
-.aboutus_text {
-    width: 70%;
-    text-align: start;
-    line-height: 30px;
-    color: #fff;
-
+.wrap {
+    width: 100%;
+    height: 80dvh;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    margin: 5rem 0 2rem 0;
 }
 
 .aboutus_bottom {
+    margin-top: 4rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
 }
 
-.line {
+.grid_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    width: 1px;
-    background-color: #fff;
+    pointer-events: none;
+    display: grid;
+    grid-template-columns: 15% 15% 55% 15%;
+    grid-template-rows: 100%;
+    z-index: 77;
 }
 
-@media (max-width:1025px) {
-    .section1_wrapper {
-        height: max-content;
-    }
+.grid_overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15%;
+    width: 10px;
+    background-color: #f9f9f9;
+}
 
+.grid_overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 30%;
+    width: 10px;
+    background-color: #f9f9f9;
+}
+
+.grid_overlay .line_85 {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 85%;
+    width: 10px;
+    background-color: #f9f9f9;
+}
+
+.aboutus_title {
+    font-size: calc(1.5rem + 1vw);
+    font-weight: 500;
+    color: #fff;
+    width: max-content;
+    padding-bottom: 20px;
+}
+
+.text_video {
+    position: absolute;
+    top: 15%;
+    width: 40%;
+    line-height: 28px;
+    color: #fff;
+    text-align: justify;
+}
+
+.video_en {
+    left: 35%;
+}
+
+.video_fa {
+    right: 18%;
+}
+
+.cover_video {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    background-color: #000000af;
+}
+
+.section1_wrapper_m {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 4.5rem;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .section1_wrapper_m {
+        height: 60dvh;
+        position: relative;
+        width: 100%;
+        max-height: 500px;
+        overflow: hidden;
+    }
+}
+
+
+@media (max-width:1024px) {
     .aboutus_content {
-        padding: 4rem 2rem;
+        padding: 4rem 0;
     }
 
     .aboutus_top {
         margin-top: 3rem;
     }
 
-    .aboutus_text {
-        margin-bottom: 4rem;
-    }
-
     .line {
         display: none;
     }
-}
 
-@media (max-width:992px) {
-    .section1_wrapper {
-        background: var(--color-1);
-    }
-}
-
-@media (max-width:890px) {
-    .section1_wrapper {
-        height: max-content;
-    }
-
-    .aboutus_text {
+    .aboutus_title {
+        position: absolute;
+        top: 40px;
         width: 80%;
-        margin-bottom: 2rem;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .main_text {
+        position: absolute;
+        top: 90px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 80%;
+        color: #fff;
+        line-height: 28px;
+        font-size: .9rem;
+        z-index: 6;
+    }
+
+    .aboutus_bottom {
+        margin-top: 2rem;
     }
 }
+
 
 @media (max-width:768px) {
-    .aboutus_text {
-        width: 90%;
+    .section1_wrapper_m {
+        height: 80dvh;
+        position: relative;
+        width: 100%;
+        max-height: 500px;
     }
 }
 
-
 @media (max-width:600px) {
-    .aboutus_content {
-        padding: 4rem 1.5rem;
-    }
-
     .aboutus_text {
         width: 100%;
         font-size: 1.1rem;
     }
 }
+
+
+
+/* .line {
+    height: 100%;
+    width: 1px;
+    background-color: #fff;
+} */

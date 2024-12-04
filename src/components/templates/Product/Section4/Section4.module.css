@@ -1,11 +1,8 @@
 .section4_wrapper {
-    background-color: #fff;
-    padding: 3rem;
+    padding: 3rem 0;
 }
 
 .catalog_wrapper {
-    padding: 0 50px;
-    justify-content: space-evenly;
 }
 
 .title {
@@ -48,11 +45,15 @@
     .catalog_wrapper {
         padding: 0;
     }
+
+    .title{
+        font-size: calc(1rem + .5vw);
+    }
 }
 
 @media (max-width:940px) {
     .section4_wrapper {
-        padding: 3rem 2rem;
+        padding: 3rem 0;
     }
 }
 

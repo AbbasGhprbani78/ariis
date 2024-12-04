@@ -1,6 +1,5 @@
 .section5_wrapper {
     height: auto;
-    padding: 0 3rem 3rem 3rem;
     margin-top: 2rem;
 }
 
@@ -12,13 +11,24 @@
 .features_wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: 40px;
+    margin: 2rem auto 1rem auto;
+    width: 87%;
 }
 
-@media (max-width:940px) {
-    .section5_wrapper {
-        padding: 0 2rem 3rem 2rem;
+
+@media (max-width:1025px) {
+    .features_wrapper {
+        width: 100%;
+        padding: 40px 20px 0 20px;
+    }
+}
+
+
+@media (max-width:600px) {
+    .features_wrapper {
+        width: 100%;
+        padding: 40px 15px 0 15px;
     }
 }

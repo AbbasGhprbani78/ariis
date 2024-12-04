@@ -1,6 +1,6 @@
 const fa = {
   Home: "خانه",
-  Products: "خدمات",
+  Products: "محصولات",
   Articles: "مقالات",
   AboutUs: "درباره ما",
   ContactUs: "ارتباط با ما",
@@ -39,6 +39,8 @@ const fa = {
   brand_text: "مشتریانی که به ما اعتماد کردند",
   nobinServices: "خدمات نوبین",
   customers: "مشتریان ما",
+  nobinp: "محصولات نوبین",
+  customp: "محصولات سفارشی",
 };
 
 export default fa

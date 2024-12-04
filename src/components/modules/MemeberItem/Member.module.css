@@ -49,7 +49,6 @@
 }
 
 .memeber_content {
-    padding: 0 3rem;
     margin: 2rem 0;
     display: flex;
     align-items: start;
@@ -65,7 +64,7 @@
 
 .memeber_contact_wrapper {
     display: flex;
-    justify-content: center;
+    justify-content:end;
     width: 50%;
 }
 
@@ -77,7 +76,7 @@
 .memeber_phone {
     display: flex;
     align-items: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.3rem;
 }
 
 .icon {}
@@ -100,10 +99,6 @@
 }
 
 @media (max-width:1025px) {
-    .memeber_content {
-        padding: 0 2rem;
-    }
-
     .name {
         left: 2rem;
     }
@@ -133,9 +128,6 @@
         justify-content: start;
     }
 
-    .memeber_phone {
-        margin-bottom: 2rem;
-    }
 
     .name_m {
         text-align: center;
@@ -148,8 +140,3 @@
 }
 
 
-@media (max-width:600px) {
-    .memeber_content {
-        padding: 0 1.5rem;
-    }
-}

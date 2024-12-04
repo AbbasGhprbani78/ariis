@@ -9,13 +9,13 @@
     align-items: center;
     justify-content: space-between;
     transition: all .3s ease-in-out;
-    margin-right: 40px;
+    /* margin-left: 40px; */
 }
 
-.rightmedia {
-    margin-right: 0;
-    margin-left: 40px;
-}
+/* .rightmedia {
+    margin-right: 40px;
+    margin-left: 0;
+} */
 
 .mediaItem:hover .icon {
     transform: scale(1.2);

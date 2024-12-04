@@ -1,11 +1,7 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import styles from "./Brands.module.css";
 import { useSelector } from "react-redux";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/autoplay";
-import { Autoplay } from "swiper/modules";
 
 export default function Brands() {
   const [loaded, setLoaded] = useState(false);
@@ -21,44 +17,29 @@ export default function Brands() {
     return <div>Loading...</div>;
   }
 
+  const marqueeStyle = {
+    "--dynamic-items": logo ? logo.length : 8, 
+  };
+
   return (
-    <div className={styles.swiper_container}>
-      <Swiper
-        modules={[Autoplay]}
-        autoplay={{
-          delay: 0,
-          disableOnInteraction: false,
-        }}
-        loop={true}
-        slidesPerView={8}
-        spaceBetween={20}
-        dir="ltr"
-        speed={2000}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 50,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
-        }}
-      >
-        {logo?.map((item, index) => (
-          <SwiperSlide key={index} className={styles.item_wrapper}>
+    <div
+      className={`${styles.marquee} ${styles.marquee__8}`}
+      style={marqueeStyle}
+    >
+      {logo &&
+        logo.map((item, i) => (
+          <div
+            className={styles.marquee__item}
+            key={i}
+            style={{ "--marquee-item-index": i + 1 }}
+          >
             <img
               src={`${process.env.NEXT_PUBLIC_BASE_URL}${item}`}
               alt="Customer logo"
-              className={styles.imgslider}
+              style={{ width: "85px", height: "auto" }}
             />
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
     </div>
   );
 }
