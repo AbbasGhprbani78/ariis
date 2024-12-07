@@ -157,22 +157,7 @@ export default function Header() {
                       </li>
                     )}
                   </ul>
-                </li>
-                {/* <Link
-                  className={`${styles.header_link}
-                                     ${
-                                       language === "en"
-                                         ? styles.header_link_left
-                                         : styles.header_link_right
-                                     }
-                                      ${
-                                        isActive("/articles") &&
-                                        styles.active_route
-                                      }`}
-                  href="/articles"
-                >
-                  {t("Articles")}
-                </Link> */}
+                </li>   
                 <Link
                   className={`${styles.header_link}
                                      ${
@@ -236,6 +221,25 @@ export default function Header() {
                   </Link> */
 }
 
+
+
+{
+  /* <Link
+                  className={`${styles.header_link}
+                                     ${
+                                       language === "en"
+                                         ? styles.header_link_left
+                                         : styles.header_link_right
+                                     }
+                                      ${
+                                        isActive("/articles") &&
+                                        styles.active_route
+                                      }`}
+                  href="/articles"
+                >
+                  {t("Articles")}
+                </Link> */
+}
 //product_nobin
 
 //product_nobin

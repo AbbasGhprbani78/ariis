@@ -41,6 +41,10 @@
     position: relative;
 }
 
+.header_link{
+    padding-bottom: 5px;
+}
+
 .header_link_left {
     margin-right: 50px;
 }
