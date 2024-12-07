@@ -206,7 +206,8 @@ const validateForm = () => {
                       placeholder={t("Message")}
                     />
                     <div className={styles.btn_wrapper}>
-                      <button disabled={loading}
+                      <button
+                        disabled={loading}
                         className={`${styles.btn} ${
                           language === "fa" && styles.btn_rtl
                         }`}
@@ -294,7 +295,9 @@ const validateForm = () => {
         <Grid container spacing={4} className={styles.footer_content_bottom}>
           <Grid size={{ xs: 12, md: 4 }}>
             <div className={styles.wrap_logo_text}>
-              <p className={styles.text_footer}>{language==="en" ? text: text_farsi}</p>
+              <p className={styles.text_footer}>
+                {language === "en" ? text : text_farsi}
+              </p>
             </div>
           </Grid>
           <Grid
@@ -311,7 +314,11 @@ const validateForm = () => {
                   {language === "en" ? address : address_farsi}
                 </p>
               </div>
-              <div className={styles.media_item}>
+              <div
+                className={`${styles.media_item} ${
+                  language === "en" && styles.middle_item
+              }`}
+              >
                 <MailOutlineOutlinedIcon
                   className={`${styles.icon_media} ${styles.icon_email}`}
                 />

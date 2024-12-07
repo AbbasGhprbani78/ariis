@@ -179,7 +179,8 @@
 
 @media (max-width:1025px) {
 
-    .footer_content_bottom {
+    .footer_content_bottom,
+    .title_footer {
         width: 100%;
         padding: 0 20px;
     }
@@ -191,9 +192,14 @@
     .contactus_form_right {
         padding: 0 20px;
     }
-        .contactus_title{
-            font-size: 1.5rem;
-        }
+
+    .contactus_title {
+        font-size: 1.5rem;
+    }
+
+    .footer_wrapper_bottom {
+        padding: 1rem 0 0 0
+    }
 }
 
 @media (min-width:900px) {
@@ -210,6 +216,10 @@
 }
 
 @media (max-width:900px) {
+    .title_footer {
+        width: 100%;
+    }
+
     .wrap_two_top_input {
         width: 100%;
     }
@@ -221,11 +231,24 @@
     .wrap_part_footer_3 {
         align-items: center;
     }
+
+    .wrap_part_footer_2 {
+        margin-top: 1rem;
+    }
+
+    .middle_item{
+        margin-bottom: 2.5rem;
+    }
 }
 
 @media (max-width:600px) {
     .footer_content_bottom {
         width: 100%;
+        padding: 0 15px;
+    }
+
+
+    .title_footer {
         padding: 0 15px;
     }
 

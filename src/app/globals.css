@@ -261,13 +261,14 @@ body {
     --sb-track-color: #232E33;
     --sb-thumb-color: #afc8c0;
     --sb-size: 9px;
-    
+
 }
 
 
 video {
     object-fit: fill;
 }
+
 /* 
 body::-webkit-scrollbar {
     width: var(--sb-size)
