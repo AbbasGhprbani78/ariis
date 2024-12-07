@@ -206,6 +206,7 @@
     .container_slide_m {
         height: 50dvh;
         max-height: 500px;
+        min-height: 500px;
     }
 
 
