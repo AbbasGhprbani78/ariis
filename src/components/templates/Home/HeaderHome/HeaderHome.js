@@ -10,15 +10,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+
 export default function HeaderHome() {
   const width = useWindowWidth();
   const { language } = useLanguage();
   const homeData = useSelector((state) => state.home.data || {});
   const swiperRef = useRef(null);
-  const handleNextSlide = () => swiperRef.current?.swiper.slideNext();
-  const handlePrevSlide = () => swiperRef.current?.swiper.slidePrev();
   const handleMouseEnter = () => swiperRef.current?.swiper.autoplay.stop();
   const handleMouseLeave = () => swiperRef.current?.swiper.autoplay.start();
 
@@ -112,29 +109,6 @@ export default function HeaderHome() {
                   </SwiperSlide>
                 ))}
             </Swiper>
-            <div className={styles.custom_buttons}>
-              <button
-                className={`${styles.prev_button} ${styles.btn_slide}`}
-                onClick={language === "en" ? handlePrevSlide : handleNextSlide}
-              >
-                {language === "fa" ? (
-                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
-                ) : (
-                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
-                )}
-              </button>
-              <button
-                className={`${styles.next_button} ${styles.btn_slide}`}
-                onClick={language === "en" ? handleNextSlide : handlePrevSlide}
-              >
-                {language === "fa" ? (
-                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
-                ) : (
-                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
-                )}
-              </button>
-            </div>
-            <div className={styles.cover_slides}></div>
           </div>
         </>
       ) : (
@@ -172,3 +146,34 @@ export default function HeaderHome() {
     </>
   );
 }
+
+
+
+
+   {
+     /* <div className={styles.custom_buttons}>
+              <button
+                className={`${styles.prev_button} ${styles.btn_slide}`}
+                onClick={language === "en" ? handlePrevSlide : handleNextSlide}
+              >
+                {language === "fa" ? (
+                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
+                ) : (
+                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
+                )}
+              </button>
+              <button
+                className={`${styles.next_button} ${styles.btn_slide}`}
+                onClick={language === "en" ? handleNextSlide : handlePrevSlide}
+              >
+                {language === "fa" ? (
+                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
+                ) : (
+                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
+                )}
+              </button>
+            </div> */
+   }
+   {
+     /* <div className={styles.cover_slides}></div> */
+   }

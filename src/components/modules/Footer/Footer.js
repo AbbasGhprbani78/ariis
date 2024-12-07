@@ -56,6 +56,7 @@ export default function Footer() {
     whatsapp,
     linkedin,
     text,
+    text_farsi,
   } = useSelector((state) => state?.contactus?.data || {});
 
   const [formdata, setFormData] = useState({
@@ -293,7 +294,7 @@ const validateForm = () => {
         <Grid container spacing={4} className={styles.footer_content_bottom}>
           <Grid size={{ xs: 12, md: 4 }}>
             <div className={styles.wrap_logo_text}>
-              <p className={styles.text_footer}>{text}</p>
+              <p className={styles.text_footer}>{language==="en" ? text: text_farsi}</p>
             </div>
           </Grid>
           <Grid

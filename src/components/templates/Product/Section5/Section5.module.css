@@ -21,7 +21,7 @@
 @media (max-width:1025px) {
     .features_wrapper {
         width: 100%;
-        padding: 40px 20px 0 20px;
+        padding:0 20px 0 20px;
     }
 }
 
@@ -29,6 +29,6 @@
 @media (max-width:600px) {
     .features_wrapper {
         width: 100%;
-        padding: 40px 15px 0 15px;
+        padding: 0 15px 0 15px;
     }
 }

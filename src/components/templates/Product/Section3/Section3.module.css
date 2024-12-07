@@ -36,6 +36,7 @@
 
     .title {
         font-size: calc(1rem + .5vw);
+        margin-bottom: 1rem;
     }
 }
 

@@ -1,6 +1,9 @@
-.img_wrapper {}
+.img_wrapper {
+    max-height: 550px;
+}
 
 .img_wrapper>img {
     height: 100%;
+    max-height: 550px;
     width: 100%;
 }

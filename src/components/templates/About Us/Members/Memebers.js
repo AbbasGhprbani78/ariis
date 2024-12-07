@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 export default function Memebers() {
     const employees = useSelector((state) => state.aboutus.data?.employees);
-    console.log(employees)
+
 
     return (
         <div className={styles.member_wrapper}>

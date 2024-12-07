@@ -30,7 +30,7 @@ export default function Offcanvas() {
   const { changeLanguage, language } = useLanguage();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(true);
   const [subDropDown, setSubDropDown] = useState(false);
   const [subDropDown2, setSubDropDown2] = useState(false);
 
@@ -38,9 +38,6 @@ export default function Offcanvas() {
     setOpen(!open);
   };
 
-  const handleDropdownToggle = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
   const handleSubDropdownToggle = () => {
     setSubDropDown(!subDropDown);
   };
@@ -89,21 +86,15 @@ export default function Offcanvas() {
             className={`${styles.link_item} ${
               isActive("/") && styles.active_route
             }`}
+            sx={{
+              paddingTop: ".8rem",
+              paddingBottom: ".8rem",
+              marginTop: "1rem",
+            }}
           >
             <Link className={styles.link_offcanvas} href={"/"}>
               {t("Home")}
             </Link>
-          </ListItemButton>
-          <ListItemButton
-            className={`${styles.link_item}`}
-            onClick={handleDropdownToggle}
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <li className={styles.products_wrapper}>{t("Products")}</li>
-            {dropdownOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
@@ -113,6 +104,9 @@ export default function Offcanvas() {
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
+                      paddingTop: ".8rem",
+                      paddingBottom: ".8rem",
+                      marginTop: "1rem",
                     }}
                     className={`${styles.link_item} `}
                     onClick={handleSubDropdownToggle}
@@ -121,11 +115,24 @@ export default function Offcanvas() {
                     {subDropDown ? <ExpandLess /> : <ExpandMore />}
                   </ListItemButton>
                   <Collapse in={subDropDown} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
+                    <List
+                      component="div"
+                      disablePadding
+                      sx={
+                        language === "en"
+                          ? { marginLeft: "30px" }
+                          : { marginRight: "30px" }
+                      }
+                    >
                       {data?.product_nobin.length > 0 &&
                         data.product_nobin.map((product) => (
                           <ListItemButton
-                            sx={{ pl: 4 }}
+                            sx={{
+                              pl: 4,
+                              paddingTop: ".8rem",
+                              paddingBottom: ".8rem",
+                              marginTop: "1rem",
+                            }}
                             className={`${styles.link_item} `}
                             key={product.id}
                           >
@@ -145,6 +152,9 @@ export default function Offcanvas() {
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
+                      paddingTop: ".8rem",
+                      paddingBottom: ".8rem",
+                      marginTop: "1rem",
                     }}
                     className={`${styles.link_item} `}
                     onClick={handleSubDropdownToggle2}
@@ -153,11 +163,24 @@ export default function Offcanvas() {
                     {subDropDown ? <ExpandLess /> : <ExpandMore />}
                   </ListItemButton>
                   <Collapse in={subDropDown2} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
+                    <List
+                      component="div"
+                      disablePadding
+                      sx={
+                        language === "en"
+                          ? { marginLeft: "30px" }
+                          : { marginRight: "30px" }
+                      }
+                    >
                       {data?.product_custom.length > 0 &&
                         data.product_custom.map((product) => (
                           <ListItemButton
-                            sx={{ pl: 4 }}
+                            sx={{
+                              pl: 4,
+                              paddingTop: ".8rem",
+                              paddingBottom: ".8rem",
+                              marginTop: "1rem",
+                            }}
                             className={`${styles.link_item} `}
                             key={product.id}
                           >
@@ -177,19 +200,15 @@ export default function Offcanvas() {
               )}
             </List>
           </Collapse>
-          {/* <ListItemButton
-            className={`${styles.link_item} ${
-              isActive("/articles") && styles.active_route
-            }`}
-          >
-            <Link className={styles.link_offcanvas} href={"/articles"}>
-              {t("Articles")}
-            </Link>
-          </ListItemButton> */}
           <ListItemButton
             className={`${styles.link_item} ${
               isActive("/aboutus") && styles.active_route
             }`}
+            sx={{
+              paddingTop: ".8rem",
+              paddingBottom: ".8rem",
+              marginTop: "1rem",
+            }}
           >
             <Link className={styles.link_offcanvas} href={"/aboutus"}>
               {t("AboutUs")}
@@ -235,4 +254,31 @@ export default function Offcanvas() {
   /* <div className={styles.btn_wrappper}>
             <Button text={t("ContactUs")} icon={EastIcon} />
           </div> */
+}
+
+{
+  /* <ListItemButton
+            className={`${styles.link_item} ${
+              isActive("/articles") && styles.active_route
+            }`}
+          >
+            <Link className={styles.link_offcanvas} href={"/articles"}>
+              {t("Articles")}
+            </Link>
+          </ListItemButton> */
+}
+{
+  /* <ListItemButton
+            className={`${styles.link_item}`}
+            
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              paddingTop: ".8rem",
+              paddingBottom: ".8rem",
+              marginTop: "1rem",
+            }}
+          >
+            <li className={styles.products_wrapper}>{t("Products")}</li>
+          </ListItemButton> */
 }

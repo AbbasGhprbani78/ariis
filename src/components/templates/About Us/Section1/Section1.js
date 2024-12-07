@@ -43,6 +43,7 @@ export default function Section1() {
               controls={false}
               width="100%"
               height="100%"
+              playsinline
             />
             <p className={styles.aboutus_title}>{t("AboutUs")}</p>
             <p className={styles.main_text}>{main_text}</p>

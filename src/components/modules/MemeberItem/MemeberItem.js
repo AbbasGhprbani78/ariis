@@ -8,7 +8,6 @@ import { convertToFarsiDigits } from "@/utils/ConvertNumberToFarsi";
 
 export default function MemeberItem({ member }) {
   const { language } = useLanguage();
-  // console.log(member.phone_number);
   return (
     <div className={styles.member_item_wrapper}>
       <span

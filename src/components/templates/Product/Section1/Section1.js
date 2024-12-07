@@ -1,14 +1,16 @@
-"use client"
-import React from 'react'
-import styles from './section1.module.css'
-import Button from '@/components/modules/Button/Button'
-import { useTranslation } from 'react-i18next'
-import EastIcon from '@mui/icons-material/East';
-import { useSelector } from 'react-redux'
+"use client";
+import React from "react";
+import styles from "./section1.module.css";
+import Button from "@/components/modules/Button/Button";
+import { useTranslation } from "react-i18next";
+import EastIcon from "@mui/icons-material/East";
+import { useSelector } from "react-redux";
 
 export default function Section1() {
   const { t } = useTranslation();
-  const { logo, title, link } = useSelector((state) => state?.product?.data || {});
+  const { logo, title, link } = useSelector(
+    (state) => state?.product?.data || {}
+  );
 
   return (
     <div className={styles.section1_wrapper}>
@@ -18,11 +20,11 @@ export default function Section1() {
         </div>
       )}
       {title && <h1 className={styles.product_title}>{title}</h1>}
-      {link && (
+      {/* {link && (
         <div className={styles.btn_wrapper}>
           <Button text={t("ViewMore")} icon={EastIcon} link={link} />
         </div>
-      )}
+      )} */}
     </div>
   );
 }

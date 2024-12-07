@@ -34,7 +34,6 @@
 @media (max-width:992px) {
     .product_title {
         width: 80%;
-       
     }
 }
 
@@ -43,7 +42,7 @@
 
 @media (max-width:768px) {
     .product_title {
-        margin: 3rem 0 2rem 0;
+        margin: 1rem 0 0 0;
     }
 }
 
@@ -51,7 +50,6 @@
 
     .product_title {
         width: 100%;
-        margin: 2rem 0 4rem 0;
         text-align: justify;
     }
 

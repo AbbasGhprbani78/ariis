@@ -70,6 +70,10 @@
 }
 
 
+.slider_item_m{
+    position: relative;
+}
+
 
 .swiper_slider {
     width: 100%;
@@ -108,7 +112,7 @@
     top: 20px;
     display: flex;
     justify-content: space-between;
-    z-index: 4;
+    z-index: 24;
     gap: 20px;
     left: 10px
 }
@@ -127,7 +131,21 @@
     background-color: #00000051;
 }
 
+.sound_toggle {
+    position: absolute;
+    z-index: 10;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 
+
+/* .sound_toggle_button:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: black;
+} */
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .container_slide_m {

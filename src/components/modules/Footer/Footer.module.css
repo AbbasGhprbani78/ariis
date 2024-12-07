@@ -191,6 +191,9 @@
     .contactus_form_right {
         padding: 0 20px;
     }
+        .contactus_title{
+            font-size: 1.5rem;
+        }
 }
 
 @media (min-width:900px) {

@@ -13,21 +13,26 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import { Autoplay } from "swiper/modules";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 export default function Coustomers() {
   const { language } = useLanguage();
+  const { video_one, video_two, video_three, video_four } = useSelector(
+    (state) => state?.home.data || {}
+  );
+
+  const videos = [video_one, video_two, video_three, video_four];
   const width = useWindowWidth();
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const swiperRef = useRef(null);
-  const handleNextSlide = () => swiperRef.current?.swiper.slideNext();
-  const handlePrevSlide = () => swiperRef.current?.swiper.slidePrev();
-  const handleMouseEnterSlide = () => swiperRef.current?.swiper.autoplay.stop();
-  const handleMouseLeave = () => swiperRef.current?.swiper.autoplay.start();
+  const [mutedStates, setMutedStates] = useState(videos.map(() => true));
+
+  const handleToggleMute = (index) => {
+    setMutedStates((prev) =>
+      prev.map((muted, i) => (i === index ? !muted : muted))
+    );
+  };
 
   const handlePanelClick = (index) => {
     setActiveIndex(index);
@@ -35,10 +40,6 @@ export default function Coustomers() {
   };
 
   const dispatch = useDispatch();
-
-  const { video_one, video_two, video_three, video_four } = useSelector(
-    (state) => state?.home.data || {}
-  );
 
   useEffect(() => {
     dispatch(getDataHome(language));
@@ -52,24 +53,13 @@ export default function Coustomers() {
     return null;
   }
 
-  const videos = [video_one, video_two, video_three, video_four];
-
   return (
     <>
       {width <= 1024 ? (
         <>
-          <div
-            className={styles.container_slide_m}
-            onMouseEnter={handleMouseEnterSlide}
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className={styles.container_slide_m}>
             <Swiper
               ref={swiperRef}
-              modules={[Autoplay]}
-              autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-              }}
               loop={videos?.length > 1}
               slidesPerView={1}
               className={styles.swiper_slider}
@@ -77,43 +67,24 @@ export default function Coustomers() {
             >
               {videos.length > 0 &&
                 videos.map((video, i) => (
-                  <SwiperSlide key={i}>
+                  <SwiperSlide key={i} className={styles.slider_item_m}>
                     <ReactPlayer
                       url={`${process.env.NEXT_PUBLIC_BASE_URL}${video}`}
                       playing={true}
-                      controls={true}
-                      muted
+                      muted={mutedStates[i]}
                       loop
                       className={styles.video}
                       width="100%"
                       height="100%"
+                      playsinline
                     />
+                    <div
+                      className={styles.sound_toggle}
+                      onClick={() => handleToggleMute(i)}
+                    ></div>
                   </SwiperSlide>
                 ))}
             </Swiper>
-            <div className={styles.custom_buttons}>
-              <button
-                className={`${styles.prev_button} ${styles.btn_slide}`}
-                onClick={language === "en" ? handlePrevSlide : handleNextSlide}
-              >
-                {language === "fa" ? (
-                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
-                ) : (
-                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
-                )}
-              </button>
-              <button
-                className={`${styles.next_button} ${styles.btn_slide}`}
-                onClick={language === "en" ? handleNextSlide : handlePrevSlide}
-              >
-                {language === "fa" ? (
-                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
-                ) : (
-                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
-                )}
-              </button>
-            </div>
-            {/* <div className={styles.cover_slides}></div> */}
           </div>
         </>
       ) : (
@@ -136,14 +107,19 @@ export default function Coustomers() {
                     )}
                     <ReactPlayer
                       url={`${process.env.NEXT_PUBLIC_BASE_URL}${video}`}
-                      playing={index === activeIndex}
-                      muted
+                      playing={true}
+                      muted={mutedStates[index]}
                       loop
-                      controls={true}
                       className={styles.video}
                       width="100%"
                       height="100%"
                     />
+                    {index === activeIndex && (
+                      <div
+                        className={styles.sound_toggle}
+                        onClick={() => handleToggleMute(index)}
+                      ></div>
+                    )}
                   </div>
                 ))}
             </div>
@@ -152,4 +128,32 @@ export default function Coustomers() {
       )}
     </>
   );
+}
+
+{
+  /* <div className={styles.custom_buttons}>
+              <button
+                className={`${styles.prev_button} ${styles.btn_slide}`}
+                onClick={language === "en" ? handlePrevSlide : handleNextSlide}
+              >
+                {language === "fa" ? (
+                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
+                ) : (
+                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
+                )}
+              </button>
+              <button
+                className={`${styles.next_button} ${styles.btn_slide}`}
+                onClick={language === "en" ? handleNextSlide : handlePrevSlide}
+              >
+                {language === "fa" ? (
+                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
+                ) : (
+                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
+                )}
+              </button>
+            </div> */
+}
+{
+  /* <div className={styles.cover_slides}></div> */
 }

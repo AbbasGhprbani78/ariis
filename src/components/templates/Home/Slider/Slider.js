@@ -65,7 +65,7 @@ export default function Slider() {
                   {truncateText(project.text_home, width < 642 ? 100 : 200)}
                 </p>
                <div className={`${styles.wrap_link} ${language==='en'? styles.wrap_en :styles.wrap_fa}`}>
-                 <Button text={t('TryNow')} link={`/product/${project.project_id}`} icon={width < 1024 && EastIcon} />
+                 <Button text={t('TryNow')} link={`/product/${project.project_id}`} icon={width <= 1024 && EastIcon} style={"width"}/>
                </div>
               </div>
             </div>

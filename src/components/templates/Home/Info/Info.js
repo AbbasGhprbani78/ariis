@@ -1,20 +1,33 @@
-"use client"
-import React, { useEffect } from 'react'
-import styles from './Info.module.css'
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid2';
-import Image from 'next/image';
-import { useLanguage } from '@/context/LangContext';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDataHome } from '@/redux/home';
-import Loading from '@/components/modules/Loading/Loading';
-import Error from '@/components/modules/Error/Error';
+"use client";
+import React, { useEffect } from "react";
+import styles from "./Info.module.css";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid2";
+import Image from "next/image";
+import { useLanguage } from "@/context/LangContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getDataHome } from "@/redux/home";
+import Loading from "@/components/modules/Loading/Loading";
+import Error from "@/components/modules/Error/Error";
+import useWindowWidth from "@/hook/WindowWidth";
 
 export default function Info() {
   const { language } = useLanguage();
+  const width = useWindowWidth();
+  if (width === undefined) {
+    return null;
+  }
+
   const dispatch = useDispatch();
 
-  const { title_image_one, text_image_one, info_image_one, info_image_two, info_image_three, info_image_four} = useSelector((state) => ({
+  const {
+    title_image_one,
+    text_image_one,
+    info_image_one,
+    info_image_two,
+    info_image_three,
+    info_image_four,
+  } = useSelector((state) => ({
     title_image_one: state.home.data?.title_image_one,
     text_image_one: state.home.data?.text_image_one,
     info_image_one: state.home.data?.info_image_one,
@@ -22,10 +35,9 @@ export default function Info() {
     info_image_three: state.home.data?.info_image_three,
     info_image_four: state.home.data?.info_image_four,
   }));
-  
+
   const { loading, error } = useSelector((state) => state.home);
 
-  
   useEffect(() => {
     dispatch(getDataHome(language));
   }, [language]);
@@ -41,26 +53,59 @@ export default function Info() {
   return (
     <div className={styles.Info_container}>
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
+        <Grid
+          container
+          spacing={2}
+          sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
+        >
           <Grid size={{ xs: 12, md: 6 }}>
-            <div className={`${styles.text_info_wrapper} ${language === "fa" && styles.text_info_right}`}>
-              {language === "en" ? (
-                <div className={styles.info_logo}>
-                  <Image src="/images/g14.svg" width={100} height={63} alt='logo' />
-                </div>
-              ) : (
-                <p className={styles.ariis_text}>{title_image_one}</p>
-              )}
+            <div
+              className={`${styles.text_info_wrapper} ${
+                language === "fa" && styles.text_info_right
+              }`}
+            >
+              <p className={styles.ariis_text}>{title_image_one}</p>
               <p className={styles.text_info}>{text_image_one}</p>
             </div>
           </Grid>
-          <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', justifyContent: "center" }} className={styles.wrap_nobin_images}>
+          <Grid
+            size={{ xs: 12, md: 6 }}
+            sx={{ display: "flex", justifyContent: "center" }}
+            className={styles.wrap_nobin_images}>
             <div className={styles.images_wrapper}>
-              {[info_image_one, info_image_two, info_image_three, info_image_four].map((image, index) => (
-                <div key={index} className={`${styles.item_image} ${styles[`item_image_${index + 1}`]}`}>
-                  <Image src={`${process.env.NEXT_PUBLIC_BASE_URL}${image}`} alt='info image' layout='fill' />
-                </div>
-              ))}
+              {width <= 1023 ? (
+                <>
+                  <div className={`${styles.item_image}`}>
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${info_image_one}`}
+                      alt="info image"
+                      layout="fill"
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {[
+                    info_image_one,
+                    info_image_two,
+                    info_image_three,
+                    info_image_four,
+                  ].map((image, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.item_image} ${
+                        styles[`item_image_${index + 1}`]
+                      }`}
+                    >
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_BASE_URL}${image}`}
+                        alt="info image"
+                        layout="fill"
+                      />
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </Grid>
         </Grid>

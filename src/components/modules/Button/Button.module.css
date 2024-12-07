@@ -29,3 +29,12 @@
 .rightdir {
     direction: rtl;
 }
+
+
+
+@media (max-width:1024px) {
+    .width{
+        font-size: .7rem;
+        padding: 8px 12px;
+    }
+}

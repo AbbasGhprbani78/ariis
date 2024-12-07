@@ -14,12 +14,15 @@ export default function ProductPage({ params }) {
     <>
       <div className={styles.container}>
         <Section1 />
-        <Section2 />
+      </div>
+      <Section2 />
+      <div className={styles.container}>
         <Section3 id={idProduct} />
         <Section4 />
       </div>
-        <Section5 />
+      <Section5 />
       <Section6 />
     </>
   );
 }
+//
