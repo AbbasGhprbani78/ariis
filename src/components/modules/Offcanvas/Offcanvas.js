@@ -18,14 +18,10 @@ import Link from "next/link";
 import { useLanguage } from "@/context/LangContext";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
-import { getProjectsTitle } from "@/redux/header";
 import { useRouter } from "next/navigation";
 
-export default function Offcanvas() {
+export default function Offcanvas({ data }) {
   const pathname = usePathname();
-  const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.header);
   const { t } = useTranslation();
   const { changeLanguage, language } = useLanguage();
   const router = useRouter();
@@ -53,10 +49,6 @@ export default function Offcanvas() {
   };
 
   const isActive = (href) => pathname === href;
-
-  useEffect(() => {
-    dispatch(getProjectsTitle(language));
-  }, []);
 
   useEffect(() => {
     setOpen(false);

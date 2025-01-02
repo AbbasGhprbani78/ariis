@@ -2,7 +2,6 @@
 import React from "react";
 import styles from "./Products.module.css";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import ServiceItem from "@/components/modules/ServiceItem/ServiceItem";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
@@ -10,33 +9,32 @@ import CodeIcon from "@mui/icons-material/Code";
 import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import WallpaperOutlinedIcon from "@mui/icons-material/WallpaperOutlined";
 import MonitorHeartOutlinedIcon from "@mui/icons-material/MonitorHeartOutlined";
-export default function Products() {
+export default function Products({ productsData }) {
   const { t } = useTranslation();
-  const homeData = useSelector((state) => state.home.data);
 
   const products = [
     {
-      image: homeData?.image_two,
-      title: homeData?.title_image_two,
-      text: homeData?.text_image_two,
+      image: productsData?.image_two,
+      title: productsData?.title_image_two,
+      text: productsData?.text_image_two,
       icon: EventNoteOutlinedIcon,
     },
     {
-      image: homeData?.image_three,
-      title: homeData?.title_image_three,
-      text: homeData?.text_image_three,
+      image: productsData?.image_three,
+      title: productsData?.title_image_three,
+      text: productsData?.text_image_three,
       icon: WallpaperOutlinedIcon,
     },
     {
-      image: homeData?.image_four,
-      title: homeData?.title_image_four,
-      text: homeData?.text_image_four,
+      image: productsData?.image_four,
+      title: productsData?.title_image_four,
+      text: productsData?.text_image_four,
       icon: MonitorHeartOutlinedIcon,
     },
     {
-      image: homeData?.image_five,
-      title: homeData?.title_image_five,
-      text: homeData?.text_image_five,
+      image: productsData?.image_five,
+      title: productsData?.title_image_five,
+      text: productsData?.text_image_five,
       icon: CodeIcon,
     },
   ];

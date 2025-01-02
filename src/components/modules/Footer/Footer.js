@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import EastIcon from "@mui/icons-material/East";
 import Toast from "../Toast/Toast";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,7 +17,6 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { Autoplay } from "swiper/modules";
 import SliderItem from "../SliderItem/SliderItem";
-import { getAboutusData } from "@/redux/aboutus";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
@@ -28,11 +26,10 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MediaItem from "../MediaItem/MediaItem";
 import { convertToFarsiDigits } from "@/utils/ConvertNumberToFarsi";
-import { getContactusData } from "@/redux/contactus";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 
 export default function Footer() {
-  const { language } = useLanguage();
+  const { language,comments } = useLanguage();
   const { t } = useTranslation();
   const [showToast, setShowToast] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,24 +37,8 @@ export default function Footer() {
   const rtlSwitch = i18n?.dir();
   const swiperRef = useRef(null);
   const swiperKey = `${rtlSwitch}-swiper`;
-  const dispatch = useDispatch();
 
-  const { customer_comment } = useSelector(
-    (state) => state.aboutus?.data || {}
-  );
-
-  const {
-    address,
-    address_farsi,
-    phone_number,
-    email,
-    instagram,
-    telegram,
-    whatsapp,
-    linkedin,
-    text,
-    text_farsi,
-  } = useSelector((state) => state?.contactus?.data || {});
+  const [contactusData, setContactusData] = useState({});
 
   const [formdata, setFormData] = useState({
     name: "",
@@ -79,53 +60,53 @@ export default function Footer() {
     }));
   };
 
-const validateForm = () => {
-  const errors = [];
+  const validateForm = () => {
+    const errors = [];
 
-  const errorMessages = {
-    en: {
-      nameRequired: "Name is required.",
-      emailRequired: "Email is required.",
-      emailInvalid: "Invalid email format.",
-      messageRequired: "Message is required.",
-    },
-    fa: {
-      nameRequired: "نام لازم است.",
-      emailRequired: "ایمیل لازم است.",
-      emailInvalid: "فرمت ایمیل نامعتبر است.",
-      messageRequired: "پیام لازم است.",
-    },
+    const errorMessages = {
+      en: {
+        nameRequired: "Name is required.",
+        emailRequired: "Email is required.",
+        emailInvalid: "Invalid email format.",
+        messageRequired: "Message is required.",
+      },
+      fa: {
+        nameRequired: "نام لازم است.",
+        emailRequired: "ایمیل لازم است.",
+        emailInvalid: "فرمت ایمیل نامعتبر است.",
+        messageRequired: "پیام لازم است.",
+      },
+    };
+
+    const messages = errorMessages[language] || errorMessages.en;
+
+    if (!formdata.name.trim()) errors.push(messages.nameRequired);
+    if (!formdata.email.trim()) {
+      errors.push(messages.emailRequired);
+    } else if (!/^\S+@\S+\.\S+$/.test(formdata.email)) {
+      errors.push(messages.emailInvalid);
+    }
+    if (!formdata.message.trim()) errors.push(messages.messageRequired);
+
+    if (errors.length > 0) {
+      setToastMessage({
+        type: "error",
+        title: language === "en" ? "Validation Errors" : "خطاهای اعتبارسنجی",
+        message: errors.join(" "),
+      });
+      setShowToast(true);
+      return false;
+    }
+
+    return true;
   };
-
-  const messages = errorMessages[language] || errorMessages.en;
-
-  if (!formdata.name.trim()) errors.push(messages.nameRequired);
-  if (!formdata.email.trim()) {
-    errors.push(messages.emailRequired);
-  } else if (!/^\S+@\S+\.\S+$/.test(formdata.email)) {
-    errors.push(messages.emailInvalid);
-  }
-  if (!formdata.message.trim()) errors.push(messages.messageRequired);
-
-  if (errors.length > 0) {
-    setToastMessage({
-      type: "error",
-      title: language === "en" ? "Validation Errors" : "خطاهای اعتبارسنجی",
-      message: errors.join(" "),
-    });
-    setShowToast(true);
-    return false;
-  }
-
-  return true;
-};
 
   const sendData = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/home/contact-us/`,
         formdata,
@@ -149,8 +130,8 @@ const validateForm = () => {
         title: t("error"),
         message: t("error"),
       });
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -162,9 +143,38 @@ const validateForm = () => {
     swiperRef.current?.swiper.slidePrev();
   };
 
+  const getContactusData = async () => {
+    const headers = {
+      "Accept-Language": language,
+    };
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/home/get-about/`,
+        { headers }
+      );
+
+      if (response.status === 200) {
+        setContactusData({
+          address: response.data[0]?.address,
+          address_farsi: response.data[0]?.address_farsi,
+          phone_number: response.data[0]?.phone_number,
+          email: response.data[0]?.email,
+          instagram: response.data[0]?.instagram,
+          telegram: response.data[0]?.telegram,
+          whatsapp: response.data[0]?.whatsapp,
+          linkedin: response.data[0]?.linkedin,
+          text: response.data[0]?.text,
+          text_farsi: response.data[0]?.text_farsi,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   useEffect(() => {
-    dispatch(getAboutusData(language));
-    dispatch(getContactusData(language));
+    getContactusData();
   }, [language]);
 
   return (
@@ -231,7 +241,7 @@ const validateForm = () => {
                   dir={rtlSwitch}
                   modules={[Autoplay]}
                   autoplay={{ delay: 3000, disableOnInteraction: false }}
-                  loop={customer_comment?.length > 1}
+                  loop={comments?.length > 1}
                   className={styles.swiper_slider}
                   spaceBetween={30}
                   breakpoints={{
@@ -249,9 +259,9 @@ const validateForm = () => {
                     },
                   }}
                 >
-                  {customer_comment &&
-                    customer_comment.length > 0 &&
-                    customer_comment.map((item, i) => (
+                  {comments &&
+                    comments.length > 0 &&
+                    comments.map((item, i) => (
                       <SwiperSlide key={i}>
                         <SliderItem item={item} />
                       </SwiperSlide>
@@ -296,7 +306,9 @@ const validateForm = () => {
           <Grid size={{ xs: 12, md: 4 }}>
             <div className={styles.wrap_logo_text}>
               <p className={styles.text_footer}>
-                {language === "en" ? text : text_farsi}
+                {language === "en"
+                  ? contactusData.text
+                  : contactusData.text_farsi}
               </p>
             </div>
           </Grid>
@@ -311,18 +323,20 @@ const validateForm = () => {
                   className={`${styles.icon_media} ${styles.icon_loc}`}
                 />
                 <p className={styles.text_media}>
-                  {language === "en" ? address : address_farsi}
+                  {language === "en"
+                    ? contactusData.address
+                    : contactusData.address_farsi}
                 </p>
               </div>
               <div
                 className={`${styles.media_item} ${
                   language === "en" && styles.middle_item
-              }`}
+                }`}
               >
                 <MailOutlineOutlinedIcon
                   className={`${styles.icon_media} ${styles.icon_email}`}
                 />
-                <p className={styles.text_media}>{email}</p>
+                <p className={styles.text_media}>{contactusData.email}</p>
               </div>
               <div className={styles.media_item}>
                 <LocalPhoneOutlinedIcon
@@ -333,8 +347,8 @@ const validateForm = () => {
                   style={{ direction: "ltr", width: "max-content" }}
                 >
                   {language === "fa"
-                    ? convertToFarsiDigits(phone_number)
-                    : phone_number}
+                    ? convertToFarsiDigits(contactusData.phone_number)
+                    : contactusData.phone_number}
                 </p>
               </div>
             </div>
@@ -350,22 +364,22 @@ const validateForm = () => {
             <div className={`${styles.media_item} ${styles.medias_wrap}`}>
               <MediaItem
                 icon={InstagramIcon}
-                url_link={`https://www.instagram.com/${instagram}`}
+                url_link={`https://www.instagram.com/${contactusData.instagram}`}
                 backStyle={"instaback"}
               />
               <MediaItem
                 icon={TelegramIcon}
-                url_link={`https://t.me/${telegram}`}
+                url_link={`https://t.me/${contactusData.telegram}`}
                 backStyle={"telback"}
               />
               <MediaItem
                 icon={WhatsAppIcon}
-                url_link={`https://wa.me/${whatsapp}`}
+                url_link={`https://wa.me/${contactusData.whatsapp}`}
                 backStyle={"whatsback"}
               />
               <MediaItem
                 icon={LinkedInIcon}
-                url_link={`https://www.linkedin.com/in/${linkedin}`}
+                url_link={`https://www.linkedin.com/in/${contactusData.linkedin}`}
                 backStyle={"linback"}
               />
             </div>

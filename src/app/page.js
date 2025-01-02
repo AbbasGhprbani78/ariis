@@ -1,11 +1,5 @@
-import HeaderHome from "@/components/templates/Home/HeaderHome/HeaderHome";
-import Info from "@/components/templates/Home/Info/Info";
-import Products from "@/components/templates/Home/Products/Products";
-import Slider from "@/components/templates/Home/Slider/Slider";
-import ContactUs from "@/components/templates/Home/ContactUs/ContactUs";
-import Brands from "@/components/templates/Home/Brands/Brands";
 import styles from "./page.module.css";
-import Coustomers from "@/components/templates/Home/Coustomers/Coustomers";
+import Home from "@/components/templates/Home/Home";
 
 export const metadata = {
   title: "Nobinco",
@@ -25,24 +19,16 @@ export const metadata = {
       },
     ],
 
-    locale: "fa_IR", // "fa_IR"
-    type: "website", // "article"
+    locale: "fa_IR",
+    type: "website", 
   },
 };
 
-export default function Home() {
+export default function Page() {
   return (
     <div className={styles.container}>
-      <HeaderHome />
-      <Info />
-      <Products />
-      <Coustomers />
-      <Brands />
-      <Slider />
+      <Home/>
     </div>
   );
 }
 
-{
-  /*<ContactUs /> */
-}

@@ -6,8 +6,9 @@
 }
 
 .logo_wrapper {
-    width: 80px;
+    width: 100px;
     height: auto;
+    position: relative;
 }
 
 .logo_wrapper>img {
@@ -26,8 +27,8 @@
 }
 
 @media (max-width:1024px) {
-    .product_title{
-    font-size: calc(1rem + .3vw);
+    .product_title {
+        font-size: calc(1rem + .3vw);
     }
 }
 

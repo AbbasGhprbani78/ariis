@@ -1,0 +1,17 @@
+
+get one article =>article/articles/${id}
+
+
+favorite article or not favorite =>  
+ const body = {
+            user: ip
+        }
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/article/articles/custom/`, body);
+
+
+        get categorie article => /article/get-article-category/
+
+
+
+        get Ip => https://api.ipify.org?format=json
+

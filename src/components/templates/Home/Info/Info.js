@@ -1,25 +1,18 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./Info.module.css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import Image from "next/image";
 import { useLanguage } from "@/context/LangContext";
-import { useDispatch, useSelector } from "react-redux";
-import { getDataHome } from "@/redux/home";
-import Loading from "@/components/modules/Loading/Loading";
-import Error from "@/components/modules/Error/Error";
 import useWindowWidth from "@/hook/WindowWidth";
 
-export default function Info() {
+export default function Info({ infoData }) {
   const { language } = useLanguage();
   const width = useWindowWidth();
   if (width === undefined) {
     return null;
   }
-
-  const dispatch = useDispatch();
-
   const {
     title_image_one,
     text_image_one,
@@ -27,29 +20,7 @@ export default function Info() {
     info_image_two,
     info_image_three,
     info_image_four,
-  } = useSelector((state) => ({
-    title_image_one: state.home.data?.title_image_one,
-    text_image_one: state.home.data?.text_image_one,
-    info_image_one: state.home.data?.info_image_one,
-    info_image_two: state.home.data?.info_image_two,
-    info_image_three: state.home.data?.info_image_three,
-    info_image_four: state.home.data?.info_image_four,
-  }));
-
-  const { loading, error } = useSelector((state) => state.home);
-
-  useEffect(() => {
-    dispatch(getDataHome(language));
-  }, [language]);
-
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <Error />;
-  }
-
+  } = infoData;
   return (
     <div className={styles.Info_container}>
       <Box sx={{ flexGrow: 1 }}>
@@ -71,7 +42,8 @@ export default function Info() {
           <Grid
             size={{ xs: 12, md: 6 }}
             sx={{ display: "flex", justifyContent: "center" }}
-            className={styles.wrap_nobin_images}>
+            className={styles.wrap_nobin_images}
+          >
             <div className={styles.images_wrapper}>
               {width <= 1023 ? (
                 <>

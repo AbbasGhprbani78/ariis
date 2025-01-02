@@ -1,11 +1,8 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./Coustomers.module.css";
 import { useTranslation } from "react-i18next";
 import SlowMotionVideoIcon from "@mui/icons-material/SlowMotionVideo";
-import { useDispatch, useSelector } from "react-redux";
-import { useLanguage } from "@/context/LangContext";
-import { getDataHome } from "@/redux/home";
 import dynamic from "next/dynamic";
 import useWindowWidth from "@/hook/WindowWidth";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
@@ -14,13 +11,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
-export default function Coustomers() {
-  const { language } = useLanguage();
-  const { video_one, video_two, video_three, video_four } = useSelector(
-    (state) => state?.home.data || {}
-  );
-
-  const videos = [video_one, video_two, video_three, video_four];
+export default function Coustomers({ customersData }) {
+  const videos = [
+    customersData?.video_one,
+    customersData?.video_two,
+    customersData?.video_three,
+    customersData?.video_four,
+  ];
   const width = useWindowWidth();
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -38,12 +35,6 @@ export default function Coustomers() {
     setActiveIndex(index);
     setIsPlaying(!isPlaying);
   };
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getDataHome(language));
-  }, [language]);
 
   const handleMouseEnter = (index) => {
     setActiveIndex(index);
@@ -65,18 +56,19 @@ export default function Coustomers() {
               className={styles.swiper_slider}
               dir="ltr"
             >
-              {videos.length > 0 &&
+              {videos?.length > 0 &&
                 videos.map((video, i) => (
                   <SwiperSlide key={i} className={styles.slider_item_m}>
                     <ReactPlayer
                       url={`${process.env.NEXT_PUBLIC_BASE_URL}${video}`}
-                      playing={true}
+                      playing={false}
                       muted={mutedStates[i]}
                       loop
                       className={styles.video}
                       width="100%"
                       height="100%"
                       playsinline
+                      preload="metadata"
                     />
                     <div
                       className={styles.sound_toggle}
@@ -92,7 +84,7 @@ export default function Coustomers() {
           <div className={styles.coustomers_container}>
             <span className={styles.title}>{t("customers")}</span>
             <div className={styles.container_slide}>
-              {videos.length > 0 &&
+              {videos?.length > 0 &&
                 videos.map((video, index) => (
                   <div
                     key={index}
@@ -128,32 +120,4 @@ export default function Coustomers() {
       )}
     </>
   );
-}
-
-{
-  /* <div className={styles.custom_buttons}>
-              <button
-                className={`${styles.prev_button} ${styles.btn_slide}`}
-                onClick={language === "en" ? handlePrevSlide : handleNextSlide}
-              >
-                {language === "fa" ? (
-                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
-                ) : (
-                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
-                )}
-              </button>
-              <button
-                className={`${styles.next_button} ${styles.btn_slide}`}
-                onClick={language === "en" ? handleNextSlide : handlePrevSlide}
-              >
-                {language === "fa" ? (
-                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
-                ) : (
-                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
-                )}
-              </button>
-            </div> */
-}
-{
-  /* <div className={styles.cover_slides}></div> */
 }

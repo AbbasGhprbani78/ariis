@@ -1,7 +1,6 @@
 import "./globals.css";
 import I18nProvider from "@/utils/I18NextProvaider";
 import { LanguageProvider } from "@/context/LangContext";
-import ReduxProvider from "@/redux/ReduxProvider";
 import Header from "@/components/modules/Header/Header";
 import Footer from "@/components/modules/Footer/Footer";
 
@@ -17,14 +16,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <I18nProvider>
-          <LanguageProvider>
-            <ReduxProvider>
+          <LanguageProvider>     
               <main>
                 <Header />
                 {children}
                 <Footer />
               </main>
-            </ReduxProvider>
           </LanguageProvider>
         </I18nProvider>
       </body>

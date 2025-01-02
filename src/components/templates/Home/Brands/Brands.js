@@ -1,24 +1,10 @@
-"use client"
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Brands.module.css";
-import { useSelector } from "react-redux";
+import Image from "next/image";
 
-export default function Brands() {
-  const [loaded, setLoaded] = useState(false);
-  const logo = useSelector((state) => state.home.data?.logo);
-
-  useEffect(() => {
-    if (logo) {
-      setLoaded(true);
-    }
-  }, [logo]);
-
-  if (!loaded) {
-    return <div>Loading...</div>;
-  }
-
+export default function Brands({ logos }) {
   const marqueeStyle = {
-    "--dynamic-items": logo ? logo.length : 8, 
+    "--dynamic-items": logos ? logos.length : 8,
   };
 
   return (
@@ -26,17 +12,19 @@ export default function Brands() {
       className={`${styles.marquee} ${styles.marquee__8}`}
       style={marqueeStyle}
     >
-      {logo &&
-        logo.map((item, i) => (
+      {logos &&
+        logos.map((item, i) => (
           <div
             className={styles.marquee__item}
             key={i}
             style={{ "--marquee-item-index": i + 1 }}
           >
-            <img
+            <Image
               src={`${process.env.NEXT_PUBLIC_BASE_URL}${item}`}
-              alt="Customer logo"
-              style={{ width: "85px", height: "auto" }}
+              alt="Customer logos"
+              width={85}
+              height={0}
+              layout="intrinsic"
             />
           </div>
         ))}

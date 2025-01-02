@@ -13,10 +13,9 @@ import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import useWindowWidth from '@/hook/WindowWidth';
 import { useLanguage } from '@/context/LangContext';
-import { useSelector } from 'react-redux';
 import { truncateText } from '@/utils/Maxtext';
 
-export default function Slider() {
+export default function Slider({ slidesData }) {
   const { t } = useTranslation();
   const swiperRef = useRef(null);
   const { language } = useLanguage();
@@ -28,8 +27,6 @@ export default function Slider() {
   const handleMouseLeave = () => swiperRef.current?.swiper.autoplay.start();
 
   if (width === undefined) return null;
-
-  const projects = useSelector((state) => state.home.data?.projects);
 
   return (
     <div
@@ -44,33 +41,55 @@ export default function Slider() {
           delay: 5000,
           disableOnInteraction: false,
         }}
-        loop={projects?.length > 1}
+        loop={slidesData?.length > 1}
         slidesPerView={1}
         className={styles.swiper_slider}
-        dir='ltr'
+        dir="ltr"
       >
-        {projects?.length > 0 && projects.map((project, i) => (
-          <SwiperSlide key={i}>
-            <div className={styles.slide_content}>
-              <img
-                src={`${process.env.NEXT_PUBLIC_BASE_URL}${width < 1024 ? project.image_mobile : project.image_desktop}`}
-                alt="slider image"
-              />
-              <div className={`${styles.slide_text_content} ${language === "fa" && styles.slide_text_content_right}`}>
-                <p
-                  className={`${width < 1024 ? styles.slide_text_m : styles.slide_text} 
-                    ${project.background_color === "white" ? styles.black_color : ""} 
-                    ${language === "fa" && styles.slide_text_right}`}
+        {slidesData?.length > 0 &&
+          slidesData.map((project, i) => (
+            <SwiperSlide key={i}>
+              <div className={styles.slide_content}>
+                <img
+                  src={`${process.env.NEXT_PUBLIC_BASE_URL}${
+                    width < 1024 ? project.image_mobile : project.image_desktop
+                  }`}
+                  alt="slider image"
+                />
+                <div
+                  className={`${styles.slide_text_content} ${
+                    language === "fa" && styles.slide_text_content_right
+                  }`}
                 >
-                  {truncateText(project.text_home, width < 642 ? 100 : 200)}
-                </p>
-               <div className={`${styles.wrap_link} ${language==='en'? styles.wrap_en :styles.wrap_fa}`}>
-                 <Button text={t('TryNow')} link={`/product/${project.project_id}`} icon={width <= 1024 && EastIcon} style={"width"}/>
-               </div>
+                  <p
+                    className={`${
+                      width < 1024 ? styles.slide_text_m : styles.slide_text
+                    } 
+                    ${
+                      project.background_color === "white"
+                        ? styles.black_color
+                        : ""
+                    } 
+                    ${language === "fa" && styles.slide_text_right}`}
+                  >
+                    {truncateText(project.text_home, width < 642 ? 100 : 200)}
+                  </p>
+                  <div
+                    className={`${styles.wrap_link} ${
+                      language === "en" ? styles.wrap_en : styles.wrap_fa
+                    }`}
+                  >
+                    <Button
+                      text={t("TryNow")}
+                      link={`/product/${project.project_id}`}
+                      icon={width <= 1024 && EastIcon}
+                      style={"width"}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          ))}
       </Swiper>
 
       <div className={styles.custom_buttons}>

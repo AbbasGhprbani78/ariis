@@ -5,6 +5,7 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import { useLanguage } from "@/context/LangContext";
 import { convertToFarsiDigits } from "@/utils/ConvertNumberToFarsi";
+import Image from "next/image";
 
 export default function MemeberItem({ member }) {
   const { language } = useLanguage();
@@ -18,7 +19,9 @@ export default function MemeberItem({ member }) {
       <div className={styles.profile_container}>
         <div className={styles.line}></div>
         <div className={styles.profile_pic}>
-          <img
+          <Image
+            width={80}
+            height={80}
             src={`${process.env.NEXT_PUBLIC_BASE_URL}${member?.image}`}
             alt="Profile Picture"
           />

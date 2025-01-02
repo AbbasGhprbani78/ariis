@@ -1,25 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./OurTean.module.css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import { useTranslation } from "react-i18next";
 import AddIcon from "@mui/icons-material/Add";
 import PercentIcon from "@mui/icons-material/Percent";
-import { Cell, Pie, PieChart } from "recharts";
 import { useLanguage } from "@/context/LangContext";
-import { useDispatch, useSelector } from "react-redux";
-import { getAboutusData } from "@/redux/aboutus";
+import { convertToFarsiDigits } from "@/utils/ConvertNumberToFarsi";
 import Loading from "@/components/modules/Loading/Loading";
 import Error from "@/components/modules/Error/Error";
-import axios from "axios";
-import { convertToFarsiDigits } from "@/utils/ConvertNumberToFarsi";
 
 export default function OurTeam() {
   const { t } = useTranslation();
-  const { language } = useLanguage();
-  const dispatch = useDispatch();
-  const [dataChart, setDataChart] = useState("");
+  const { language, ourTeamData, loading, error } = useLanguage();
 
   const {
     our_team_text,
@@ -29,44 +23,15 @@ export default function OurTeam() {
     satisfaction_level,
     number_of_cooperation_with_other_countries,
     point,
-    loading,
-    error,
-  } = useSelector((state) => state?.aboutus?.data || {});
+  } = ourTeamData;
+
   const [mainScore, totalScore] = point
     ? `${point}/10`.split("/")
     : ["0", "10"];
 
-  const getDataChart = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/home/data/`,
-        {}
-      );
-      setDataChart(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  if (loading) return <Loading />;
 
-  const chartData =
-    dataChart[0]?.map((item) => ({
-      name: item?.name,
-      value: parseInt(item?.count),
-      color: item?.name,
-    })) || [];
-
-  useEffect(() => {
-    dispatch(getAboutusData(language));
-    getDataChart();
-  }, [language]);
-
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <Error />;
-  }
+  if (error) return <Error />;
 
   return (
     <div className={styles.ourteam_wrapper}>
@@ -121,96 +86,4 @@ export default function OurTeam() {
       </Box>
     </div>
   );
-}
-
-//  <div className={`${styles.item_about} ${styles.item6}`}>
-//    <div className={styles.item6_top}>
-//      <div className={styles.wrap_number}>
-//        <AddIcon className={styles.icon_number} />
-//        <span className={styles.number}>
-//          {language === "fa"
-//            ? convertToFarsiDigits(number_of_cooperation_with_other_countries)
-//            : number_of_cooperation_with_other_countries}
-//        </span>
-//      </div>
-//      <p
-//        className={`${styles.item6_text} ${
-//          language === "fa" && styles.item6_text_fa
-//        }`}
-//      >
-//        Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor
-//        sit amet,
-//      </p>
-//    </div>
-//    <div className={styles.item6_flag}>
-//      <img className={styles.flag_img} src="/images/usa.png" alt="flag" />
-//      <img className={styles.flag_img} src="/images/france.png" alt="flag" />
-//      <img className={styles.flag_img} src="/images/afg.png" alt="flag" />
-//      <img className={styles.flag_img} src="/images/france.png" alt="flag" />
-//      <img
-//        className={styles.flag_img}
-//        src="/images/united-kingdom.png"
-//        alt="flag"
-//      />
-//    </div>
-//  </div>;
-
-{
-  /* <div className={`${styles.item_about} ${styles.item5}`}>
-                                <div className={styles.chart_wrapper}>
-                                    <PieChart width={200} height={200}>
-                                        <Pie
-                                            data={chartData}
-                                            dataKey="value"
-                                            cx="50%"
-                                            cy="50%"
-                                            innerRadius={68}
-                                            outerRadius={80}
-                                            startAngle={90}
-                                            endAngle={-270}
-                                            paddingAngle={5}
-                                        >
-                                            {chartData?.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={entry.color} />
-                                            ))}
-                                        </Pie>
-                                        <text
-                                            x="50%"
-                                            y="50%"
-                                            textAnchor="middle"
-                                            dominantBaseline="middle"
-                                            fontSize={20}
-                                            fontWeight="bold"
-                                            fill="#fff"
-                                        >
-                                            {language === "fa" ? convertToFarsiDigits(dataChart[1]?.count || 87) : dataChart[1]?.count || 87}%
-                                        </text>
-                                    </PieChart>
-                                </div>
-                                <span className={styles.text_chart}></span>
-                            </div> */
-}
-
-{
-  /* <div className={styles.year_founded}>
-                                    <span className={styles.year_founded_item}>{t("Satisfaction")}</span>
-                                    <div className={styles.wrap_number}>
-                                        <span className={styles.number}>
-                                            {language === "fa" ? convertToFarsiDigits(satisfaction_level) : satisfaction_level}
-                                        </span>
-                                        <PercentIcon className={styles.icon_number} />
-                                    </div>
-                                </div> */
-}
-
-{
-  /* <div className={styles.year_founded}>
-                                    <span className={styles.year_founded_item}>{t("Experience")}</span>
-                                    <div className={styles.wrap_number}>
-                                        <AddIcon className={styles.icon_number} />
-                                        <span className={styles.number}>
-                                            {language === "fa" ? convertToFarsiDigits(experience) : experience}
-                                        </span>
-                                    </div>
-                                </div> */
 }

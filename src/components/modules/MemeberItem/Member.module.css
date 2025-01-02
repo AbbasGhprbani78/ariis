@@ -21,6 +21,7 @@
     border-radius: 50%;
     overflow: hidden;
     margin: 0 10px;
+    position: relative;
 }
 
 .profile_pic img {

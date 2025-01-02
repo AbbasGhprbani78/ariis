@@ -3,15 +3,16 @@ import React from "react";
 import styles from "./Section1.module.css";
 import { useTranslation } from "react-i18next";
 import AboutFeatureItem from "@/components/modules/AboutFeatureItem/AboutFeatureItem";
-import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import { useLanguage } from "@/context/LangContext";
 import useWindowWidth from "@/hook/WindowWidth";
+import Loading from "@/components/modules/Loading/Loading";
+import Error from "@/components/modules/Error/Error";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 export default function Section1() {
   const { t } = useTranslation();
-  const { language } = useLanguage();
+  const { language, aboutUsSection1Data,loading,error } = useLanguage();
   const width = useWindowWidth();
   if (width === undefined) {
     return null;
@@ -28,7 +29,11 @@ export default function Section1() {
     image_four,
     about_video,
     main_text,
-  } = useSelector((state) => state.aboutus?.data || {});
+  } = aboutUsSection1Data;
+
+    if (loading) return <Loading />;
+  
+    if (error) return <Error />;
 
   return (
     <>

@@ -10,7 +10,6 @@ import { getIPData } from '@/redux/getIp';
 export default function CommentItem({ comment }) {
 
     const { language } = useLanguage()
-
     const [likeCount, setLikeCount] = useState(comment?.like_count)
     const [disLikeCount, setdisLikeCount] = useState(comment?.dislike_count)
     const dispatch = useDispatch();

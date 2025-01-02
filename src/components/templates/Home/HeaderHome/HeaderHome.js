@@ -1,67 +1,64 @@
-"use client";
 import React, { useRef, useState } from "react";
 import styles from "./HeaderHome.module.css";
 import useWindowWidth from "@/hook/WindowWidth";
-import { useSelector } from "react-redux";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
-import { useLanguage } from "@/context/LangContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
+import { useLanguage } from "@/context/LangContext";
+import Image from "next/image";
 
-export default function HeaderHome() {
-  const width = useWindowWidth();
+export default function HeaderHome({ headerData }) {
   const { language } = useLanguage();
-  const homeData = useSelector((state) => state.home.data || {});
+  const width = useWindowWidth();
   const swiperRef = useRef(null);
   const handleMouseEnter = () => swiperRef.current?.swiper.autoplay.stop();
   const handleMouseLeave = () => swiperRef.current?.swiper.autoplay.start();
-
-  const panels = [
-    {
-      title: homeData?.sidebar_image_one_text || "Default Title",
-      image: homeData?.sidebar_image_one || null,
-    },
-    {
-      title: homeData?.sidebar_image_two_text || "Default Title",
-      image: homeData?.sidebar_image_two || null,
-    },
-    {
-      title: homeData?.sidebar_image_three_text || "Default Title",
-      image: homeData?.sidebar_image_three || null,
-    },
-    {
-      title: homeData?.sidebar_image_four_text || "Default Title",
-      image: homeData?.sidebar_image_four || null,
-    },
-  ];
-
-  const panelsMobile = [
-    {
-      title: homeData?.sidebar_image_one_text || "Default Title",
-      image: homeData?.sidebar_image_mobile_one || null,
-    },
-    {
-      title: homeData?.sidebar_image_two_text || "Default Title",
-      image: homeData?.sidebar_image_mobile_two || null,
-    },
-    {
-      title: homeData?.sidebar_image_three_text || "Default Title",
-      image: homeData?.sidebar_image_mobile_three || null,
-    },
-    {
-      title: homeData?.sidebar_image_four_text || "Default Title",
-      image: homeData?.sidebar_image_mobile_four || null,
-    },
-  ];
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (width === undefined) {
     return null;
   }
+  const panels = [
+    {
+      image: headerData?.sidebar_image_one,
+      title: headerData?.sidebar_image_one_text,
+    },
+    {
+      image: headerData?.sidebar_image_two,
+      title: headerData?.sidebar_image_two_text,
+    },
+    {
+      image: headerData?.sidebar_image_three,
+      title: headerData?.sidebar_image_three_text,
+    },
+    {
+      image: headerData?.sidebar_image_four,
+      title: headerData?.sidebar_image_four_text,
+    },
+  ];
+
+  const panelsMobile = [
+    {
+      image: headerData?.sidebar_image_mobile_one,
+      title: headerData?.sidebar_image_one_text,
+    },
+    {
+      image: headerData?.sidebar_image_mobile_two,
+      title: headerData?.sidebar_image_two_text,
+    },
+    {
+      image: headerData?.sidebar_image_mobile_three,
+      title: headerData?.sidebar_image_three_text,
+    },
+    {
+      image: headerData?.sidebar_image_mobile_four,
+      title: headerData?.sidebar_image_four_text,
+    },
+  ];
 
   const handlePanelClick = (index) => {
     setActiveIndex(index);
@@ -91,10 +88,12 @@ export default function HeaderHome() {
               {panelsMobile.length > 0 &&
                 panelsMobile.map((panel, i) => (
                   <SwiperSlide key={i} className={styles.swiper_item}>
-                    <img
+                    <Image
                       src={`${process.env.NEXT_PUBLIC_BASE_URL}${panel?.image}`}
-                      alt=""
+                      alt="image-item"
                       className={styles.image_header_item}
+                      layout="fill"
+                      objectFit="cover"
                     />
                     <div
                       className={`${styles.wrap_title_m} ${
@@ -126,7 +125,12 @@ export default function HeaderHome() {
                 onClick={() => handlePanelClick(index)}
               >
                 {index !== activeIndex && (
-                  <img src="/images/plus.png" className={styles.icon} />
+                  <Image
+                    src="/images/plus.png"
+                    className={styles.icon}
+                    width={40}
+                    height={40}
+                  />
                 )}
                 <div
                   className={`${
@@ -146,34 +150,3 @@ export default function HeaderHome() {
     </>
   );
 }
-
-
-
-
-   {
-     /* <div className={styles.custom_buttons}>
-              <button
-                className={`${styles.prev_button} ${styles.btn_slide}`}
-                onClick={language === "en" ? handlePrevSlide : handleNextSlide}
-              >
-                {language === "fa" ? (
-                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
-                ) : (
-                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
-                )}
-              </button>
-              <button
-                className={`${styles.next_button} ${styles.btn_slide}`}
-                onClick={language === "en" ? handleNextSlide : handlePrevSlide}
-              >
-                {language === "fa" ? (
-                  <KeyboardArrowLeftIcon className={styles.arrowIcon} />
-                ) : (
-                  <KeyboardArrowRightIcon className={styles.arrowIcon} />
-                )}
-              </button>
-            </div> */
-   }
-   {
-     /* <div className={styles.cover_slides}></div> */
-   }

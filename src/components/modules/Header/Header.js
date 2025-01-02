@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,28 +9,26 @@ import { useLanguage } from "@/context/LangContext";
 import Offcanvas from "../Offcanvas/Offcanvas";
 import useWindowWidth from "@/hook/WindowWidth";
 import { usePathname } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
-import { getProjectsTitle } from "@/redux/header";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 export default function Header() {
+  const [data, setData] = useState("");
   const pathname = usePathname();
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const { changeLanguage, language } = useLanguage();
-  const { data } = useSelector((state) => state.header);
   const width = useWindowWidth();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   if (width === undefined) {
     return null;
   }
 
   const isActive = (href) => pathname === href;
-
-  useEffect(() => {
-    dispatch(getProjectsTitle(language));
-  }, [dispatch, language]);
 
   const handleLanguageSwitch = (lang) => {
     if (pathname.startsWith("/articles/")) {
@@ -39,14 +37,42 @@ export default function Header() {
     changeLanguage(lang);
   };
 
- 
+  useEffect(() => {
+    const getProjectsTitle = async () => {
+      const headers = {
+        "Accept-Language": language,
+      };
+      try {
+        setLoading(true);
+        const resposne = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/home/get-all-project/`,
+          {
+            headers,
+          }
+        );
+        if (resposne.status === 200) {
+          setData(resposne.data);
+        }
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getProjectsTitle();
+  }, [language]);
+
+  if (loading) return <Loading />;
+
+  if (error) return <Error />;
 
   return (
     <>
       <header className={styles.header_container}>
         {width < 1025 ? (
           <>
-            <Offcanvas />
+            <Offcanvas data={data} />
             <Image src={"/images/g14.svg"} width={25} height={33} alt="logo" />
           </>
         ) : (
@@ -157,7 +183,7 @@ export default function Header() {
                       </li>
                     )}
                   </ul>
-                </li>   
+                </li>
                 <Link
                   className={`${styles.header_link}
                                      ${
@@ -220,8 +246,6 @@ export default function Header() {
                     {t("ContactUs")}
                   </Link> */
 }
-
-
 
 {
   /* <Link
