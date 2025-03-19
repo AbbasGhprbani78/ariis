@@ -69,6 +69,7 @@ export default function Coustomers({ customersData }) {
                       height="100%"
                       playsinline
                       preload="metadata"
+                      style={{ objectFit: "cover" }}
                     />
                     <div
                       className={styles.sound_toggle}
